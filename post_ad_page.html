@@ -326,6 +326,58 @@
         background: white;
     }
     
+    /* CONSISTENT DROPDOWN ARROWS FIX */
+.form-select {
+    /* Remove default browser arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Add consistent custom arrow */
+    padding-right: 40px !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+.form-select:focus {
+    /* Arrow color changes on focus */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+/* Hide IE11 default arrow */
+.form-select::-ms-expand {
+    display: none;
+}
+
+/* Fix searchable dropdown inputs to match */
+.searchable-input {
+    padding-right: 40px !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+.searchable-input:focus {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+.searchable-input:disabled {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+/* Hide the old dropdown arrow divs */
+.dropdown-arrow {
+    display: none !important;
+}
+
+/* Active state for open dropdowns */
+.searchable-dropdown.active .searchable-input {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='18,15 12,9 6,15'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
     .form-input:focus,
     .form-select:focus,
     .form-textarea:focus {
@@ -1595,19 +1647,15 @@
         cursor: not-allowed;
     }
 
-    .dropdown-arrow {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #6b7280;
-        pointer-events: none;
-        transition: transform 0.2s ease;
-    }
-
-    .searchable-dropdown.active .dropdown-arrow {
-        transform: translateY(-50%) rotate(180deg);
-    }
+  /*  .dropdown-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    pointer-events: none;
+    font-size: 12px;
+}*/
 
     .dropdown-options {
         position: absolute;
@@ -1725,6 +1773,19 @@
             padding: 10px 12px;
         }
     }
+
+    .searchable-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.searchable-input {
+    width: 100%;
+    padding-right: 40px !important;
+    cursor: pointer;
+}
+
+
 
 </style>
 </head>
@@ -2292,11 +2353,6 @@
                             <div class="searchable-dropdown" id="district-dropdown">
                                 <input type="text" class="form-input searchable-input" id="district" 
                                        placeholder="Search or select district..." required autocomplete="off">
-                                <div class="dropdown-arrow">
-                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
-                                        <path d="M6 8L0 0h12L6 8z"/>
-                                    </svg>
-                                </div>
                                 <div class="dropdown-options" id="district-options"></div>
                                 <input type="hidden" id="district-value" name="district" required>
                             </div>
@@ -2309,11 +2365,6 @@
                             <div class="searchable-dropdown" id="city-dropdown">
                                 <input type="text" class="form-input searchable-input" id="city" 
                                        placeholder="First select a district..." disabled autocomplete="off">
-                                <div class="dropdown-arrow">
-                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
-                                        <path d="M6 8L0 0h12L6 8z"/>
-                                    </svg>
-                                </div>
                                 <div class="dropdown-options" id="city-options"></div>
                                 <input type="hidden" id="city-value" name="city" required>
                             </div>
