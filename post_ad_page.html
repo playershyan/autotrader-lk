@@ -1577,6 +1577,155 @@
         from { transform: translateX(0); opacity: 1; }
         to { transform: translateX(100%); opacity: 0; }
     }
+
+    /* Searchable Dropdown Styles */
+    .searchable-dropdown {
+        position: relative;
+        width: 100%
+    }
+
+    .searchable-input {
+        width:100%;
+        padding-right: 40px !important;
+        cursor: pointer;
+    }
+
+    .searchable-input:disabled {
+        background-color: #f9fafb;
+        cursor: not-allowed;
+    }
+
+    .dropdown-arrow {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6b7280;
+        pointer-events: none;
+        transition: transform 0.2s ease;
+    }
+
+    .searchable-dropdown.active .dropdown-arrow {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    .dropdown-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #d1d5db;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .searchable-dropdown.active .dropdown-options {
+        display: block;
+    }
+
+    .dropdown-option {
+        padding: 12px 16px;
+        cursor: pointer;
+        border-bottom: 1px solid #f3f4f6;
+        transition: background-color 0.15s ease;
+        font-size: 0.95rem;
+    }
+
+    .dropdown-option:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-option:hover {
+        background-color: #f9fafb;
+    }
+
+    .dropdown-option.selected {
+        background-color: #eff6ff;
+        color: #1e40af;
+        font-weight: 500;
+    }
+
+    .dropdown-option.highlighted {
+        background-color: #f0f9ff;
+    }
+
+    .dropdown-option .option-main {
+        font-weight: 500;
+        color: #1f2937;
+    }
+
+    .dropdown-option .option-sub {
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin-top: 2px;
+    }
+
+    .no-results {
+        padding: 16px;
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+    }
+
+    .dropdown-loading {
+        padding: 16px;
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+    }
+
+    .dropdown-loading::after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #e5e7eb;
+        border-top: 2px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 8px;
+    }
+
+    /* Improved scrolling for long lists */
+    .dropdown-options {
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db #f9fafb;
+    }
+
+    .dropdown-options::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .dropdown-options::-webkit-scrollbar-track {
+        background: #f9fafb;
+    }
+
+    .dropdown-options::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+    }
+
+    .dropdown-options::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dropdown-options {
+            max-height: 150px;
+        }
+        
+        .dropdown-option {
+            padding: 10px 12px;
+        }
+    }
+
 </style>
 </head>
 <body>
@@ -2123,7 +2272,7 @@
 </div>
                 </div>
 
-                <!-- Step 4: Location -->
+                      <!-- Step 4: Location -->
                 <div class="form-section">
                     <h2 class="section-title">
                         <div class="section-icon">
@@ -2140,41 +2289,34 @@
                             <label class="form-label" for="district">
                                 District <span class="required">*</span>
                             </label>
-                            <select class="form-select" id="district" required>
-                                <option value="">Select District</option>
-                                <option value="colombo">Colombo</option>
-                                <option value="gampaha">Gampaha</option>
-                                <option value="kalutara">Kalutara</option>
-                                <option value="kandy">Kandy</option>
-                                <option value="matale">Matale</option>
-                                <option value="nuwara-eliya">Nuwara Eliya</option>
-                                <option value="galle">Galle</option>
-                                <option value="matara">Matara</option>
-                                <option value="hambantota">Hambantota</option>
-                                <option value="jaffna">Jaffna</option>
-                                <option value="kilinochchi">Kilinochchi</option>
-                                <option value="mannar">Mannar</option>
-                                <option value="vavuniya">Vavuniya</option>
-                                <option value="mullaitivu">Mullaitivu</option>
-                                <option value="batticaloa">Batticaloa</option>
-                                <option value="ampara">Ampara</option>
-                                <option value="trincomalee">Trincomalee</option>
-                                <option value="kurunegala">Kurunegala</option>
-                                <option value="puttalam">Puttalam</option>
-                                <option value="anuradhapura">Anuradhapura</option>
-                                <option value="polonnaruwa">Polonnaruwa</option>
-                                <option value="badulla">Badulla</option>
-                                <option value="monaragala">Monaragala</option>
-                                <option value="ratnapura">Ratnapura</option>
-                                <option value="kegalle">Kegalle</option>
-                            </select>
+                            <div class="searchable-dropdown" id="district-dropdown">
+                                <input type="text" class="form-input searchable-input" id="district" 
+                                       placeholder="Search or select district..." required autocomplete="off">
+                                <div class="dropdown-arrow">
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
+                                        <path d="M6 8L0 0h12L6 8z"/>
+                                    </svg>
+                                </div>
+                                <div class="dropdown-options" id="district-options"></div>
+                                <input type="hidden" id="district-value" name="district" required>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="city">
                                 City/Town <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-input" id="city" placeholder="e.g., Colombo 03" required>
+                            <div class="searchable-dropdown" id="city-dropdown">
+                                <input type="text" class="form-input searchable-input" id="city" 
+                                       placeholder="First select a district..." disabled autocomplete="off">
+                                <div class="dropdown-arrow">
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
+                                        <path d="M6 8L0 0h12L6 8z"/>
+                                    </svg>
+                                </div>
+                                <div class="dropdown-options" id="city-options"></div>
+                                <input type="hidden" id="city-value" name="city" required>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3434,7 +3576,18 @@ document.getElementById('finance-toggle').addEventListener('change', function() 
     if (this.checked) {
         showFinancePricing();
         console.log('Finance mode enabled');
+    } else {document.getElementById('finance-toggle').addEventListener('change', function() {
+    if (this.checked) {
+        showFinancePricing();
+        console.log('Finance mode enabled');
     } else {
+        hideFinancePricing();
+        console.log('Regular pricing mode');
+    }
+    
+    // Add this line to fix the progress tracking
+    window.progressTracker.checkStep1Completion();
+});
         hideFinancePricing();
         console.log('Regular pricing mode');
     }
@@ -3652,93 +3805,576 @@ document.getElementById('finance-toggle').addEventListener('change', function() 
             console.log('Auto-saving draft...');
         }, 30000);
 
-        // ===== TEMPORARY TEST CODE - REMOVE AFTER TESTING =====
-function runDataCleanupTest() {
-    console.log('🧪 Starting Data Cleanup Test...');
-    
-    // Step 1: Fill both regular and finance fields
-    console.log('📝 Step 1: Filling both regular and finance fields...');
-    
-    // Fill regular fields
-    document.getElementById('price').value = '5000000';
-    document.getElementById('negotiable').value = 'yes';
-    
-    // Fill finance fields
-    document.getElementById('finance-type').value = 'bank-loan';
-    document.getElementById('finance-provider').value = 'Commercial Bank';
-    document.getElementById('original-amount').value = '6000000';
-    document.getElementById('outstanding-amount').value = '3500000';
-    document.getElementById('monthly-payment').value = '125000';
-    document.getElementById('remaining-months').value = '36';
-    document.getElementById('asking-price-finance').value = '4500000';
-    
-    console.log('✅ Both pricing modes filled');
-    console.log('Regular price:', document.getElementById('price').value);
-    console.log('Finance asking price:', document.getElementById('asking-price-finance').value);
-    
-    // Step 2: Test with Regular Mode
-    console.log('\n🔄 Step 2: Testing Regular Mode submission...');
-    document.getElementById('finance-toggle').checked = false;
-    hideFinancePricing(); // Ensure UI is in regular mode
-    
-    // Simulate form submission cleanup
-    simulateSubmissionCleanup();
-    
-    // Check results
-    console.log('After cleanup in Regular Mode:');
-    console.log('Regular price:', document.getElementById('price').value || 'EMPTY');
-    console.log('Finance asking price:', document.getElementById('asking-price-finance').value || 'EMPTY');
-    
-    // Step 3: Refill and test Finance Mode
-    console.log('\n🔄 Step 3: Refilling and testing Finance Mode...');
-    
-    // Refill both again
-    document.getElementById('price').value = '5000000';
-    document.getElementById('asking-price-finance').value = '4500000';
-    
-    document.getElementById('finance-toggle').checked = true;
-    showFinancePricing(); // Ensure UI is in finance mode
-    
-    // Simulate form submission cleanup
-    simulateSubmissionCleanup();
-    
-    // Check results
-    console.log('After cleanup in Finance Mode:');
-    console.log('Regular price:', document.getElementById('price').value || 'EMPTY');
-    console.log('Finance asking price:', document.getElementById('asking-price-finance').value || 'EMPTY');
-    
-    console.log('\n✅ Test Complete! Check console output above.');
-    console.log('Expected: Regular mode should clear finance fields, Finance mode should clear regular fields');
-}
-
-function simulateSubmissionCleanup() {
-    // This simulates the cleanup logic from the form submission
-    const isFinanceMode = document.getElementById('finance-toggle').checked;
-    
-    if (isFinanceMode) {
-        // Clear regular pricing fields when in finance mode
-        document.getElementById('price').value = '';
-        document.getElementById('negotiable').value = '';
-        console.log('🧹 Finance mode: Cleared regular pricing fields');
-    } else {
-        // Clear finance fields when in regular mode
-        const financeFieldIds = [
-            'finance-type', 'finance-provider', 'original-amount', 
-            'outstanding-amount', 'monthly-payment', 'remaining-months', 
-            'asking-price-finance', 'interest-rate', 'next-payment-date', 
-            'finance-notes'
-        ];
-        
-        financeFieldIds.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.value = '';
+        // Location Data Loader with Sri Lankan data
+        class LocationDataLoader {
+            constructor() {
+                this.districts = [];
+                this.cities = {};
+                this.loaded = false;
             }
-        });
-        
-        console.log('🧹 Regular mode: Cleared finance fields');
-    }
-}
+
+            async loadData() {
+                if (this.loaded) return;
+
+                try {
+                    console.log('📍 Loading location data...');
+                    
+                    // Try to load from your JSON files first
+                    try {
+                        const districtsResponse = await fetch('./data/districts.json');
+                        this.districts = await districtsResponse.json();
+                        
+                        const citiesResponse = await fetch('./data/cities.json');
+                        this.cities = await citiesResponse.json();
+                        
+                        console.log(`✅ Loaded ${this.districts.length} districts and cities for ${Object.keys(this.cities).length} districts from JSON files`);
+                    } catch (jsonError) {
+                        console.log('JSON files not found, using fallback data...');
+                        this.loadFallbackData();
+                    }
+                    
+                    this.loaded = true;
+                    
+                } catch (error) {
+                    console.error('❌ Error loading location data:', error);
+                    this.loadFallbackData();
+                }
+            }
+
+            loadFallbackData() {
+                console.log('🔄 Loading comprehensive fallback data...');
+                
+                // Complete Sri Lankan districts data
+                this.districts = [
+                    { id: 1, name: "Ampara", province: "Eastern" },
+                    { id: 2, name: "Anuradhapura", province: "North Central" },
+                    { id: 3, name: "Badulla", province: "Uva" },
+                    { id: 4, name: "Batticaloa", province: "Eastern" },
+                    { id: 5, name: "Colombo", province: "Western" },
+                    { id: 6, name: "Galle", province: "Southern" },
+                    { id: 7, name: "Gampaha", province: "Western" },
+                    { id: 8, name: "Hambantota", province: "Southern" },
+                    { id: 9, name: "Jaffna", province: "Northern" },
+                    { id: 10, name: "Kalutara", province: "Western" },
+                    { id: 11, name: "Kandy", province: "Central" },
+                    { id: 12, name: "Kegalle", province: "Sabaragamuwa" },
+                    { id: 13, name: "Kilinochchi", province: "Northern" },
+                    { id: 14, name: "Kurunegala", province: "North Western" },
+                    { id: 15, name: "Mannar", province: "Northern" },
+                    { id: 16, name: "Matale", province: "Central" },
+                    { id: 17, name: "Matara", province: "Southern" },
+                    { id: 18, name: "Monaragala", province: "Uva" },
+                    { id: 19, name: "Mullaitivu", province: "Northern" },
+                    { id: 20, name: "Nuwara Eliya", province: "Central" },
+                    { id: 21, name: "Polonnaruwa", province: "North Central" },
+                    { id: 22, name: "Puttalam", province: "North Western" },
+                    { id: 23, name: "Ratnapura", province: "Sabaragamuwa" },
+                    { id: 24, name: "Trincomalee", province: "Eastern" },
+                    { id: 25, name: "Vavuniya", province: "Northern" }
+                ];
+
+                // Comprehensive cities data by district ID
+                this.cities = {
+                    "1": [
+                        { id: 1, name: "Akkaraipattu", district_id: 1 },
+                        { id: 2, name: "Ampara", district_id: 1 },
+                        { id: 3, name: "Kalmunai", district_id: 1 },
+                        { id: 4, name: "Sainthamaruthu", district_id: 1 },
+                        { id: 5, name: "Sammanthurai", district_id: 1 },
+                        { id: 6, name: "Tirukkovil", district_id: 1 },
+                        { id: 7, name: "Uhana", district_id: 1 }
+                    ],
+                    "2": [
+                        { id: 8, name: "Anuradhapura", district_id: 2 },
+                        { id: 9, name: "Kekirawa", district_id: 2 },
+                        { id: 10, name: "Thambuttegama", district_id: 2 },
+                        { id: 11, name: "Eppawala", district_id: 2 },
+                        { id: 12, name: "Galnewa", district_id: 2 },
+                        { id: 13, name: "Horowpothana", district_id: 2 },
+                        { id: 14, name: "Medawachchiya", district_id: 2 }
+                    ],
+                    "3": [
+                        { id: 15, name: "Badulla", district_id: 3 },
+                        { id: 16, name: "Bandarawela", district_id: 3 },
+                        { id: 17, name: "Ella", district_id: 3 },
+                        { id: 18, name: "Haputale", district_id: 3 },
+                        { id: 19, name: "Mahiyanganaya", district_id: 3 },
+                        { id: 20, name: "Passara", district_id: 3 },
+                        { id: 21, name: "Welimada", district_id: 3 }
+                    ],
+                    "4": [
+                        { id: 22, name: "Batticaloa", district_id: 4 },
+                        { id: 23, name: "Eravur", district_id: 4 },
+                        { id: 24, name: "Kattankudy", district_id: 4 },
+                        { id: 25, name: "Vakarai", district_id: 4 },
+                        { id: 26, name: "Valachchenai", district_id: 4 },
+                        { id: 27, name: "Kaluwanchikudy", district_id: 4 },
+                        { id: 28, name: "Oddamavadi", district_id: 4 }
+                    ],
+                    "5": [
+                        { id: 29, name: "Colombo", district_id: 5 },
+                        { id: 30, name: "Dehiwala-Mount Lavinia", district_id: 5 },
+                        { id: 31, name: "Moratuwa", district_id: 5 },
+                        { id: 32, name: "Sri Jayawardenepura Kotte", district_id: 5 },
+                        { id: 33, name: "Kolonnawa", district_id: 5 },
+                        { id: 34, name: "Kaduwela", district_id: 5 },
+                        { id: 35, name: "Kotikawatta", district_id: 5 },
+                        { id: 36, name: "Maharagama", district_id: 5 },
+                        { id: 37, name: "Nugegoda", district_id: 5 },
+                        { id: 38, name: "Rajagiriya", district_id: 5 }
+                    ],
+                    "6": [
+                        { id: 39, name: "Galle", district_id: 6 },
+                        { id: 40, name: "Ambalangoda", district_id: 6 },
+                        { id: 41, name: "Baddegama", district_id: 6 },
+                        { id: 42, name: "Bentota", district_id: 6 },
+                        { id: 43, name: "Elpitiya", district_id: 6 },
+                        { id: 44, name: "Hikkaduwa", district_id: 6 },
+                        { id: 45, name: "Unawatuna", district_id: 6 }
+                    ],
+                    "7": [
+                        { id: 46, name: "Gampaha", district_id: 7 },
+                        { id: 47, name: "Negombo", district_id: 7 },
+                        { id: 48, name: "Katunayake", district_id: 7 },
+                        { id: 49, name: "Ja-Ela", district_id: 7 },
+                        { id: 50, name: "Wattala", district_id: 7 },
+                        { id: 51, name: "Kelaniya", district_id: 7 },
+                        { id: 52, name: "Ragama", district_id: 7 },
+                        { id: 53, name: "Minuwangoda", district_id: 7 },
+                        { id: 54, name: "Divulapitiya", district_id: 7 }
+                    ],
+                    "8": [
+                        { id: 55, name: "Hambantota", district_id: 8 },
+                        { id: 56, name: "Tangalle", district_id: 8 },
+                        { id: 57, name: "Tissamaharama", district_id: 8 },
+                        { id: 58, name: "Ambalantota", district_id: 8 },
+                        { id: 59, name: "Beliatta", district_id: 8 },
+                        { id: 60, name: "Suriyawewa", district_id: 8 },
+                        { id: 61, name: "Weeraketiya", district_id: 8 }
+                    ],
+                    "9": [
+                        { id: 62, name: "Jaffna", district_id: 9 },
+                        { id: 63, name: "Chavakachcheri", district_id: 9 },
+                        { id: 64, name: "Point Pedro", district_id: 9 },
+                        { id: 65, name: "Karainagar", district_id: 9 },
+                        { id: 66, name: "Velanai", district_id: 9 },
+                        { id: 67, name: "Kayts", district_id: 9 },
+                        { id: 68, name: "Nelliady", district_id: 9 }
+                    ],
+                    "10": [
+                        { id: 69, name: "Kalutara", district_id: 10 },
+                        { id: 70, name: "Panadura", district_id: 10 },
+                        { id: 71, name: "Horana", district_id: 10 },
+                        { id: 72, name: "Beruwala", district_id: 10 },
+                        { id: 73, name: "Aluthgama", district_id: 10 },
+                        { id: 74, name: "Mathugama", district_id: 10 },
+                        { id: 75, name: "Bandaragama", district_id: 10 }
+                    ],
+                    "11": [
+                        { id: 76, name: "Kandy", district_id: 11 },
+                        { id: 77, name: "Gampola", district_id: 11 },
+                        { id: 78, name: "Nawalapitiya", district_id: 11 },
+                        { id: 79, name: "Wattegama", district_id: 11 },
+                        { id: 80, name: "Kadugannawa", district_id: 11 },
+                        { id: 81, name: "Peradeniya", district_id: 11 },
+                        { id: 82, name: "Katugastota", district_id: 11 }
+                    ],
+                    "12": [
+                        { id: 83, name: "Kegalle", district_id: 12 },
+                        { id: 84, name: "Mawanella", district_id: 12 },
+                        { id: 85, name: "Warakapola", district_id: 12 },
+                        { id: 86, name: "Rambukkana", district_id: 12 },
+                        { id: 87, name: "Galigamuwa", district_id: 12 },
+                        { id: 88, name: "Dehiowita", district_id: 12 },
+                        { id: 89, name: "Yatiyantota", district_id: 12 }
+                    ],
+                    "13": [
+                        { id: 90, name: "Kilinochchi", district_id: 13 },
+                        { id: 91, name: "Pallai", district_id: 13 },
+                        { id: 92, name: "Paranthan", district_id: 13 },
+                        { id: 93, name: "Poonakary", district_id: 13 },
+                        { id: 94, name: "Elephant Pass", district_id: 13 },
+                        { id: 95, name: "Kandavalai", district_id: 13 }
+                    ],
+                    "14": [
+                        { id: 96, name: "Kurunegala", district_id: 14 },
+                        { id: 97, name: "Chilaw", district_id: 14 },
+                        { id: 98, name: "Kuliyapitiya", district_id: 14 },
+                        { id: 99, name: "Narammala", district_id: 14 },
+                        { id: 100, name: "Wariyapola", district_id: 14 },
+                        { id: 101, name: "Pannala", district_id: 14 },
+                        { id: 102, name: "Melsiripura", district_id: 14 }
+                    ],
+                    "15": [
+                        { id: 103, name: "Mannar", district_id: 15 },
+                        { id: 104, name: "Nanattan", district_id: 15 },
+                        { id: 105, name: "Madhu", district_id: 15 },
+                        { id: 106, name: "Pesalai", district_id: 15 },
+                        { id: 107, name: "Adampan", district_id: 15 },
+                        { id: 108, name: "Silavathurai", district_id: 15 }
+                    ],
+                    "16": [
+                        { id: 109, name: "Matale", district_id: 16 },
+                        { id: 110, name: "Dambulla", district_id: 16 },
+                        { id: 111, name: "Sigiriya", district_id: 16 },
+                        { id: 112, name: "Galewela", district_id: 16 },
+                        { id: 113, name: "Ukuwela", district_id: 16 },
+                        { id: 114, name: "Naula", district_id: 16 },
+                        { id: 115, name: "Rattota", district_id: 16 }
+                    ],
+                    "17": [
+                        { id: 116, name: "Matara", district_id: 17 },
+                        { id: 117, name: "Weligama", district_id: 17 },
+                        { id: 118, name: "Mirissa", district_id: 17 },
+                        { id: 119, name: "Akuressa", district_id: 17 },
+                        { id: 120, name: "Hakmana", district_id: 17 },
+                        { id: 121, name: "Dikwella", district_id: 17 },
+                        { id: 122, name: "Devinuwara", district_id: 17 }
+                    ],
+                    "18": [
+                        { id: 123, name: "Monaragala", district_id: 18 },
+                        { id: 124, name: "Wellawaya", district_id: 18 },
+                        { id: 125, name: "Bibile", district_id: 18 },
+                        { id: 126, name: "Buttala", district_id: 18 },
+                        { id: 127, name: "Kataragama", district_id: 18 },
+                        { id: 128, name: "Medagama", district_id: 18 },
+                        { id: 129, name: "Siyambalanduwa", district_id: 18 }
+                    ],
+                    "19": [
+                        { id: 130, name: "Mullaitivu", district_id: 19 },
+                        { id: 131, name: "Oddusuddan", district_id: 19 },
+                        { id: 132, name: "Puthukudiyiruppu", district_id: 19 },
+                        { id: 133, name: "Weli Oya", district_id: 19 },
+                        { id: 134, name: "Kokkilai", district_id: 19 },
+                        { id: 135, name: "Mankulam", district_id: 19 }
+                    ],
+                    "20": [
+                        { id: 136, name: "Nuwara Eliya", district_id: 20 },
+                        { id: 137, name: "Hatton", district_id: 20 },
+                        { id: 138, name: "Talawakele", district_id: 20 },
+                        { id: 139, name: "Ginigathena", district_id: 20 },
+                        { id: 140, name: "Ramboda", district_id: 20 },
+                        { id: 141, name: "Walapane", district_id: 20 },
+                        { id: 142, name: "Kotagala", district_id: 20 }
+                    ],
+                    "21": [
+                        { id: 143, name: "Polonnaruwa", district_id: 21 },
+                        { id: 144, name: "Kaduruwela", district_id: 21 },
+                        { id: 145, name: "Medirigiriya", district_id: 21 },
+                        { id: 146, name: "Hingurakgoda", district_id: 21 },
+                        { id: 147, name: "Dimbulagala", district_id: 21 },
+                        { id: 148, name: "Manampitiya", district_id: 21 }
+                    ],
+                    "22": [
+                        { id: 149, name: "Puttalam", district_id: 22 },
+                        { id: 150, name: "Chilaw", district_id: 22 },
+                        { id: 151, name: "Wennappuwa", district_id: 22 },
+                        { id: 152, name: "Anamaduwa", district_id: 22 },
+                        { id: 153, name: "Nattandiya", district_id: 22 },
+                        { id: 154, name: "Dankotuwa", district_id: 22 },
+                        { id: 155, name: "Marawila", district_id: 22 }
+                    ],
+                    "23": [
+                        { id: 156, name: "Ratnapura", district_id: 23 },
+                        { id: 157, name: "Embilipitiya", district_id: 23 },
+                        { id: 158, name: "Balangoda", district_id: 23 },
+                        { id: 159, name: "Pelmadulla", district_id: 23 },
+                        { id: 160, name: "Kahawatta", district_id: 23 },
+                        { id: 161, name: "Kuruwita", district_id: 23 },
+                        { id: 162, name: "Eheliyagoda", district_id: 23 }
+                    ],
+                    "24": [
+                        { id: 163, name: "Trincomalee", district_id: 24 },
+                        { id: 164, name: "Kinniya", district_id: 24 },
+                        { id: 165, name: "Mutur", district_id: 24 },
+                        { id: 166, name: "Kuchchaveli", district_id: 24 },
+                        { id: 167, name: "Nilaveli", district_id: 24 },
+                        { id: 168, name: "Uppuveli", district_id: 24 },
+                        { id: 169, name: "Kantale", district_id: 24 }
+                    ],
+                    "25": [
+                        { id: 170, name: "Vavuniya", district_id: 25 },
+                        { id: 171, name: "Cheddikulam", district_id: 25 },
+                        { id: 172, name: "Nedunkeni", district_id: 25 },
+                        { id: 173, name: "Settikulam", district_id: 25 },
+                        { id: 174, name: "Omanthai", district_id: 25 },
+                        { id: 175, name: "Vavuniya South", district_id: 25 }
+                    ]
+                };
+
+                this.loaded = true;
+                console.log(`✅ Loaded ${this.districts.length} districts with comprehensive city data`);
+            }
+
+            getDistricts() {
+                return this.districts;
+            }
+
+            getCitiesForDistrict(districtId) {
+                return this.cities[districtId.toString()] || [];
+            }
+
+            searchDistricts(query) {
+                if (!query) return this.districts;
+                
+                query = query.toLowerCase();
+                return this.districts.filter(district => 
+                    district.name.toLowerCase().includes(query) ||
+                    district.province.toLowerCase().includes(query)
+                );
+            }
+
+            searchCities(districtId, query) {
+                const cities = this.getCitiesForDistrict(districtId);
+                if (!query) return cities;
+                
+                query = query.toLowerCase();
+                return cities.filter(city => 
+                    city.name.toLowerCase().includes(query)
+                );
+            }
+        }
+
+        // Enhanced Searchable Dropdown Class
+        class SearchableDropdown {
+            constructor(containerId, options = {}) {
+                this.container = document.getElementById(containerId);
+                this.input = this.container.querySelector('.searchable-input');
+                this.hiddenInput = this.container.querySelector('input[type="hidden"]');
+                this.optionsContainer = this.container.querySelector('.dropdown-options');
+                
+                this.dataLoader = options.dataLoader;
+                this.onSelect = options.onSelect || (() => {});
+                this.isOpen = false;
+                this.selectedValue = null;
+                this.highlightedIndex = -1;
+                this.currentData = [];
+                
+                this.init();
+            }
+
+            init() {
+                this.input.addEventListener('input', (e) => this.handleInput(e));
+                this.input.addEventListener('focus', () => this.open());
+                this.input.addEventListener('keydown', (e) => this.handleKeydown(e));
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!this.container.contains(e.target)) {
+                        this.close();
+                   }
+               });
+           }
+
+           setData(data) {
+               this.currentData = data;
+               this.renderOptions();
+           }
+
+           handleInput(e) {
+               const query = e.target.value.toLowerCase().trim();
+               this.filterAndRender(query);
+               this.open();
+           }
+
+           filterAndRender(query = '') {
+               // This will be implemented by subclasses
+               this.highlightedIndex = -1;
+               this.renderOptions();
+           }
+
+           handleKeydown(e) {
+               if (!this.isOpen) return;
+
+               const options = this.optionsContainer.querySelectorAll('.dropdown-option:not(.no-results)');
+               
+               switch(e.key) {
+                   case 'ArrowDown':
+                       e.preventDefault();
+                       this.highlightedIndex = Math.min(this.highlightedIndex + 1, options.length - 1);
+                       this.updateHighlight();
+                       break;
+                   case 'ArrowUp':
+                       e.preventDefault();
+                       this.highlightedIndex = Math.max(this.highlightedIndex - 1, 0);
+                       this.updateHighlight();
+                       break;
+                   case 'Enter':
+                       e.preventDefault();
+                       if (this.highlightedIndex >= 0 && options[this.highlightedIndex]) {
+                           this.selectOption(options[this.highlightedIndex]);
+                       }
+                       break;
+                   case 'Escape':
+                       this.close();
+                       break;
+               }
+           }
+
+           updateHighlight() {
+               const options = this.optionsContainer.querySelectorAll('.dropdown-option:not(.no-results)');
+               options.forEach((option, index) => {
+                   option.classList.toggle('highlighted', index === this.highlightedIndex);
+               });
+
+               if (this.highlightedIndex >= 0 && options[this.highlightedIndex]) {
+                   options[this.highlightedIndex].scrollIntoView({ block: 'nearest' });
+               }
+           }
+
+           renderOptions() {
+               if (this.currentData.length === 0) {
+                   this.optionsContainer.innerHTML = '<div class="no-results">No results found</div>';
+                   return;
+               }
+
+               this.optionsContainer.innerHTML = this.currentData.map(item => {
+                   const isSelected = this.selectedValue && this.selectedValue.id === item.id;
+                   return `
+                       <div class="dropdown-option ${isSelected ? 'selected' : ''}" 
+                            data-id="${item.id}" data-name="${item.name}" data-obj='${JSON.stringify(item)}'>
+                           <div class="option-main">${item.name}</div>
+                           ${item.province ? `<div class="option-sub">${item.province} Province</div>` : ''}
+                       </div>
+                   `;
+               }).join('');
+
+               this.optionsContainer.querySelectorAll('.dropdown-option').forEach(option => {
+                   option.addEventListener('click', () => this.selectOption(option));
+               });
+           }
+
+           selectOption(option) {
+               const data = JSON.parse(option.getAttribute('data-obj'));
+               
+               this.selectedValue = data;
+               this.input.value = data.name;
+               this.hiddenInput.value = data.name.toLowerCase().replace(/\s+/g, '-');
+               
+               this.optionsContainer.querySelectorAll('.dropdown-option').forEach(opt => {
+                   opt.classList.remove('selected');
+               });
+               option.classList.add('selected');
+               
+               this.close();
+               this.onSelect(this.selectedValue);
+               
+               this.hiddenInput.dispatchEvent(new Event('change'));
+           }
+
+           open() {
+               if (this.input.disabled) return;
+               
+               this.isOpen = true;
+               this.container.classList.add('active');
+               this.input.style.borderRadius = '8px 8px 0 0';
+           }
+
+           close() {
+               this.isOpen = false;
+               this.container.classList.remove('active');
+               this.input.style.borderRadius = '8px';
+               this.highlightedIndex = -1;
+           }
+
+           reset() {
+               this.selectedValue = null;
+               this.input.value = '';
+               this.hiddenInput.value = '';
+               this.currentData = [];
+               this.close();
+           }
+
+           disable() {
+               this.input.disabled = true;
+               this.input.placeholder = 'First select a district...';
+               this.reset();
+           }
+
+           enable(placeholder = 'Search or select...') {
+               this.input.disabled = false;
+               this.input.placeholder = placeholder;
+           }
+       }
+
+       // District Dropdown
+       class DistrictDropdown extends SearchableDropdown {
+           filterAndRender(query = '') {
+               const filteredDistricts = this.dataLoader.searchDistricts(query);
+               this.setData(filteredDistricts);
+           }
+
+           async initialize() {
+               await this.dataLoader.loadData();
+               this.filterAndRender();
+           }
+       }
+
+       // City Dropdown
+       class CityDropdown extends SearchableDropdown {
+           constructor(containerId, options) {
+               super(containerId, options);
+               this.selectedDistrictId = null;
+           }
+
+           setDistrict(districtId) {
+               this.selectedDistrictId = districtId;
+               this.reset();
+               this.filterAndRender();
+           }
+
+           filterAndRender(query = '') {
+               if (!this.selectedDistrictId) {
+                   this.setData([]);
+                   return;
+               }
+
+               const filteredCities = this.dataLoader.searchCities(this.selectedDistrictId, query);
+               this.setData(filteredCities);
+           }
+       }
+
+       // Initialize location dropdowns when DOM loads
+       document.addEventListener('DOMContentLoaded', async function() {
+           const dataLoader = new LocationDataLoader();
+           
+           try {
+               // Initialize district dropdown
+               const districtDropdown = new DistrictDropdown('district-dropdown', {
+                   dataLoader: dataLoader,
+                   onSelect: (district) => {
+                       console.log('Selected district:', district);
+                       
+                       // Enable and update city dropdown
+                       cityDropdown.enable('Search or select city...');
+                       cityDropdown.setDistrict(district.id);
+                   }
+               });
+
+               // Initialize city dropdown
+               const cityDropdown = new CityDropdown('city-dropdown', {
+                   dataLoader: dataLoader,
+                   onSelect: (city) => {
+                       console.log('Selected city:', city);
+                   }
+               });
+
+               // Load data and initialize districts
+               await districtDropdown.initialize();
+               cityDropdown.disable();
+
+               // Store globally for debugging
+               window.districtDropdown = districtDropdown;
+               window.cityDropdown = cityDropdown;
+               window.locationData = dataLoader;
+
+               console.log('🎉 Location dropdowns initialized successfully!');
+
+           } catch (error) {
+               console.error('❌ Failed to initialize location dropdowns:', error);
+           }
+       });
+
     </script>
 </body>
 </html>
