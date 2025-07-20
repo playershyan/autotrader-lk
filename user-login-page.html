@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTrader.lk - Login/Registration Modal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #fbbf24;
+        }
+
+        .icon-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .icon-btn:hover {
+            background: white;
+            color: #1e3a8a;
+            transform: scale(1.1);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #f59e0b;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to { 
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            min-height: 520px;
+            max-height: 520px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            background: #f3f4f6;
+            color: #1e3a8a;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            background: white;
+            color: #1f2937;
+            padding: 15px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .value-prop-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .value-prop-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 3px;
+            line-height: 1.1;
+            color: #1e3a8a;
+        }
+
+        .value-prop-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: #6b7280;
+        }
+
+        .value-prop-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .value-prop-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .value-prop-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .value-prop-icon {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            margin-top: 1px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+        }
+
+        .value-prop-text {
+            font-size: 0.88rem;
+            line-height: 1.3;
+            opacity: 0.85;
+            color: #374151;
+        }
+
+        /* Form Section */
+        .form-section {
+            flex: 1;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 12px;
+            color: #1e3a8a;
+            font-size: 1.3rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-label.required::after {
+            content: " *";
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        .phone-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            width: 80px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        .btn-form {
+            width: 100%;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .btn-form:hover {
+            background: #1e40af;
+        }
+
+        .btn-form:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Social Login */
+        .social-divider {
+            text-align: center;
+            margin: 8px 0;
+            position: relative;
+            color: #6b7280;
+        }
+
+        .social-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .social-divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-btn:hover {
+            border-color: #d1d5db;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .social-btn.google {
+            border-color: #e5e7eb;
+            border-width: 1px;
+            background: #fff;
+        }
+
+        .social-btn.google:hover {
+            position: relative;
+            border: 2px solid transparent;
+            border-width: 1px;
+            background: linear-gradient(white, white) padding-box,
+                       linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335) border-box;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .social-btn.facebook {
+            border-color: #e5e7eb;
+            border-width: 1px;
+            background: #fff;
+        }
+
+        .social-btn.facebook:hover {
+            border-color: #1877f2;
+            box-shadow: 0 2px 8px rgba(24, 119, 242, 0.3);
+        }
+
+        .social-btn.apple {
+            border-color: #e5e7eb;
+            border-width: 1px;
+            background: #fff;
+        }
+
+        .social-btn.apple:hover {
+            border-color: #000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .google-logo, .facebook-logo, .apple-logo {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Links */
+        .auth-links {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .auth-link {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+        /* OTP Verification */
+        .otp-container {
+            display: none;
+            text-align: center;
+        }
+
+        .otp-container.active {
+            display: block;
+        }
+
+        /* Auto-detection status */
+        .auto-detect-status {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .auto-detect-status.supported {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .auto-detect-status.not-supported {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .auto-detect-status.detecting {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .auto-detect-status.detected {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .otp-input {
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            font-size: 14px;
+            margin: 0 1px;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .otp-input:focus {
+            border-color: #1e3a8a;
+            outline: none;
+        }
+
+        .otp-input.filled {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .resend-otp {
+            color: #6b7280;
+            margin-top: 10px;
+        }
+
+        .resend-link {
+            color: #1e3a8a;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        /* Demo Page Content */
+        .demo-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .demo-content h1 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .demo-content p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 0 10px;
+            }
+
+            .auth-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .value-prop-section {
+                padding: 20px 15px;
+            }
+
+            .form-section {
+                padding: 20px 15px;
+            }
+
+            .value-prop-title {
+                font-size: 1.4rem;
+            }
+
+            .value-prop-item {
+                margin-bottom: 12px;
+                padding: 6px 0;
+            }
+
+            .value-prop-text {
+                font-size: 0.85rem;
+                line-height: 1.25;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .header-content {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AutoTrader.lk</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#research">Research & Reviews</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#wanted">Wanted Requests</a></li>
+                    <li><a href="#import">Import Service</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#favorites" class="icon-btn">❤️</a>
+                <button class="icon-btn" id="profileBtn">👤</button>
+                <a href="#sell" class="btn-primary">Post Ad</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Page Content -->
+    <div class="demo-content">
+        <h1>Welcome to AutoTrader.lk</h1>
+        <p>Click the profile button (👤) in the header to open the login/registration popup with auto-OTP detection.</p>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <div class="auth-container">
+                <button class="close-modal" id="closeModal">&times;</button>
+                
+                <!-- Value Proposition Section -->
+                <div class="value-prop-section">
+                    <div class="value-prop-content">
+                        <h2 class="value-prop-title" id="valuePropTitle">Hi there! Welcome back!</h2>
+                        <p class="value-prop-subtitle" id="valuePropSubtitle">Log in to manage your account</p>
+                        
+                        <ul class="value-prop-list">
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                    <rect width="256" height="256" fill="none"/>
+                                    <polygon points="128 160 96 160 96 128 192 32 224 64 128 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    <line x1="168" y1="56" x2="200" y2="88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    <path d="M216,128v80a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8h80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                </svg>
+                            </div>
+                                <div class="value-prop-text">Post & manage your vehicle ads with ease.</div>
+                            </li>
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                        <rect width="256" height="256" fill="none"/>
+                                        <circle cx="112" cy="112" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                        <line x1="168.57" y1="168.57" x2="224" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    </svg>
+                                </div>
+                                <div class="value-prop-text">Create & track your wanted requests.</div>
+                            </li>
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                        <rect width="256" height="256" fill="none"/>
+                                        <path d="M128,224S24,168,24,102A54,54,0,0,1,78,48c22.59,0,41.94,12.31,50,32,8.06-19.69,27.41-32,50-32a54,54,0,0,1,54,54C232,168,128,224,128,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    </svg>
+                                </div>
+                                <div class="value-prop-text">Save your favorite ads & view them anytime.</div>
+                            </li>
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                    <rect width="256" height="256" fill="none"/>
+                                    <path d="M45.15,230.11A8,8,0,0,1,32,224V64a8,8,0,0,1,8-8H216a8,8,0,0,1,8,8V192a8,8,0,0,1-8,8H80Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                </svg>
+                            </div>
+                                <div class="value-prop-text">Manage all your conversations in one place.</div>
+                            </li>
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                        <rect width="256" height="256" fill="none"/>
+                                        <path d="M128,189.09l54.72,33.65a8.4,8.4,0,0,0,12.52-9.17l-14.88-62.79,48.7-42A8.46,8.46,0,0,0,224.27,94L160.36,88.8,135.74,29.2a8.36,8.36,0,0,0-15.48,0L95.64,88.8,31.73,94a8.46,8.46,0,0,0-4.79,14.83l48.7,42L60.76,213.57a8.4,8.4,0,0,0,12.52,9.17Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    </svg>
+                                </div>
+                                <div class="value-prop-text">Discover & manage AutoTrader® membership plans.</div>
+                            </li>
+                            <li class="value-prop-item">
+                                <div class="value-prop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                                        <rect width="256" height="256" fill="none"/>
+                                        <polyline points="224 208 32 208 32 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                        <polyline points="200 72 128 144 96 112 32 176" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                        <polyline points="200 112 200 72 160 72" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                                    </svg>
+                                </div>
+                                <div class="value-prop-text">Get detailed analytics on your listings.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div class="form-section">
+                    <h2 class="form-title" id="formTitle">Welcome Back!</h2>
+                        
+                    <div id="login-form">
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label class="form-label" for="login-phone">Mobile Number</label>
+                                <div class="phone-input-group">
+                                    <input type="text" class="country-code" value="+94" readonly>
+                                    <input type="tel" class="form-input phone-input" id="login-phone" placeholder="771234567" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-form" id="submitBtn">Send OTP</button>
+                        </form>
+                    </div>
+
+                    <div id="login-otp" class="otp-container">
+                        <h3 id="otpTitle">Enter OTP</h3>
+                        <p>We've sent a code to +94 <span id="login-phone-display"></span></p>
+                        
+                        <div id="auto-detect-status" class="auto-detect-status">
+                            Checking auto-detection support...
+                        </div>
+                        
+                        <div style="margin: 15px 0;">
+                            <input type="text" class="otp-input" maxlength="1" data-index="0" autocomplete="one-time-code">
+                            <input type="text" class="otp-input" maxlength="1" data-index="1">
+                            <input type="text" class="otp-input" maxlength="1" data-index="2">
+                            <input type="text" class="otp-input" maxlength="1" data-index="3">
+                            <input type="text" class="otp-input" maxlength="1" data-index="4">
+                            <input type="text" class="otp-input" maxlength="1" data-index="5">
+                        </div>
+                        
+                        <button class="btn-form" id="verifyBtn" onclick="verifyOTP('login')">Verify OTP</button>
+                        
+                        <div class="resend-otp">
+                            Didn't receive code? <span class="resend-link" onclick="resendOTP('login')">Resend</span>
+                        </div>
+                    </div>
+
+                    <div class="social-divider">
+                        <span>Or continue with</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="social-btn google" onclick="socialLogin('google')" title="Continue with Google">
+                            <svg class="google-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                            </svg>
+                        </button>
+                        <button class="social-btn facebook" onclick="socialLogin('facebook')" title="Continue with Facebook">
+                            <svg class="facebook-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877f2"/>
+                            </svg>
+                        </button>
+                        <button class="social-btn apple" onclick="socialLogin('apple')" title="Continue with Apple">
+                            <svg class="apple-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" fill="#000"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="auth-links" id="authLinks">
+                        Don't have an account? <span class="auth-link" onclick="showRegisterForm()">Sign Up</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for auto-OTP detection
+        let otpDetectionActive = false;
+        let otpAbortController = null;
+
+        // Modal functionality
+        const profileBtn = document.getElementById('profileBtn');
+        const authModal = document.getElementById('authModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Open modal
+        profileBtn.addEventListener('click', function() {
+            authModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        function closeAuthModal() {
+            authModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Cancel any ongoing OTP detection
+            if (otpAbortController) {
+                otpAbortController.abort();
+                otpAbortController = null;
+            }
+            otpDetectionActive = false;
+            
+            resetForm();
+        }
+
+        closeModal.addEventListener('click', closeAuthModal);
+
+        // Close modal when clicking outside
+        authModal.addEventListener('click', function(e) {
+            if (e.target === authModal) {
+                closeAuthModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && authModal.classList.contains('active')) {
+                closeAuthModal();
+            }
+        });
+
+        // Check for WebOTP API support
+        function checkOTPSupport() {
+            const statusElement = document.getElementById('auto-detect-status');
+            
+            if ('OTPCredential' in window) {
+                statusElement.textContent = '✅ Auto-detection ready';
+                statusElement.className = 'auto-detect-status supported';
+                return true;
+            } else if (navigator.userAgent.includes('Chrome') && navigator.userAgent.includes('Android')) {
+                statusElement.textContent = '⚠️ Limited support detected';
+                statusElement.className = 'auto-detect-status supported';
+                return true;
+            } else {
+                statusElement.textContent = '❌ Auto-detection not supported';
+                statusElement.className = 'auto-detect-status not-supported';
+                return false;
+            }
+        }
+
+        // Start OTP auto-detection
+        async function startOTPDetection() {
+            if (otpDetectionActive) return;
+            
+            otpDetectionActive = true;
+            const statusElement = document.getElementById('auto-detect-status');
+            
+            if ('OTPCredential' in window) {
+                try {
+                    statusElement.textContent = '📱 Listening for SMS...';
+                    statusElement.className = 'auto-detect-status detecting';
+                    
+                    // Create abort controller for timeout
+                    otpAbortController = new AbortController();
+                    
+                    const credential = await navigator.credentials.get({
+                        otp: { transport: ['sms'] },
+                        signal: otpAbortController.signal
+                    });
+
+                    if (credential && credential.code) {
+                        fillOTPInputs(credential.code);
+                        statusElement.textContent = '✅ SMS detected automatically!';
+                        statusElement.className = 'auto-detect-status detected';
+                        
+                        // Auto-verify after a short delay
+                        setTimeout(() => {
+                            verifyOTP();
+                        }, 1000);
+                    }
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        console.log('OTP detection failed:', error);
+                        statusElement.textContent = '⏱️ Auto-detection timed out';
+                        statusElement.className = 'auto-detect-status not-supported';
+                    }
+                }
+            }
+            
+            otpDetectionActive = false;
+            otpAbortController = null;
+        }
+
+        // Fill OTP inputs with detected code
+        function fillOTPInputs(otp, autoDetected = false) {
+            const inputs = document.querySelectorAll('.otp-input');
+            const otpDigits = otp.toString().padStart(6, '0');
+            
+            inputs.forEach((input, index) => {
+                if (index < otpDigits.length) {
+                    input.value = otpDigits[index];
+                    input.classList.add('filled');
+                }
+            });
+            
+            // Auto-verify if OTP was automatically detected
+            if (autoDetected && otpDigits.length === 6) {
+                // Add visual feedback for auto-detection
+                const verifyBtn = document.getElementById('verifyBtn');
+                verifyBtn.textContent = 'Verifying...';
+                verifyBtn.disabled = true;
+                
+                // Auto-verify after a brief delay for better UX
+                setTimeout(() => {
+                    verifyOTP();
+                }, 1200);
+            }
+        }
+
+        // Setup OTP input handling
+        function setupOTPInputs() {
+            const inputs = document.querySelectorAll('.otp-input');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    const value = e.target.value;
+                    
+                    // Only allow digits
+                    if (!/^\d$/.test(value)) {
+                        e.target.value = '';
+                        return;
+                    }
+                    
+                    e.target.classList.add('filled');
+                    
+                    // Move to next input
+                    if (value && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                    
+                    // Auto-verify if all inputs are filled manually
+                    const allFilled = Array.from(inputs).every(inp => inp.value);
+                    if (allFilled) {
+                        // Brief delay for manual entry, longer for auto-detection
+                        setTimeout(() => verifyOTP(), 500);
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    // Handle backspace
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                        inputs[index - 1].value = '';
+                        inputs[index - 1].classList.remove('filled');
+                    }
+                });
+
+                // Handle paste
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text');
+                    const digits = pastedData.replace(/\D/g, '').slice(0, 6);
+                    
+                    if (digits.length === 6) {
+                        fillOTPInputs(digits, false); // Manual paste, not auto-detected
+                        setTimeout(() => verifyOTP(), 500);
+                    }
+                });
+            });
+        }
+
+        // Reset form to login state
+        function resetForm() {
+            document.getElementById('formTitle').textContent = 'Welcome Back!';
+            document.getElementById('submitBtn').textContent = 'Send OTP';
+            document.getElementById('authLinks').innerHTML = 
+                'Don\'t have an account? <span class="auth-link" onclick="showRegisterForm()">Sign Up</span>';
+            
+            updateLoginWelcomeMessage();
+            
+            // Remove name field if exists
+            const nameGroup = document.getElementById('register-name')?.closest('.form-group');
+            if (nameGroup) {
+                nameGroup.remove();
+            }
+            
+            // Reset form handlers
+            document.getElementById('loginForm').removeEventListener('submit', handleRegister);
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            
+            // Hide OTP section
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('login-otp').classList.remove('active');
+            
+            // Clear form
+            document.getElementById('loginForm').reset();
+            document.querySelectorAll('.otp-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            // Remove messages
+            document.querySelectorAll('.success-message, .error-message').forEach(msg => msg.remove());
+        }
+
+        // Function to get user's first name from localStorage
+        function getUserFirstName() {
+            const userData = localStorage.getItem('autotrader_user');
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    return user.firstName;
+                } catch (e) {
+                    return null;
+                }
+            }
+            
+            const recentName = localStorage.getItem('autotrader_recent_name');
+            if (recentName) {
+                const firstName = recentName.split(' ')[0];
+                return firstName;
+            }
+            
+            return null;
+        }
+
+        // Function to update login welcome message
+        function updateLoginWelcomeMessage() {
+            const firstName = getUserFirstName();
+            const titleElement = document.getElementById('valuePropTitle');
+            const subtitleElement = document.getElementById('valuePropSubtitle');
+            
+            if (firstName) {
+                titleElement.textContent = `Hi ${firstName}, welcome back!`;
+                subtitleElement.textContent = 'Log in to continue managing your account';
+            } else {
+                titleElement.textContent = 'Hi there! Welcome back!';
+                subtitleElement.textContent = 'Log in to manage your account';
+            }
+        }
+
+        // Function to store user data after successful verification
+        function storeUserData(name, phone) {
+            const firstName = name.split(' ')[0];
+            const userData = {
+                firstName: firstName,
+                fullName: name,
+                phone: phone,
+                lastLogin: new Date().toISOString()
+            };
+            localStorage.setItem('autotrader_user', JSON.stringify(userData));
+            localStorage.setItem('autotrader_recent_name', name);
+        }
+
+        // Show register form
+        function showRegisterForm() {
+            document.getElementById('formTitle').textContent = 'Create Account';
+            
+            document.getElementById('valuePropTitle').textContent = 'Join AutoTrader.lk today!';
+            document.getElementById('valuePropSubtitle').textContent = 'Create your account and unlock these features';
+            
+            // Add name field before phone number field
+            const nameGroup = document.createElement('div');
+            nameGroup.className = 'form-group';
+            nameGroup.innerHTML = `
+                <label class="form-label required" for="register-name">Full Name</label>
+                <input type="text" class="form-input" id="register-name" placeholder="Enter your full name" required>
+            `;
+            
+            const phoneGroup = document.querySelector('.form-group');
+            phoneGroup.parentNode.insertBefore(nameGroup, phoneGroup);
+            
+            const phoneLabel = document.querySelector('label[for="login-phone"]');
+            phoneLabel.classList.add('required');
+            
+            document.getElementById('submitBtn').textContent = 'Create Account';
+            
+            document.getElementById('authLinks').innerHTML = 
+                'Already have an account? <span class="auth-link" onclick="showLoginForm()">Login</span>';
+            
+            document.getElementById('loginForm').removeEventListener('submit', handleLogin);
+            document.getElementById('loginForm').addEventListener('submit', handleRegister);
+        }
+
+        // Show login form
+        function showLoginForm() {
+            document.getElementById('formTitle').textContent = 'Welcome Back!';
+            
+            updateLoginWelcomeMessage();
+            
+            const nameGroup = document.getElementById('register-name')?.closest('.form-group');
+            if (nameGroup) {
+                nameGroup.remove();
+            }
+            
+            const phoneLabel = document.querySelector('label[for="login-phone"]');
+            phoneLabel.classList.remove('required');
+            
+            document.getElementById('submitBtn').textContent = 'Send OTP';
+            
+            document.getElementById('authLinks').innerHTML = 
+                'Don\'t have an account? <span class="auth-link" onclick="showRegisterForm()">Sign Up</span>';
+            
+            document.getElementById('loginForm').removeEventListener('submit', handleRegister);
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        }
+
+        // Login form submission handler
+        function handleLogin(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('login-phone').value;
+            
+            if (phoneNumber.length < 9) {
+                showMessage('Please enter a valid mobile number', 'error');
+                return;
+            }
+            
+            localStorage.setItem('autotrader_login_phone', phoneNumber);
+            
+            // Show OTP form
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('login-otp').classList.add('active');
+            document.getElementById('login-phone-display').textContent = phoneNumber;
+            
+            // Check auto-detection support and start listening
+            checkOTPSupport();
+            setupOTPInputs();
+            startOTPDetection();
+            
+            showMessage('OTP sent successfully!', 'success');
+            
+            // Focus first OTP input
+            document.querySelector('#login-otp .otp-input').focus();
+        }
+
+        // Register form submission handler
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const phoneNumber = document.getElementById('login-phone').value;
+            
+            if (name.length < 2) {
+                showMessage('Please enter your full name', 'error');
+                return;
+            }
+            
+            if (phoneNumber.length < 9) {
+                showMessage('Please enter a valid mobile number', 'error');
+                return;
+            }
+            
+            localStorage.setItem('autotrader_register_name', name);
+            localStorage.setItem('autotrader_register_phone', phoneNumber);
+            
+            // Show OTP form
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('login-otp').classList.add('active');
+            document.getElementById('login-phone-display').textContent = phoneNumber;
+            
+            document.getElementById('otpTitle').textContent = 'Verify Your Number';
+            document.getElementById('verifyBtn').textContent = 'Verify & Create Account';
+            
+            // Check auto-detection support and start listening
+            checkOTPSupport();
+            setupOTPInputs();
+            startOTPDetection();
+            
+            showMessage('OTP sent successfully!', 'success');
+            
+            // Focus first OTP input
+            document.querySelector('#login-otp .otp-input').focus();
+        }
+
+        // Initialize login form handler
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+        // Verify OTP function
+        function verifyOTP(type) {
+            const inputs = document.querySelectorAll('.otp-input');
+            let otp = '';
+            
+            inputs.forEach(input => {
+                otp += input.value;
+            });
+            
+            if (otp.length !== 6) {
+                showMessage('Please enter the complete OTP', 'error');
+                // Reset button state if verification fails
+                const verifyBtn = document.getElementById('verifyBtn');
+                verifyBtn.textContent = 'Verify OTP';
+                verifyBtn.disabled = false;
+                return;
+            }
+            
+            // Show verifying state
+            const verifyBtn = document.getElementById('verifyBtn');
+            const originalText = verifyBtn.textContent;
+            verifyBtn.textContent = 'Verifying...';
+            verifyBtn.disabled = true;
+            
+            // Simulate verification delay
+            setTimeout(() => {
+                // Simulate OTP verification (use 123456 for demo)
+                if (otp === '123456' || otp === '111111') {
+                    const registrationName = localStorage.getItem('autotrader_register_name');
+                    const registrationPhone = localStorage.getItem('autotrader_register_phone');
+                    const loginPhone = localStorage.getItem('autotrader_login_phone');
+                    
+                    if (registrationName && registrationPhone) {
+                        storeUserData(registrationName, registrationPhone);
+                        showMessage(`Welcome ${registrationName.split(' ')[0]}! Your account has been created successfully.`, 'success');
+                        
+                        localStorage.removeItem('autotrader_register_name');
+                        localStorage.removeItem('autotrader_register_phone');
+                    } else if (loginPhone) {
+                        const firstName = getUserFirstName();
+                        if (firstName) {
+                            showMessage(`Welcome back, ${firstName}!`, 'success');
+                        } else {
+                            showMessage('Login successful! Welcome to AutoTrader.lk', 'success');
+                        }
+                        
+                        localStorage.removeItem('autotrader_login_phone');
+                    }
+                    
+                    // Success - keep the button in success state
+                    verifyBtn.textContent = '✅ Verified!';
+                    
+                    setTimeout(() => {
+                        closeAuthModal();
+                    }, 2000);
+                } else {
+                    showMessage('Invalid OTP. Please try again.', 'error');
+                    
+                    // Reset button state and clear inputs on failure
+                    verifyBtn.textContent = originalText;
+                    verifyBtn.disabled = false;
+                    
+                    // Clear inputs
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    inputs[0].focus();
+                }
+            }, 800); // Realistic verification delay
+        }
+
+        // Social login function
+        function socialLogin(provider) {
+            showMessage(`Connecting to ${provider}...`, 'success');
+            setTimeout(() => {
+                const demoNames = {
+                    'google': 'John Doe',
+                    'facebook': 'Jane Smith', 
+                    'apple': 'Alex Johnson'
+                };
+                
+                const demoName = demoNames[provider];
+                const firstName = demoName.split(' ')[0];
+                
+                storeUserData(demoName, '771234567');
+                
+                showMessage(`${provider} login successful! Welcome ${firstName}!`, 'success');
+                setTimeout(() => {
+                    closeAuthModal();
+                }, 2000);
+            }, 1500);
+        }
+
+        // Show message function
+        function showMessage(message, type) {
+            document.querySelectorAll('.success-message, .error-message').forEach(msg => msg.remove());
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            
+            const container = document.querySelector('.form-section');
+            container.insertBefore(messageDiv, container.querySelector('.form-title').nextSibling);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Resend OTP function
+        function resendOTP(type) {
+            showMessage('OTP resent successfully!', 'success');
+            
+            // Clear current inputs
+            const inputs = document.querySelectorAll('.otp-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            // Restart auto-detection
+            startOTPDetection();
+            inputs[0].focus();
+        }
+
+        // Initialize the modal
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLoginWelcomeMessage();
+            
+            function setupPhoneInput() {
+                const phoneInput = document.getElementById('login-phone');
+                if (phoneInput) {
+                    phoneInput.addEventListener('input', function() {
+                        this.value = this.value.replace(/\D/g, '');
+                        
+                        if (this.value.length > 9) {
+                            this.value = this.value.slice(0, 9);
+                        }
+                    });
+                }
+            }
+            
+            setupPhoneInput();
+            
+            // Log auto-detection support status
+            console.log('WebOTP API supported:', 'OTPCredential' in window);
+        });
+
+        // Demo function for testing
+        function setDemoUser(name) {
+            storeUserData(name, '771234567');
+            updateLoginWelcomeMessage();
+            console.log(`Demo user set: ${name}. Refresh the modal to see personalized greeting.`);
+        }
+
+        // Demo function to simulate OTP arrival
+        function simulateAutoOTP() {
+            if (document.getElementById('login-otp').classList.contains('active')) {
+                fillOTPInputs('123456', true); // Pass true for auto-detected simulation
+                const statusElement = document.getElementById('auto-detect-status');
+                statusElement.textContent = '✅ Demo SMS detected automatically!';
+                statusElement.className = 'auto-detect-status detected';
+                showMessage('📱 Demo: OTP detected and filled automatically!', 'success');
+            } else {
+                console.log('Please start OTP verification first');
+            }
+        }
+    </script>
+</body>
+</html>
