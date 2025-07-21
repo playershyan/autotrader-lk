@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Your Vehicle Ad | AutoTrader.lk</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #fbbf24;
+        }
+        
+        .icon-btn {
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .icon-btn:hover {
+            background: none;
+            color: #fbbf24;
+            transform: scale(1.1);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #f59e0b;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #e5e7eb;
+            padding: 10px 0;
+        }
+        
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffffff;
+            color: #374151;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            flex-shrink: 0;
+            width: 100%;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+        
+        .footer-section a {
+            color: #6b7280;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #1e3a8a;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .content-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary-large,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AutoTrader.lk</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#research">Research & Reviews</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#wanted">Wanted Requests</a></li>
+                    <li><a href="#import">Import Service</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#favorites" class="icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" style="width: 24px; height: 24px;">
+                        <rect width="256" height="256" fill="none"/>
+                        <path d="M128,224S24,168,24,102A54,54,0,0,1,78,48c22.59,0,41.94,12.31,50,32,8.06-19.69,27.41-32,50-32a54,54,0,0,1,54,54C232,168,128,224,128,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                    </svg>
+                </a>
+                <a href="#profile" class="icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" style="width: 24px; height: 24px;">
+                        <rect width="256" height="256" fill="none"/>
+                        <circle cx="128" cy="96" r="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                        <path d="M32,216c19.37-33.47,54.55-56,96-56s76.63,22.53,96,56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                    </svg>
+                </a>
+                <a href="#sell" class="btn-primary">Post Ad</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/">Home</a> > <span>Post Ad</span>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AutoTrader.lk</h3>
+                <p>Sri Lanka's most trusted vehicle marketplace. Find your perfect car, van, motorcycle or three-wheeler with confidence.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#browse">Browse Cars</a>
+                <a href="#sell">Sell Your Car</a>
+                <a href="#finance">Car Finance</a>
+                <a href="#insurance">Car Insurance</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#help">Help Center</a>
+                <a href="#contact">Contact Us</a>
+                <a href="#terms">Terms & Conditions</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22">
+                        <rect width="256" height="256" fill="none"/>
+                        <path d="M164.39,145.34a8,8,0,0,1,7.59-.69l47.16,21.13a8,8,0,0,1,4.8,8.3A48.33,48.33,0,0,1,176,216,136,136,0,0,1,40,80,48.33,48.33,0,0,1,81.92,32.06a8,8,0,0,1,8.3,4.8l21.13,47.2a8,8,0,0,1-.66,7.53L89.32,117a7.93,7.93,0,0,0-.54,7.81c8.27,16.93,25.77,34.22,42.75,42.41a7.92,7.92,0,0,0,7.83-.59Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                    </svg>  
+                    +94 11 234 5678
+                </p>
+                <p>📧 
+                    info@autotrader.lk</p>
+                <p>📍 Colombo, Sri Lanka</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AutoTrader.lk. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
