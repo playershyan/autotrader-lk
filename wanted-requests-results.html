@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanted Requests - AutoTrader.lk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #1e3a8a;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            padding: 8px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8fafc;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .breadcrumb-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Search Header */
+        .search-header {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        .search-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .search-subtitle {
+            color: #6b7280;
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        /* Button Styles matching user-profile.html */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #1e40af;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .quick-search {
+            margin: 15px 0 20px 0;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #1e3a8a;
+        }
+
+        .search-btn {
+            background: #1e3a8a;
+            color: white;
+            border: 2px solid #1e3a8a;
+            border-left: none;
+            padding: 12px 20px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background: #1e40af;
+            border-color: #1e40af;
+        }
+
+        .search-icon {
+            font-size: 0.9rem;
+        }
+
+        /* Filters Sidebar */
+        .filters-sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filters-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .clear-filters {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #374151;
+            display: block;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 10px;
+        }
+
+        .collapsible-header:hover {
+            background-color: #f9fafb;
+            margin: 0 -10px;
+            padding: 8px 10px;
+            border-radius: 4px;
+        }
+
+        .collapse-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: #6b7280;
+        }
+
+        .collapse-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.expanded {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .location-links, .make-links, .model-links {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 10px;
+            background: #f9fafb;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .location-link, .make-link, .model-link {
+            color: #1e3a8a;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .location-link:hover, .make-link:hover, .model-link:hover {
+            color: #1e40af;
+            background: #e0f2fe;
+        }
+
+        .location-link.selected, .make-link.selected, .model-link.selected {
+            color: #fbbf24;
+            font-weight: bold;
+            background: #fffbeb;
+        }
+
+        .price-range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input {
+            margin: 0;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Results Container */
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        /* Wanted Request Card */
+        .wanted-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .wanted-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .urgency-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .urgency-high {
+            background: #fecaca;
+            color: #dc2626;
+        }
+
+        .urgency-medium {
+            background: #fed7aa;
+            color: #ea580c;
+        }
+
+        .urgency-low {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .wanted-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .requester-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .requester-avatar {
+            width: 32px;
+            height: 32px;
+            background: #1e3a8a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .requester-name {
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .request-date {
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .budget-info {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .budget-label {
+            font-size: 0.85rem;
+            color: #0369a1;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .budget-amount {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #0c4a6e;
+        }
+
+        .request-details {
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.9rem;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .request-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            border-left: 3px solid #1e3a8a;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn-contact {
+            flex: 1;
+            background: #1e3a8a;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-contact:hover {
+            background: #1e40af;
+        }
+
+        .btn-save {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-save:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-save.saved {
+            background: #fbbf24;
+            color: #1f2937;
+            border-color: #f59e0b;
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .filters-sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sort-options {
+                justify-content: space-between;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .header-content {
+                padding: 0 10px;
+            }
+
+            .main-container {
+                padding: 15px;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AutoTrader.lk</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#research">Research & Reviews</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#wanted">Wanted Requests</a></li>
+                    <li><a href="#import">Import Service</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#favorites" class="icon-btn">❤️</a>
+                <a href="#profile" class="icon-btn">👤</a>
+                <a href="#sell" class="btn-primary">Post Ad</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/">Home</a> > <span>Wanted Requests</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Search Header -->
+        <div class="search-header">
+            <div class="header-top">
+                <div class="header-text">
+                    <h1 class="search-title">Wanted Requests</h1>
+                    <p class="search-subtitle">Browse active requests from buyers looking for specific vehicles. Contact them directly if you have what they're looking for.</p>
+                </div>
+                <button class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14"/>
+                        <path d="M5 12h14"/>
+                    </svg>
+                    Publish a Wanted Request
+                </button>
+            </div>
+            <div class="quick-search">
+                <div class="search-container">
+                    <input type="text" id="keyword-search" class="search-input" placeholder="Search wanted requests...">
+                    <button class="search-btn" id="search-button">
+                        <span class="search-icon">🔍</span>
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="search-info">
+                <div class="results-count">43 wanted requests found</div>
+                <div class="sort-options">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort" class="sort-select">
+                        <option value="recent">Most Recent</option>
+                        <option value="budget-high">Budget: High to Low</option>
+                        <option value="budget-low">Budget: Low to High</option>
+                        <option value="urgency">Most Urgent</option>
+                        <option value="location">Location</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters Sidebar -->
+        <div class="filters-sidebar">
+            <div class="filters-header">
+                <h3 class="filters-title">Filters</h3>
+                <a href="#" class="clear-filters">Clear all</a>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleLocationFilter()">
+                    <span class="filter-label">Location</span>
+                    <span class="collapse-icon" id="location-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="location-content">
+                    <input type="text" class="filter-input location-search" id="location-search" placeholder="Search districts and cities...">
+                    <div class="location-links" id="location-list">
+                        <a href="#" class="location-link" data-location="colombo">Colombo</a>
+                        <a href="#" class="location-link" data-location="gampaha">Gampaha</a>
+                        <a href="#" class="location-link" data-location="kalutara">Kalutara</a>
+                        <a href="#" class="location-link" data-location="kandy">Kandy</a>
+                        <a href="#" class="location-link" data-location="galle">Galle</a>
+                        <a href="#" class="location-link" data-location="matara">Matara</a>
+                        <a href="#" class="location-link" data-location="negombo">Negombo</a>
+                        <a href="#" class="location-link" data-location="kurunegala">Kurunegala</a>
+                        <a href="#" class="location-link" data-location="anuradhapura">Anuradhapura</a>
+                        <a href="#" class="location-link" data-location="jaffna">Jaffna</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleMakeFilter()">
+                    <span class="filter-label">Make</span>
+                    <span class="collapse-icon" id="make-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="make-content">
+                    <input type="text" class="filter-input make-search" id="make-search" placeholder="Search makes...">
+                    <div class="make-links" id="make-list">
+                        <a href="#" class="make-link" data-make="toyota">Toyota</a>
+                        <a href="#" class="make-link" data-make="honda">Honda</a>
+                        <a href="#" class="make-link" data-make="nissan">Nissan</a>
+                        <a href="#" class="make-link" data-make="mazda">Mazda</a>
+                        <a href="#" class="make-link" data-make="suzuki">Suzuki</a>
+                        <a href="#" class="make-link" data-make="mitsubishi">Mitsubishi</a>
+                        <a href="#" class="make-link" data-make="hyundai">Hyundai</a>
+                        <a href="#" class="make-link" data-make="kia">Kia</a>
+                        <a href="#" class="make-link" data-make="bmw">BMW</a>
+                        <a href="#" class="make-link" data-make="mercedes">Mercedes-Benz</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleModelFilter()">
+                    <span class="filter-label">Model</span>
+                    <span class="collapse-icon" id="model-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="model-content">
+                    <input type="text" class="filter-input model-search" id="model-search" placeholder="Search models...">
+                    <div class="model-links" id="model-list">
+                        <a href="#" class="model-link" data-model="prius">Prius</a>
+                        <a href="#" class="model-link" data-model="civic">Civic</a>
+                        <a href="#" class="model-link" data-model="accord">Accord</a>
+                        <a href="#" class="model-link" data-model="fit">Fit</a>
+                        <a href="#" class="model-link" data-model="vezel">Vezel</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Budget Range</label>
+                <div class="price-range">
+                    <input type="number" class="filter-input" placeholder="Min (LKR)" id="min-budget">
+                    <input type="number" class="filter-input" placeholder="Max (LKR)" id="max-budget">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Year Range</label>
+                <div class="price-range">
+                    <input type="number" class="filter-input" placeholder="From year" id="year-from">
+                    <input type="number" class="filter-input" placeholder="To year" id="year-to">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Fuel Type</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="petrol">
+                        <label for="petrol">Petrol</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="diesel">
+                        <label for="diesel">Diesel</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hybrid">
+                        <label for="hybrid">Hybrid</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="electric">
+                        <label for="electric">Electric</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Transmission</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="automatic">
+                        <label for="automatic">Automatic</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="manual">
+                        <label for="manual">Manual</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Urgency</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urgent-high">
+                        <label for="urgent-high">High Priority</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urgent-medium">
+                        <label for="urgent-medium">Medium Priority</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="urgent-low">
+                        <label for="urgent-low">Low Priority</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container">
+            <div class="results-grid" id="results-grid">
+                <!-- Wanted Request Card 1 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-high">High Priority</div>
+                        <h3 class="wanted-title">Looking for: Mercedes-Benz C-Class 2019-2021</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">KP</div>
+                            <div>
+                                <div class="requester-name">Kamal Perera</div>
+                                <div class="request-date">Posted 2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 6,000,000 - Rs. 8,500,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Colombo or nearby areas</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Petrol</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Max Mileage:</span>
+                                <span class="detail-value">60,000 km</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            Looking for a well-maintained Mercedes C-Class in excellent condition. Prefer single owner vehicles with full service history. Color preference: Black, White, or Silver.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wanted Request Card 2 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-medium">Medium Priority</div>
+                        <h3 class="wanted-title">Looking for: Toyota Land Cruiser Prado</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">SF</div>
+                            <div>
+                                <div class="requester-name">Saman Fernando</div>
+                                <div class="request-date">Posted 5 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 12,000,000 - Rs. 16,000,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Any location in Sri Lanka</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Diesel</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year Range:</span>
+                                <span class="detail-value">2017 onwards</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            Need a reliable SUV for family use and occasional off-road trips. Looking for a vehicle with leather interior and all modern features.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wanted Request Card 3 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-low">Low Priority</div>
+                        <h3 class="wanted-title">Looking for: Honda Civic 2018-2020</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">NR</div>
+                            <div>
+                                <div class="requester-name">Nimal Rajapaksa</div>
+                                <div class="request-date">Posted 1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 4,500,000 - Rs. 6,000,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Kandy area</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Petrol</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Manual or Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Max Mileage:</span>
+                                <span class="detail-value">80,000 km</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            First car for my son who's starting university. Looking for a reliable, fuel-efficient vehicle in good condition.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wanted Request Card 4 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-high">High Priority</div>
+                        <h3 class="wanted-title">Looking for: BMW X5 2018-2021</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">AS</div>
+                            <div>
+                                <div class="requester-name">Arjuna Silva</div>
+                                <div class="request-date">Posted 3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 15,000,000 - Rs. 20,000,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Colombo, Gampaha</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Petrol or Diesel</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Max Mileage:</span>
+                                <span class="detail-value">50,000 km</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            Looking for a luxury SUV with all premium features. Prefer vehicles with warranty remaining and accident-free history.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wanted Request Card 5 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-medium">Medium Priority</div>
+                        <h3 class="wanted-title">Looking for: Nissan Leaf Electric Vehicle</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">DP</div>
+                            <div>
+                                <div class="requester-name">Dilshan Perera</div>
+                                <div class="request-date">Posted 4 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 3,500,000 - Rs. 4,500,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Negombo area</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Electric</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Year Range:</span>
+                                <span class="detail-value">2017 onwards</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            Interested in switching to an eco-friendly electric vehicle. Looking for good battery health and charging accessories included.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wanted Request Card 6 -->
+                <div class="wanted-card">
+                    <div class="card-header">
+                        <div class="urgency-badge urgency-high">High Priority</div>
+                        <h3 class="wanted-title">Looking for: Toyota Prius 2018-2020</h3>
+                        <div class="requester-info">
+                            <div class="requester-avatar">RW</div>
+                            <div>
+                                <div class="requester-name">Ruwan Wijesinghe</div>
+                                <div class="request-date">Posted 1 day ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="budget-info">
+                            <div class="budget-label">Budget Range</div>
+                            <div class="budget-amount">Rs. 4,000,000 - Rs. 5,500,000</div>
+                        </div>
+                        
+                        <div class="request-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preferred Location:</span>
+                                <span class="detail-value">Galle, Matara</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fuel Type:</span>
+                                <span class="detail-value">Hybrid</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Transmission:</span>
+                                <span class="detail-value">Automatic</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Max Mileage:</span>
+                                <span class="detail-value">70,000 km</span>
+                            </div>
+                        </div>
+                        
+                        <div class="request-description">
+                            Need a fuel-efficient hybrid for daily commuting. Prefer vehicles with good maintenance records and original parts.
+                        </div>
+                        
+                        <div class="card-actions">
+                            <a href="#" class="btn-contact">Contact Buyer</a>
+                            <button class="btn-save" onclick="toggleSave(this)">💾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Section -->
+            <div class="load-more">
+                <div class="loading" id="loading" style="display: none;">Loading more wanted requests...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AutoTrader.lk</h3>
+                <p>Sri Lanka's most trusted vehicle marketplace.</p>
+                <p>Connect buyers and sellers across the island with ease and confidence.</p>
+            </div>
+            <div class="footer-section">
+                <h3>For Buyers</h3>
+                <ul>
+                    <li><a href="#">Search Vehicles</a></li>
+                    <li><a href="#">Compare Prices</a></li>
+                    <li><a href="#">Vehicle History</a></li>
+                    <li><a href="#">Financing Options</a></li>
+                    <li><a href="#">Insurance Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>For Sellers</h3>
+                <ul>
+                    <li><a href="#">Post Your Ad</a></li>
+                    <li><a href="#">Pricing Guide</a></li>
+                    <li><a href="#">Seller Tips</a></li>
+                    <li><a href="#">Premium Listings</a></li>
+                    <li><a href="#">Dealer Solutions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Safety Tips</a></li>
+                    <li><a href="#">Report Fraud</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AutoTrader.lk. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter Toggle Functions
+        function toggleLocationFilter() {
+            toggleFilter('location');
+        }
+
+        function toggleMakeFilter() {
+            toggleFilter('make');
+        }
+
+        function toggleModelFilter() {
+            toggleFilter('model');
+        }
+
+        function toggleFilter(filterType) {
+            const content = document.getElementById(`${filterType}-content`);
+            const icon = document.getElementById(`${filterType}-icon`);
+            
+            content.classList.toggle('expanded');
+            icon.classList.toggle('expanded');
+        }
+
+        // Filter Selection
+        let selectedMake = null;
+
+        document.querySelectorAll('.location-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.location-link').forEach(l => l.classList.remove('selected'));
+                this.classList.add('selected');
+                updateSearchHeader();
+                console.log('Location selected:', this.dataset.location);
+            });
+        });
+
+        document.querySelectorAll('.make-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.make-link').forEach(l => l.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedMake = this.dataset.make;
+                filterModelsByMake(selectedMake);
+                console.log('Make selected:', selectedMake);
+            });
+        });
+
+        document.querySelectorAll('.model-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.model-link').forEach(l => l.classList.remove('selected'));
+                this.classList.add('selected');
+                console.log('Model selected:', this.dataset.model);
+            });
+        });
+
+        // Model filtering based on make
+        const makeModelMap = {
+            toyota: ['Prius', 'Camry', 'Corolla', 'Vitz', 'Aqua', 'CHR', 'Highlander', 'Land Cruiser', 'Hiace', 'Hilux'],
+            honda: ['Civic', 'Accord', 'Fit', 'Vezel', 'CR-V', 'Insight', 'City', 'Jazz', 'Pilot', 'Ridgeline'],
+            nissan: ['March', 'Tiida', 'Sylphy', 'Teana', 'X-Trail', 'Murano', 'Navara', 'Juke', 'Qashqai', 'Leaf'],
+            mazda: ['Demio', 'Axela', 'Atenza', 'CX-3', 'CX-5', 'CX-9', 'BT-50', 'Premacy', 'Biante', 'Roadster'],
+            suzuki: ['Alto', 'Swift', 'Wagon R', 'Baleno', 'Vitara', 'Jimny', 'Ertiga', 'S-Cross', 'Ignis', 'Ciaz'],
+            mitsubishi: ['Lancer', 'Outlander', 'Pajero', 'Montero', 'ASX', 'Mirage', 'Triton', 'Galant', 'Colt', 'Eclipse'],
+            hyundai: ['Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'i10', 'i20', 'i30', 'Accent', 'Genesis', 'Kona'],
+            kia: ['Cerato', 'Optima', 'Sportage', 'Sorento', 'Picanto', 'Rio', 'Soul', 'Stinger', 'Carnival', 'Seltos'],
+            bmw: ['3 Series', '5 Series', '7 Series', 'X1', 'X3', 'X5', 'X7', 'Z4', 'i3', 'i8'],
+            mercedes: ['C-Class', 'E-Class', 'S-Class', 'A-Class', 'GLA', 'GLC', 'GLE', 'GLS', 'CLA', 'CLS']
+        };
+
+        function filterModelsByMake(make) {
+            const modelList = document.getElementById('model-list');
+            modelList.innerHTML = '';
+            
+            if (make && makeModelMap[make]) {
+                makeModelMap[make].forEach(model => {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.className = 'model-link';
+                    link.dataset.model = model.toLowerCase().replace(/\s+/g, '-');
+                    link.textContent = model;
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        document.querySelectorAll('.model-link').forEach(l => l.classList.remove('selected'));
+                        this.classList.add('selected');
+                        console.log('Model selected:', this.dataset.model);
+                    });
+                    modelList.appendChild(link);
+                });
+            }
+        }
+
+        function updateSearchHeader() {
+            const selectedLocation = document.querySelector('.location-link.selected');
+            const searchTitle = document.querySelector('.search-title');
+            
+            if (selectedLocation) {
+                const locationName = selectedLocation.textContent;
+                searchTitle.textContent = `Wanted Requests in ${locationName}`;
+            } else {
+                searchTitle.textContent = 'Wanted Requests';
+            }
+        }
+
+        // Search functionality
+        function performKeywordSearch() {
+            const searchTerm = document.getElementById('keyword-search').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                document.querySelectorAll('.wanted-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+                updateResultsCount();
+                return;
+            }
+            
+            let visibleCount = 0;
+            
+            document.querySelectorAll('.wanted-card').forEach(card => {
+                const title = card.querySelector('.wanted-title')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('.request-description')?.textContent.toLowerCase() || '';
+                const requester = card.querySelector('.requester-name')?.textContent.toLowerCase() || '';
+                const details = card.querySelector('.request-details')?.textContent.toLowerCase() || '';
+                
+                const searchableText = `${title} ${description} ${requester} ${details}`;
+                
+                if (searchableText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            updateResultsCount(visibleCount, searchTerm);
+        }
+
+        function updateResultsCount(count = null, searchTerm = '') {
+            const resultsCount = document.querySelector('.results-count');
+            
+            if (count === null) {
+                count = document.querySelectorAll('.wanted-card[style*="block"], .wanted-card:not([style*="none"])').length;
+            }
+            
+            if (searchTerm) {
+                resultsCount.textContent = `${count} wanted requests found for "${searchTerm}"`;
+            } else {
+                resultsCount.textContent = `${count} wanted requests found`;
+            }
+        }
+
+        // Search event handlers
+        document.getElementById('search-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            performKeywordSearch();
+        });
+
+        document.getElementById('keyword-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performKeywordSearch();
+            }
+        });
+
+        // Clear filters
+        document.querySelector('.clear-filters').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            document.querySelectorAll('.filter-input').forEach(input => {
+                input.value = '';
+            });
+            
+            document.querySelectorAll('.checkbox-item input').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            document.querySelectorAll('.location-link, .make-link, .model-link').forEach(link => {
+                link.classList.remove('selected');
+            });
+            
+            selectedMake = null;
+            filterModelsByMake(null);
+            
+            document.getElementById('keyword-search').value = '';
+            
+            document.querySelectorAll('.wanted-card').forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            updateSearchHeader();
+            updateResultsCount();
+            
+            console.log('All filters cleared');
+        });
+
+        // Save functionality
+        function toggleSave(button) {
+            button.classList.toggle('saved');
+            if (button.classList.contains('saved')) {
+                button.innerHTML = '⭐';
+                button.style.background = '#fbbf24';
+                button.style.color = '#1f2937';
+                button.style.borderColor = '#f59e0b';
+            } else {
+                button.innerHTML = '💾';
+                button.style.background = '#f3f4f6';
+                button.style.color = '#374151';
+                button.style.borderColor = '#d1d5db';
+            }
+        }
+
+        // Sort functionality
+        document.getElementById('sort').addEventListener('change', function() {
+            console.log('Sort changed to:', this.value);
+            // In a real implementation, this would re-sort the results
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-input, .checkbox-item input').forEach(input => {
+            input.addEventListener('change', function() {
+                console.log('Filter applied:', this.name || this.id, this.value || this.checked);
+                // In a real implementation, this would trigger filtering
+            });
+        });
+
+        // Initialize filters
+        document.addEventListener('DOMContentLoaded', function() {
+            filterModelsByMake(null);
+        });
+
+        // Publish wanted request button functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-secondary') && e.target.closest('.btn-secondary').textContent.includes('Publish a Wanted Request')) {
+                const button = e.target.closest('.btn-secondary');
+                
+                // Simulate navigation to publish wanted request page
+                console.log('User clicked Publish a Wanted Request');
+                
+                // Show feedback to user
+                const originalText = button.innerHTML;
+                button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Opening form...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    // In a real app, you'd navigate to the publish form
+                    // window.location.href = '/wanted-requests/create';
+                }, 1500);
+            }
+        });
+
+        // Infinite scroll implementation
+        let isLoading = false;
+        let hasMoreResults = true;
+
+        function loadMoreWantedRequests() {
+            if (isLoading || !hasMoreResults) return;
+            
+            isLoading = true;
+            const loading = document.getElementById('loading');
+            
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                isLoading = false;
+                loading.style.display = 'none';
+                
+                const totalCards = document.querySelectorAll('.wanted-card').length;
+                if (totalCards > 20) {
+                    hasMoreResults = false;
+                    loading.innerHTML = 'No more wanted requests to load';
+                    loading.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        // Intersection Observer for infinite scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadMoreWantedRequests();
+                }
+            });
+        }, {
+            rootMargin: '100px'
+        });
+
+        // Create sentinel for infinite scroll
+        function createSentinel() {
+            const sentinel = document.createElement('div');
+            sentinel.id = 'scroll-sentinel';
+            sentinel.style.height = '1px';
+            sentinel.style.visibility = 'hidden';
+            
+            const resultsContainer = document.querySelector('.results-container');
+            resultsContainer.appendChild(sentinel);
+            
+            observer.observe(sentinel);
+        }
+
+        // Initialize infinite scroll when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createSentinel();
+        });
+    </script>
+</body>
+</html>
