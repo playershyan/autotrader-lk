@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Finance - AutoTrader.lk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Finance Providers Grid */
+        .providers-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .provider-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .provider-card.selected {
+            border-color: #1e3a8a;
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.15);
+        }
+
+        .provider-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .provider-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .provider-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .provider-rate {
+            color: #059669;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .provider-benefits {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .provider-benefits li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        .benefit-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .provider-terms {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .provider-terms h4 {
+            color: #1e3a8a;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .provider-terms ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .provider-terms li {
+            margin-bottom: 4px;
+        }
+
+        /* Finance Calculator */
+        .calculator-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .calculator-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .financing-note {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .input-field {
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        .provider-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .provider-option {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .provider-option.active {
+            border-color: #1e3a8a;
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .provider-option:hover {
+            border-color: #3b82f6;
+        }
+
+        /* Results Panel */
+        .results-panel {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .results-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 2px solid #1e3a8a;
+        }
+
+        .result-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
+
+        .monthly-payment {
+            font-size: 1.8rem;
+            color: #1e3a8a;
+        }
+
+        /* Apply Button */
+        .apply-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        /* Important Information */
+        .important-info {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+        }
+
+        .info-item h4 {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .info-item p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .providers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .provider-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .provider-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .monthly-payment {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="page-title">Vehicle Finance</h1>
+            <p class="page-subtitle">Get competitive rates from trusted lenders and calculate your monthly payments</p>
+        </div>
+
+        <!-- Finance Providers -->
+        <div class="providers-section">
+            <h2 class="section-title">Our Finance Partners</h2>
+            <div class="providers-grid">
+                <!-- Provider 1: Lanka Finance -->
+                <div class="provider-card" data-provider="lanka" data-rate="8.5">
+                    <div class="provider-header">
+                        <div class="provider-logo">LF</div>
+                        <div class="provider-info">
+                            <h3>Lanka Finance</h3>
+                            <div class="provider-rate">8.5% interest rate</div>
+                        </div>
+                    </div>
+
+                    <ul class="provider-benefits">
+                        <li><span class="benefit-icon">✓</span>Quick 24-hour approval</li>
+                        <li><span class="benefit-icon">✓</span>Flexible repayment terms</li>
+                        <li><span class="benefit-icon">✓</span>No early settlement fees</li>
+                        <li><span class="benefit-icon">✓</span>Island-wide service</li>
+                    </ul>
+
+                    <div class="provider-terms">
+                        <h4>Key Terms</h4>
+                        <ul>
+                            <li>• Loan tenure: 1-7 years</li>
+                            <li>• Processing fee: 1.5%</li>
+                            <li>• Documentation charge: LKR 5,000</li>
+                            <li>• Insurance required</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Provider 2: Commercial Credit -->
+                <div class="provider-card" data-provider="commercial" data-rate="9.2">
+                    <div class="provider-header">
+                        <div class="provider-logo">CC</div>
+                        <div class="provider-info">
+                            <h3>Commercial Credit</h3>
+                            <div class="provider-rate">9.2% interest rate</div>
+                        </div>
+                    </div>
+
+                    <ul class="provider-benefits">
+                        <li><span class="benefit-icon">✓</span>Specialized vehicle financing</li>
+                        <li><span class="benefit-icon">✓</span>Online application process</li>
+                        <li><span class="benefit-icon">✓</span>Free vehicle valuation</li>
+                        <li><span class="benefit-icon">✓</span>Expert advisory service</li>
+                    </ul>
+
+                    <div class="provider-terms">
+                        <h4>Key Terms</h4>
+                        <ul>
+                            <li>• Loan tenure: 1-5 years</li>
+                            <li>• Processing fee: 2%</li>
+                            <li>• Documentation charge: LKR 7,500</li>
+                            <li>• Comprehensive insurance mandatory</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Provider 3: Seylan Bank -->
+                <div class="provider-card" data-provider="seylan" data-rate="7.8">
+                    <div class="provider-header">
+                        <div class="provider-logo">SB</div>
+                        <div class="provider-info">
+                            <h3>Seylan Bank</h3>
+                            <div class="provider-rate">7.8% interest rate</div>
+                        </div>
+                    </div>
+
+                    <ul class="provider-benefits">
+                        <li><span class="benefit-icon">✓</span>Lowest interest rates</li>
+                        <li><span class="benefit-icon">✓</span>Banking relationship benefits</li>
+                        <li><span class="benefit-icon">✓</span>Grace period available</li>
+                        <li><span class="benefit-icon">✓</span>Multiple branch network</li>
+                    </ul>
+
+                    <div class="provider-terms">
+                        <h4>Key Terms</h4>
+                        <ul>
+                            <li>• Loan tenure: 2-7 years</li>
+                            <li>• Processing fee: 1%</li>
+                            <li>• Documentation charge: LKR 3,000</li>
+                            <li>• Salary account preferred</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Provider 4: People's Leasing -->
+                <div class="provider-card" data-provider="peoples" data-rate="10.1">
+                    <div class="provider-header">
+                        <div class="provider-logo">PL</div>
+                        <div class="provider-info">
+                            <h3>People's Leasing</h3>
+                            <div class="provider-rate">10.1% interest rate</div>
+                        </div>
+                    </div>
+
+                    <ul class="provider-benefits">
+                        <li><span class="benefit-icon">✓</span>Easy approval process</li>
+                        <li><span class="benefit-icon">✓</span>Minimal documentation</li>
+                        <li><span class="benefit-icon">✓</span>Same-day disbursement</li>
+                        <li><span class="benefit-icon">✓</span>Flexible income verification</li>
+                    </ul>
+
+                    <div class="provider-terms">
+                        <h4>Key Terms</h4>
+                        <ul>
+                            <li>• Loan tenure: 1-6 years</li>
+                            <li>• Processing fee: 2.5%</li>
+                            <li>• Documentation charge: LKR 8,000</li>
+                            <li>• Quick approval for existing customers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finance Calculator -->
+        <div class="calculator-section">
+            <div class="calculator-header">
+                <h2 class="calculator-title">Finance Calculator</h2>
+                <div class="financing-note">
+                    📋 Financing is available up to 70% of the vehicle's valuation
+                </div>
+            </div>
+
+            <div class="calculator-content">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label class="input-label">Select Finance Provider</label>
+                        <div class="provider-selector">
+                            <div class="provider-option active" data-provider="lanka" data-rate="8.5">Lanka Finance</div>
+                            <div class="provider-option" data-provider="commercial" data-rate="9.2">Commercial Credit</div>
+                            <div class="provider-option" data-provider="seylan" data-rate="7.8">Seylan Bank</div>
+                            <div class="provider-option" data-provider="peoples" data-rate="10.1">People's Leasing</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Vehicle Price (LKR)</label>
+                        <input type="number" class="input-field" id="vehiclePrice" placeholder="5,000,000" value="5000000">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Finance Amount (LKR)</label>
+                        <input type="number" class="input-field" id="financeAmount" placeholder="3,500,000" value="3500000">
+                        <small style="color: #64748b; margin-top: 5px;">Maximum 70% of vehicle price</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Loan Period (Years)</label>
+                        <input type="number" class="input-field" id="loanPeriod" placeholder="5" value="5" min="1" max="7">
+                    </div>
+                </div>
+
+                <div class="results-panel">
+                    <h3 class="results-title">Payment Breakdown</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Selected Provider:</span>
+                        <span class="result-value" id="selectedProvider">Lanka Finance</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="result-label">Interest Rate:</span>
+                        <span class="result-value" id="interestRate">8.5%</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="result-label">Finance Amount:</span>
+                        <span class="result-value" id="displayFinanceAmount">LKR 3,500,000</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="result-label">Total Interest:</span>
+                        <span class="result-value" id="totalInterest">LKR 744,375</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="result-label">Total Repayment:</span>
+                        <span class="result-value" id="totalRepayment">LKR 4,244,375</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="result-label">Monthly Payment:</span>
+                        <span class="result-value monthly-payment" id="monthlyPayment">LKR 70,739</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <button class="apply-btn" id="applyBtn">Apply for Finance</button>
+            </div>
+        </div>
+
+        <!-- Important Information -->
+        <div class="important-info">
+            <h2 class="info-title">Important Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Eligibility Requirements</h4>
+                    <p>Must be 21-65 years old, Sri Lankan citizen, with steady income and good credit history.</p>
+                </div>
+
+                <div class="info-item">
+                    <h4>Required Documents</h4>
+                    <p>NIC, salary certificates, bank statements, vehicle registration, and insurance documents.</p>
+                </div>
+
+                <div class="info-item">
+                    <h4>Processing Time</h4>
+                    <p>Applications typically processed within 24-48 hours after document submission and verification.</p>
+                </div>
+
+                <div class="info-item">
+                    <h4>Insurance Requirement</h4>
+                    <p>Comprehensive motor insurance covering the financed vehicle is mandatory throughout the loan period.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Finance providers data
+        const providers = {
+            lanka: { name: 'Lanka Finance', rate: 8.5 },
+            commercial: { name: 'Commercial Credit', rate: 9.2 },
+            seylan: { name: 'Seylan Bank', rate: 7.8 },
+            peoples: { name: "People's Leasing", rate: 10.1 }
+        };
+
+        let currentProvider = 'lanka';
+        let currentRate = 8.5;
+
+        // Initialize calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCalculations();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Provider selection in calculator
+            document.querySelectorAll('.provider-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    document.querySelectorAll('.provider-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update current provider
+                    currentProvider = this.dataset.provider;
+                    currentRate = parseFloat(this.dataset.rate);
+                    
+                    // Highlight corresponding provider card
+                    highlightProviderCard(currentProvider);
+                    
+                    // Update calculations
+                    updateCalculations();
+                });
+            });
+
+            // Provider card selection
+            document.querySelectorAll('.provider-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const provider = this.dataset.provider;
+                    const rate = parseFloat(this.dataset.rate);
+                    
+                    // Remove selected class from all cards
+                    document.querySelectorAll('.provider-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Update calculator provider selection
+                    document.querySelectorAll('.provider-option').forEach(opt => {
+                        opt.classList.remove('active');
+                        if (opt.dataset.provider === provider) {
+                            opt.classList.add('active');
+                        }
+                    });
+                    
+                    currentProvider = provider;
+                    currentRate = rate;
+                    
+                    updateCalculations();
+                });
+            });
+
+            // Input field changes
+            ['vehiclePrice', 'financeAmount', 'loanPeriod'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    validateInputs();
+                    updateCalculations();
+                });
+            });
+
+            // Apply button
+            document.getElementById('applyBtn').addEventListener('click', function() {
+                const providerName = providers[currentProvider].name;
+                const amount = document.getElementById('financeAmount').value;
+                
+                if (!amount || amount <= 0) {
+                    alert('Please enter a valid finance amount.');
+                    return;
+                }
+                
+                alert(`Redirecting to ${providerName} application form for LKR ${parseInt(amount).toLocaleString()} financing...`);
+            });
+        }
+
+        function highlightProviderCard(provider) {
+            document.querySelectorAll('.provider-card').forEach(card => {
+                card.classList.remove('selected');
+                if (card.dataset.provider === provider) {
+                    card.classList.add('selected');
+                }
+            });
+        }
+
+        function validateInputs() {
+            const vehiclePrice = parseFloat(document.getElementById('vehiclePrice').value) || 0;
+            const financeAmount = parseFloat(document.getElementById('financeAmount').value) || 0;
+            const maxFinance = vehiclePrice * 0.7;
+
+            // Auto-adjust finance amount if it exceeds 70%
+            if (financeAmount > maxFinance && vehiclePrice > 0) {
+                document.getElementById('financeAmount').value = Math.floor(maxFinance);
+            }
+        }
+
+        function updateCalculations() {
+            const vehiclePrice = parseFloat(document.getElementById('vehiclePrice').value) || 0;
+            const financeAmount = parseFloat(document.getElementById('financeAmount').value) || 0;
+            const loanPeriod = parseFloat(document.getElementById('loanPeriod').value) || 0;
+
+            if (financeAmount <= 0 || loanPeriod <= 0) {
+                return;
+            }
+
+            // Calculate monthly payment using compound interest formula
+            const monthlyRate = currentRate / 100 / 12;
+            const numPayments = loanPeriod * 12;
+            
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = financeAmount / numPayments;
+            } else {
+                monthlyPayment = financeAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                                 (Math.pow(1 + monthlyRate, numPayments) - 1);
+            }
+
+            const totalRepayment = monthlyPayment * numPayments;
+            const totalInterest = totalRepayment - financeAmount;
+
+            // Update UI
+            document.getElementById('selectedProvider').textContent = providers[currentProvider].name;
+            document.getElementById('interestRate').textContent = currentRate + '%';
+            document.getElementById('displayFinanceAmount').textContent = 'LKR ' + financeAmount.toLocaleString();
+            document.getElementById('totalInterest').textContent = 'LKR ' + Math.round(totalInterest).toLocaleString();
+            document.getElementById('totalRepayment').textContent = 'LKR ' + Math.round(totalRepayment).toLocaleString();
+            document.getElementById('monthlyPayment').textContent = 'LKR ' + Math.round(monthlyPayment).toLocaleString();
+        }
+
+        // Initialize with Lanka Finance selected
+        highlightProviderCard('lanka');
+    </script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Your Dream Vehicle - AutoTrader.lk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #10b981 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,20 1000,100 0,80"/></svg>');
+            background-size: 100% 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .savings-badge {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon-section {
+            background: white;
+            margin: -50px auto 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 50px;
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+        }
+
+        .coming-soon-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .coming-soon-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .launch-timer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .timer-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
+
+        /* Notification Form */
+        .notification-form {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .notify-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        .notify-btn:active {
+            transform: translateY(0);
+        }
+
+        .privacy-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 0;
+        }
+
+        .benefits-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .benefit-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: white;
+            padding: 60px 0;
+            margin: 50px 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+        }
+
+        .process-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-banner {
+                padding: 60px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .coming-soon-section {
+                margin: -30px 20px 30px;
+                padding: 30px;
+            }
+
+            .coming-soon-title {
+                font-size: 1.8rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-section,
+            .process-section {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .savings-badge {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .coming-soon-section {
+                padding: 25px;
+            }
+
+            .notification-form {
+                padding: 25px;
+            }
+        }
+
+        /* Floating Elements Animation */
+        .floating-car {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <div class="floating-car">🚗</div>
+            <div class="hero-content">
+                <div class="savings-badge">💰 Save Over 1 Million Rupees!</div>
+                <h1 class="hero-title">Import Your Dream Vehicle</h1>
+                <p class="hero-subtitle">Own it in your name, save significantly</p>
+                <p class="hero-description">
+                    Skip the middleman and import your ideal vehicle directly. Save at least LKR 1,000,000 compared to 
+                    local dealer prices while getting exactly what you want with full ownership from day one.
+                </p>
+            </div>
+        </div>
+
+        <!-- Coming Soon Section -->
+        <div class="coming-soon-section">
+            <div class="coming-soon-header">
+                <h2 class="coming-soon-title">🚀 Launching Soon</h2>
+                <p class="coming-soon-subtitle">
+                    Our vehicle import service is in final development. Be among the first to access exclusive savings!
+                </p>
+                
+                <div class="launch-timer">
+                    <div class="timer-label">Expected Launch</div>
+                    <div class="timer-value">Q2 2025</div>
+                </div>
+            </div>
+
+            <!-- Notification Form -->
+            <form class="notification-form" id="notificationForm">
+                <h3 class="form-title">🔔 Get Notified When We Launch</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phoneNumber">Phone Number *</label>
+                    <input 
+                        type="tel" 
+                        id="phoneNumber" 
+                        name="phoneNumber" 
+                        class="form-input" 
+                        placeholder="+94 77 123 4567"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address (Optional)</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="your.email@example.com"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="vehicleInterest">Dream Vehicle (Optional)</label>
+                    <input 
+                        type="text" 
+                        id="vehicleInterest" 
+                        name="vehicleInterest" 
+                        class="form-input" 
+                        placeholder="e.g., Toyota Camry, BMW X5, Tesla Model 3"
+                    >
+                </div>
+
+                <button type="submit" class="notify-btn">
+                    Notify Me When Available
+                </button>
+
+                <p class="privacy-note">
+                    We'll only contact you about our import service launch. Your information is secure.
+                </p>
+
+                <div class="success-message" id="successMessage">
+                    ✅ Thank you! We'll notify you as soon as our import service launches.
+                </div>
+            </form>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <h2 class="benefits-title">Why Import with AutoTrader.lk?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Massive Savings</h3>
+                    <p class="benefit-description">
+                        Save 1-3 million rupees compared to local dealer prices. Import directly and avoid markup costs.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">Exact Specifications</h3>
+                    <p class="benefit-description">
+                        Get exactly the color, trim, and options you want. No compromising on your dream vehicle features.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📋</div>
+                    <h3 class="benefit-title">Full Documentation</h3>
+                    <p class="benefit-description">
+                        We handle all import documentation, customs clearance, and registration processes for you.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3 class="benefit-title">Quality Assurance</h3>
+                    <p class="benefit-description">
+                        Pre-import inspection, shipping insurance, and warranty options to protect your investment.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3 class="benefit-title">Expert Support</h3>
+                    <p class="benefit-description">
+                        Dedicated import specialists guide you through every step of the process.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <h3 class="benefit-title">Door-to-Door Service</h3>
+                    <p class="benefit-description">
+                        From overseas dealer to your doorstep. We manage shipping, clearance, and delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Section -->
+        <div class="process-section">
+            <div class="container">
+                <h2 class="process-title">How It Works</h2>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Choose Your Vehicle</h3>
+                        <p class="step-description">Browse our global inventory or tell us your specific requirements</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Get Quote & Finance</h3>
+                        <p class="step-description">Receive detailed pricing and explore financing options if needed</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Secure & Ship</h3>
+                        <p class="step-description">We handle purchase, inspection, and international shipping arrangements</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Clear & Register</h3>
+                        <p class="step-description">Complete customs clearance and vehicle registration in your name</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Delivery</h3>
+                        <p class="step-description">Receive your dream vehicle with all documentation complete</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('notificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('email').value;
+            const vehicleInterest = document.getElementById('vehicleInterest').value;
+            
+            // Validate phone number
+            if (!phoneNumber || phoneNumber.length < 10) {
+                alert('Please enter a valid phone number.');
+                return;
+            }
+            
+            // Simulate API call
+            const submitBtn = document.querySelector('.notify-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+                
+                // Log the submission (in real app, this would be an API call)
+                console.log('Import notification signup:', {
+                    phoneNumber,
+                    email,
+                    vehicleInterest,
+                    timestamp: new Date().toISOString()
+                });
+                
+            }, 1500);
+        });
+
+        // Format phone number input
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // Add +94 prefix if not present
+            if (value.length > 0 && !value.startsWith('94')) {
+                if (value.startsWith('0')) {
+                    value = '94' + value.substring(1);
+                } else if (value.startsWith('7') || value.startsWith('1')) {
+                    value = '94' + value;
+                }
+            }
+            
+            // Format as +94 XX XXX XXXX
+            if (value.length >= 2) {
+                let formatted = '+' + value.substring(0, 2);
+                if (value.length > 2) {
+                    formatted += ' ' + value.substring(2, 4);
+                }
+                if (value.length > 4) {
+                    formatted += ' ' + value.substring(4, 7);
+                }
+                if (value.length > 7) {
+                    formatted += ' ' + value.substring(7, 11);
+                }
+                e.target.value = formatted;
+            }
+        });
+
+        // Add floating animation to benefit cards
+        document.querySelectorAll('.benefit-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Smooth scroll for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe benefit cards and process steps
+        document.querySelectorAll('.benefit-card, .process-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
