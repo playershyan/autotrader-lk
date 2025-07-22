@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Plans & Pricing - AutoTrader.lk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            letter-spacing: -0.025em;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            font-weight: 400;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .toggle-container {
+            background: white;
+            padding: 6px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            position: relative;
+        }
+
+        .toggle-option {
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #64748b;
+            position: relative;
+            z-index: 2;
+            font-size: 0.9rem;
+        }
+
+        .toggle-option.active {
+            color: white;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: calc(50% - 6px);
+            height: calc(100% - 12px);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 40px;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .toggle-slider.annual {
+            transform: translateX(100%);
+        }
+
+        .savings-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .pricing-card.featured {
+            border-color: #1e3a8a;
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.15);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+
+
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .plan-description {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .price-container {
+            margin-bottom: 25px;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1f2937;
+            line-height: 1;
+        }
+
+        .price-currency {
+            font-size: 1.2rem;
+            vertical-align: top;
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .features-list li {
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #374151;
+            font-size: 0.8rem;
+        }
+
+        .feature-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #10b981;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .feature-icon.premium {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .feature-unavailable .feature-icon {
+            background: #d1d5db;
+            color: #9ca3af;
+        }
+
+        .feature-unavailable {
+            color: #9ca3af;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        .cta-secondary {
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 2px solid #e2e8f0;
+        }
+
+        .cta-secondary:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        .cta-disabled {
+            background: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+        }
+
+        .faq-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .faq-item {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                gap: 12px;
+            }
+            
+            .pricing-card {
+                padding: 18px;
+                min-height: 480px;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .pricing-card {
+                min-height: auto;
+            }
+            
+            .cta-button {
+                position: static;
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-3px);
+            }
+
+            .billing-toggle {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .price {
+                font-size: 2.2rem;
+            }
+
+            .faq-section {
+                padding: 25px 15px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toggle-container {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .pricing-card {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 1.7rem;
+            }
+
+            .price {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation for smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="page-title">Choose Your Plan</h1>
+            <p class="page-subtitle">Unlock premium features and sell your vehicle faster with our membership plans</p>
+            
+            <!-- Billing Toggle -->
+            <div class="billing-toggle">
+                <div class="toggle-container">
+                    <div class="toggle-slider" id="toggleSlider"></div>
+                    <div class="toggle-option active" data-billing="monthly">Monthly</div>
+                    <div class="toggle-option" data-billing="annual">Annual</div>
+                </div>
+                <div class="savings-badge" id="savingsBadge">Save up to 25% annually</div>
+            </div>
+        </div>
+
+        <!-- Pricing Grid -->
+        <div class="pricing-grid" id="pricingGrid">
+            <!-- Starter Plan -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Starter</h3>
+                    <p class="plan-description">Perfect for occasional sellers</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">LKR</span>
+                            <span class="monthly-price">990</span>
+                            <span class="annual-price" style="display: none;">890</span>
+                        </div>
+                        <div class="price-period monthly-period">per month</div>
+                        <div class="price-period annual-period" style="display: none;">per month, billed annually</div>
+                        <div class="price-note annual-note" style="display: none;">Save 10% annually</div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="feature-icon">✓</span>1 active listing</li>
+                    <li><span class="feature-icon">✓</span>Basic photo upload (5 photos)</li>
+                    <li><span class="feature-icon">✓</span>30-day listing duration</li>
+                    <li><span class="feature-icon">✓</span>Email support</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Featured listing</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Priority placement</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Analytics</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Lead management</li>
+                </ul>
+
+                <a href="#" class="cta-button cta-secondary">Get Starter</a>
+            </div>
+
+            <!-- Professional Plan -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Professional</h3>
+                    <p class="plan-description">Great for regular sellers</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">LKR</span>
+                            <span class="monthly-price">2,490</span>
+                            <span class="annual-price" style="display: none;">2,115</span>
+                        </div>
+                        <div class="price-period monthly-period">per month</div>
+                        <div class="price-period annual-period" style="display: none;">per month, billed annually</div>
+                        <div class="price-note annual-note" style="display: none;">Save 15% annually</div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="feature-icon">✓</span>3 active listings</li>
+                    <li><span class="feature-icon">✓</span>Premium photo upload (15 photos)</li>
+                    <li><span class="feature-icon">✓</span>60-day listing duration</li>
+                    <li><span class="feature-icon">✓</span>Priority email support</li>
+                    <li><span class="feature-icon">✓</span>Basic analytics</li>
+                    <li><span class="feature-icon">✓</span>Social media sharing tools</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Featured listing</li>
+                    <li class="feature-unavailable"><span class="feature-icon">×</span>Top search placement</li>
+                </ul>
+
+                <a href="#" class="cta-button cta-secondary">Get Professional</a>
+            </div>
+
+            <!-- Business Plan - Featured -->
+            <div class="pricing-card featured">
+                <div class="plan-badge">Most Popular</div>
+                <div class="plan-header">
+                    <h3 class="plan-name">Business</h3>
+                    <p class="plan-description">Best for dealers and power sellers</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">LKR</span>
+                            <span class="monthly-price">4,990</span>
+                            <span class="annual-price" style="display: none;">3,740</span>
+                        </div>
+                        <div class="price-period monthly-period">per month</div>
+                        <div class="price-period annual-period" style="display: none;">per month, billed annually</div>
+                        <div class="price-note annual-note" style="display: none;">Save 25% annually</div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="feature-icon">✓</span>10 active listings</li>
+                    <li><span class="feature-icon premium">✓</span>Unlimited photo uploads</li>
+                    <li><span class="feature-icon premium">✓</span>90-day listing duration</li>
+                    <li><span class="feature-icon premium">✓</span>24/7 phone support</li>
+                    <li><span class="feature-icon premium">✓</span>Advanced analytics & insights</li>
+                    <li><span class="feature-icon premium">✓</span>Featured listing badge</li>
+                    <li><span class="feature-icon premium">✓</span>Top search placement</li>
+                    <li><span class="feature-icon premium">✓</span>Lead management tools</li>
+                </ul>
+
+                <a href="#" class="cta-button cta-primary">Get Business Plan</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <p class="plan-description">For large dealerships</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">LKR</span>
+                            <span class="monthly-price">9,990</span>
+                            <span class="annual-price" style="display: none;">7,990</span>
+                        </div>
+                        <div class="price-period monthly-period">per month</div>
+                        <div class="price-period annual-period" style="display: none;">per month, billed annually</div>
+                        <div class="price-note annual-note" style="display: none;">Save 20% annually</div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="feature-icon premium">✓</span>Unlimited listings</li>
+                    <li><span class="feature-icon premium">✓</span>Custom branding</li>
+                    <li><span class="feature-icon premium">✓</span>Dedicated account manager</li>
+                    <li><span class="feature-icon premium">✓</span>API access</li>
+                    <li><span class="feature-icon premium">✓</span>Custom reporting</li>
+                    <li><span class="feature-icon premium">✓</span>Priority featured placement</li>
+                    <li><span class="feature-icon premium">✓</span>White-label solutions</li>
+                    <li><span class="feature-icon premium">✓</span>Training & onboarding</li>
+                </ul>
+
+                <a href="#" class="cta-button cta-secondary">Contact Sales</a>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Can I upgrade my plan anytime?</div>
+                    <div class="faq-answer">Yes! You can upgrade your plan at any time. The price difference will be prorated for the remaining billing period.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What happens when my listing expires?</div>
+                    <div class="faq-answer">You can easily renew your listing or upgrade to a longer duration plan to avoid interruptions.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer refunds?</div>
+                    <div class="faq-answer">We offer a 7-day money-back guarantee for all plans if you're not completely satisfied.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do featured listings work?</div>
+                    <div class="faq-answer">Featured listings appear at the top of search results and have special badges to attract more buyers.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Billing toggle functionality
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        const toggleSlider = document.getElementById('toggleSlider');
+        const savingsBadge = document.getElementById('savingsBadge');
+        
+        let currentBilling = 'monthly';
+
+        // Pricing data
+        const pricingData = {
+            monthly: {
+                starter: { price: 990, savings: 0 },
+                professional: { price: 2490, savings: 0 },
+                business: { price: 4990, savings: 0 },
+                enterprise: { price: 9990, savings: 0 }
+            },
+            annual: {
+                starter: { price: 890, savings: 10 },
+                professional: { price: 2115, savings: 15 },
+                business: { price: 3740, savings: 25 },
+                enterprise: { price: 7990, savings: 20 }
+            }
+        };
+
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const billing = option.dataset.billing;
+                if (billing === currentBilling) return;
+
+                // Update active states
+                toggleOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+
+                // Move slider
+                toggleSlider.classList.toggle('annual', billing === 'annual');
+
+                // Update pricing
+                currentBilling = billing;
+                updatePricing(billing);
+                updateSavingsBadge(billing);
+            });
+        });
+
+        function updatePricing(billing) {
+            const cards = document.querySelectorAll('.pricing-card');
+            const plans = ['starter', 'professional', 'business', 'enterprise'];
+            
+            cards.forEach((card, index) => {
+                const planName = plans[index];
+                const data = pricingData[billing][planName];
+                
+                // Update prices
+                const monthlyPrice = card.querySelector('.monthly-price');
+                const annualPrice = card.querySelector('.annual-price');
+                const monthlyPeriod = card.querySelector('.monthly-period');
+                const annualPeriod = card.querySelector('.annual-period');
+                const annualNote = card.querySelector('.annual-note');
+                
+                if (billing === 'monthly') {
+                    monthlyPrice.style.display = 'inline';
+                    annualPrice.style.display = 'none';
+                    monthlyPeriod.style.display = 'block';
+                    annualPeriod.style.display = 'none';
+                    annualNote.style.display = 'none';
+                    monthlyPrice.textContent = data.price.toLocaleString();
+                } else {
+                    monthlyPrice.style.display = 'none';
+                    annualPrice.style.display = 'inline';
+                    monthlyPeriod.style.display = 'none';
+                    annualPeriod.style.display = 'block';
+                    annualNote.style.display = 'block';
+                    annualPrice.textContent = data.price.toLocaleString();
+                    annualNote.textContent = `Save ${data.savings}% annually`;
+                }
+            });
+
+            // Add animation class
+            cards.forEach(card => {
+                card.classList.add('fade-in');
+                setTimeout(() => card.classList.remove('fade-in'), 500);
+            });
+        }
+
+        function updateSavingsBadge(billing) {
+            if (billing === 'annual') {
+                savingsBadge.textContent = 'Save up to 25% annually';
+                savingsBadge.style.opacity = '1';
+            } else {
+                savingsBadge.style.opacity = '0.7';
+                savingsBadge.textContent = 'Switch to annual for savings';
+            }
+        }
+
+        // CTA button interactions
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get plan name from card
+                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
+                const billing = currentBilling;
+                
+                // Simulate plan selection
+                console.log(`Selected: ${planName} - ${billing}`);
+                
+                // Add visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
+                // Different actions for different plans
+                if (planName === 'Enterprise') {
+                    alert(`Connecting you with our sales team for ${planName} plan...`);
+                } else {
+                    alert(`Redirecting to checkout for ${planName} plan (${billing} billing)...`);
+                }
+            });
+        });
+
+        // Initialize with monthly view
+        updatePricing('monthly');
+        updateSavingsBadge('monthly');
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all pricing cards
+        document.querySelectorAll('.pricing-card, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                // Enhance tab navigation experience
+                const focusedElement = document.activeElement;
+                if (focusedElement.classList.contains('cta-button')) {
+                    focusedElement.style.outline = '3px solid #3b82f6';
+                }
+            }
+        });
+
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'Tab') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.classList.contains('cta-button')) {
+                    setTimeout(() => {
+                        focusedElement.style.outline = '';
+                    }, 100);
+                }
+            }
+        });
+
+        // Add hover effects for better interactivity
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('featured') 
+                    ? 'scale(1.03) translateY(-5px)' 
+                    : 'translateY(-5px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = this.classList.contains('featured') 
+                    ? 'scale(1.03)' 
+                    : '';
+            });
+        });
+    </script>
+</body>
+</html>
