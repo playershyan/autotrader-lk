@@ -3006,13 +3006,6 @@ input:checked + .toggle-slider:hover {
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="contact-email">
-                                Email Address <span class="required">*</span>
-                            </label>
-                            <input type="email" class="form-input" id="contact-email" placeholder="your.email@example.com" required>
-                        </div>
-
-                        <div class="form-group">
                             <label class="form-label" for="whatsapp">
                                 WhatsApp Number
                                 <div class="toggle-container">
@@ -3321,7 +3314,7 @@ input:checked + .toggle-slider:hover {
             }
 
             monitorContactInfo() {
-                const contactFields = ['contact-name', 'contact-phone', 'contact-email'];
+                const contactFields = ['contact-name', 'contact-phone'];
                 
                 contactFields.forEach(fieldId => {
                     const field = document.getElementById(fieldId);
@@ -3339,10 +3332,9 @@ input:checked + .toggle-slider:hover {
             checkStep3Completion() {
                 const contactName = document.getElementById('contact-name')?.value || '';
                 const contactPhone = document.getElementById('contact-phone')?.value || '';
-                const contactEmail = document.getElementById('contact-email')?.value || '';
-
+                
                 const previousState = this.stepStates.step3Complete;
-                this.stepStates.step3Complete = contactName.trim() && contactPhone.trim() && contactEmail.trim();
+                this.stepStates.step3Complete = contactName.trim() && contactPhone.trim();
 
                 if (!previousState && this.stepStates.step3Complete) {
                     this.updateStep();
