@@ -1,7 +1,7 @@
 // AI Buying Guide Service using Google Gemini
 class AIBuyingGuideService {
     constructor() {
-        this.GEMINI_API_KEY = 'AIzaSyAmGRyTq6P8aBiH70DsETrR7Ny7DjmXPPs'; // Replace with your actual key
+        this.GEMINI_API_KEY = 'AIzaSyCfZQVTMeuQngky_3ZvjPhKqvj_RJSCGIM'; // Replace with your actual key
         this.GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
         this.cache = new Map(); // Initialize the Map properly
         this.CACHE_DURATION = 90 * 24 * 60 * 60 * 1000; // 90 days in milliseconds
