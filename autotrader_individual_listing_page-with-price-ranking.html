@@ -488,68 +488,58 @@
     }
 }
 
-        /* Vehicle Details Tabs */
-        .details-section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 0 20px;
-        }
+        /* Replace the existing tab styles with these */
+.details-section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 0;
+}
 
-        .tab-navigation {
-            display: flex;
-            border-bottom: 1px solid #e5e7eb;
-        }
+.section-header {
+    padding: 20px 20px 15px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    background: #f9fafb;
+}
 
-        .tab-btn {
-            flex: 1;
-            padding: 15px 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
+.section-header:first-child {
+    border-radius: 10px 10px 0 0;
+}
 
-        .tab-btn.active {
-            color: #1e3a8a;
-            border-bottom-color: #1e3a8a;
-        }
+.section-content {
+    padding: 20px;
+}
 
-        .tab-content {
-            padding: 20px;
-        }
+.section-content:last-child {
+    border-radius: 0 0 10px 10px;
+}
 
-        .tab-panel {
-            display: none;
-        }
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
 
-        .tab-panel.active {
-            display: block;
-        }
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 5px;
+}
 
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
+.spec-label {
+    font-weight: 500;
+    color: #374151;
+}
 
-        .spec-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: #f9fafb;
-            border-radius: 5px;
-        }
-
-        .spec-label {
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .spec-value {
-            color: #6b7280;
-        }
+.spec-value {
+    color: #6b7280;
+}
 
         /* Sidebar */
         .sidebar {
@@ -986,151 +976,149 @@
         <!-- Left Column -->
         <div class="left-column">
             <!-- Vehicle Details Tabs -->
-            <div class="details-section">
-                <div class="tab-navigation">
-                    <button class="tab-btn active" data-tab="overview">Overview</button>
-                    <button class="tab-btn" data-tab="specs">Specifications</button>
-                    <button class="tab-btn" data-tab="features">Features</button>
-                    <button class="tab-btn" data-tab="history">History</button>
-                </div>
+            <!-- Replace the entire .details-section content with this -->
+<div class="details-section">
+    <!-- Overview Section -->
+    <h3 class="section-header">Overview</h3>
+    <div class="section-content">
+        <h4>Vehicle Description</h4>
+        <p style="margin-bottom: 20px;">
+            Excellent condition Toyota Prius 2020 in beautiful silver color. 
+            This hybrid vehicle offers exceptional fuel economy and reliability. 
+            Well-maintained with full service history. Perfect for city driving and long-distance travel. 
+            All original parts, no accidents, single owner.
+        </p>
+        
+        <h4 style="margin-bottom: 15px;">Key Features:</h4>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="margin-bottom: 8px;">✅ Hybrid Engine Technology</li>
+            <li style="margin-bottom: 8px;">✅ Automatic Transmission</li>
+            <li style="margin-bottom: 8px;">✅ Excellent Fuel Economy</li>
+            <li style="margin-bottom: 8px;">✅ Well Maintained</li>
+            <li style="margin-bottom: 8px;">✅ No Accidents</li>
+        </ul>
+    </div>
 
-                <div class="tab-content">
-                    <div class="tab-panel active" id="overview">
-                        <h3>Vehicle Description</h3>
-                        <p style="margin-bottom: 20px;">
-                            Excellent condition Toyota Prius 2020 in beautiful silver color. This hybrid vehicle offers exceptional fuel economy and reliability. 
-                            Well-maintained with full service history. Perfect for city driving and long-distance travel. 
-                            All original parts, no accidents, single owner.
-                        </p>
-                        
-                        <h4 style="margin-bottom: 15px;">Key Features:</h4>
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li style="margin-bottom: 8px;">✅ Hybrid Engine Technology</li>
-                            <li style="margin-bottom: 8px;">✅ Automatic Transmission</li>
-                            <li style="margin-bottom: 8px;">✅ Excellent Fuel Economy</li>
-                            <li style="margin-bottom: 8px;">✅ Well Maintained</li>
-                            <li style="margin-bottom: 8px;">✅ No Accidents</li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-panel" id="specs">
-                        <h3>Technical Specifications</h3>
-                        <div class="spec-grid">
-                            <div class="spec-item">
-                                <span class="spec-label">Make</span>
-                                <span class="spec-value">Toyota</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Model</span>
-                                <span class="spec-value">Prius</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Year</span>
-                                <span class="spec-value">2020</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Engine</span>
-                                <span class="spec-value">1.8L Hybrid</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Transmission</span>
-                                <span class="spec-value">CVT Automatic</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Fuel Type</span>
-                                <span class="spec-value">Hybrid (Petrol + Electric)</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Mileage</span>
-                                <span class="spec-value">45,000 km</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Color</span>
-                                <span class="spec-value">Silver Metallic</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Body Type</span>
-                                <span class="spec-value">Hatchback</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Doors</span>
-                                <span class="spec-value">5</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Seats</span>
-                                <span class="spec-value">5</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Drive Type</span>
-                                <span class="spec-value">Front Wheel Drive</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-panel" id="features">
-                        <h3>Standard & Optional Features</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Safety Features</h4>
-                                <ul style="list-style: none; padding-left: 0;">
-                                    <li style="margin-bottom: 5px;">✅ Toyota Safety Sense 2.0</li>
-                                    <li style="margin-bottom: 5px;">✅ Pre-Collision System</li>
-                                    <li style="margin-bottom: 5px;">✅ Lane Departure Alert</li>
-                                    <li style="margin-bottom: 5px;">✅ Automatic High Beams</li>
-                                    <li style="margin-bottom: 5px;">✅ Multiple Airbags</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Technology</h4>
-                                <ul style="list-style: none; padding-left: 0;">
-                                    <li style="margin-bottom: 5px;">✅ 7" Touch Display</li>
-                                    <li style="margin-bottom: 5px;">✅ Bluetooth Connectivity</li>
-                                    <li style="margin-bottom: 5px;">✅ USB Ports</li>
-                                    <li style="margin-bottom: 5px;">✅ Wireless Phone Charging</li>
-                                    <li style="margin-bottom: 5px;">✅ Backup Camera</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Comfort</h4>
-                                <ul style="list-style: none; padding-left: 0;">
-                                    <li style="margin-bottom: 5px;">✅ Climate Control</li>
-                                    <li style="margin-bottom: 5px;">✅ Power Windows</li>
-                                    <li style="margin-bottom: 5px;">✅ Power Mirrors</li>
-                                    <li style="margin-bottom: 5px;">✅ Keyless Entry</li>
-                                    <li style="margin-bottom: 5px;">✅ Push Button Start</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-panel" id="history">
-                        <h3>Vehicle History</h3>
-                        <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <h4 style="color: #1e3a8a; margin-bottom: 10px;">Clean History Report</h4>
-                            <p>This vehicle has a clean history with no reported accidents, flood damage, or major repairs.</p>
-                        </div>
-                        
-                        <h4 style="margin-bottom: 15px;">Service Records</h4>
-                        <div style="border-left: 3px solid #1e3a8a; padding-left: 20px;">
-                            <div style="margin-bottom: 15px;">
-                                <strong>Latest Service - December 2024</strong>
-                                <p style="color: #6b7280; margin: 5px 0;">Full service including oil change, filter replacement, brake inspection</p>
-                            </div>
-                            <div style="margin-bottom: 15px;">
-                                <strong>Major Service - June 2024</strong>
-                                <p style="color: #6b7280; margin: 5px 0;">40,000 km service, battery health check, transmission service</p>
-                            </div>
-                            <div style="margin-bottom: 15px;">
-                                <strong>Regular Service - January 2024</strong>
-                                <p style="color: #6b7280; margin: 5px 0;">Oil change, tire rotation, general inspection</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Specifications Section -->
+    <h3 class="section-header">Technical Specifications</h3>
+    <div class="section-content">
+        <div class="spec-grid">
+            <div class="spec-item">
+                <span class="spec-label">Make</span>
+                <span class="spec-value">Toyota</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Model</span>
+                <span class="spec-value">Prius</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Year</span>
+                <span class="spec-value">2020</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Engine</span>
+                <span class="spec-value">1.8L Hybrid</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Transmission</span>
+                <span class="spec-value">CVT Automatic</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Fuel Type</span>
+                <span class="spec-value">Hybrid (Petrol + Electric)</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Mileage</span>
+                <span class="spec-value">45,000 km</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Color</span>
+                <span class="spec-value">Silver Metallic</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Body Type</span>
+                <span class="spec-value">Hatchback</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Doors</span>
+                <span class="spec-value">5</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Seats</span>
+                <span class="spec-value">5</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Drive Type</span>
+                <span class="spec-value">Front Wheel Drive</span>
             </div>
         </div>
+    </div>
 
-        <!-- Right Sidebar -->
+    <!-- Features Section -->
+    <h3 class="section-header">Features & Equipment</h3>
+    <div class="section-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Safety</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 5px;">✅ Multiple Airbags</li>
+                    <li style="margin-bottom: 5px;">✅ ABS Brakes</li>
+                    <li style="margin-bottom: 5px;">✅ Stability Control</li>
+                    <li style="margin-bottom: 5px;">✅ Traction Control</li>
+                    <li style="margin-bottom: 5px;">✅ Lane Departure Warning</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Technology</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 5px;">✅ 7" Touch Display</li>
+                    <li style="margin-bottom: 5px;">✅ Bluetooth Connectivity</li>
+                    <li style="margin-bottom: 5px;">✅ USB Ports</li>
+                    <li style="margin-bottom: 5px;">✅ Wireless Phone Charging</li>
+                    <li style="margin-bottom: 5px;">✅ Backup Camera</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+            <div>
+                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Comfort</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 5px;">✅ Climate Control</li>
+                    <li style="margin-bottom: 5px;">✅ Power Windows</li>
+                    <li style="margin-bottom: 5px;">✅ Power Mirrors</li>
+                    <li style="margin-bottom: 5px;">✅ Keyless Entry</li>
+                    <li style="margin-bottom: 5px;">✅ Push Button Start</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Section 
+    <h3 class="section-header">Vehicle History</h3>
+    <div class="section-content">
+        <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h4 style="color: #1e3a8a; margin-bottom: 10px;">Clean History Report</h4>
+            <p>This vehicle has a clean history with no reported accidents, flood damage, or major repairs.</p>
+        </div>
+        
+        <h4 style="margin-bottom: 15px;">Service Records</h4>
+        <div style="border-left: 3px solid #1e3a8a; padding-left: 20px;">
+            <div style="margin-bottom: 15px;">
+                <strong>Latest Service - December 2024</strong>
+                <p style="color: #6b7280; margin: 5px 0;">Full service including oil change, filter replacement, brake inspection</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <strong>Major Service - June 2024</strong>
+                <p style="color: #6b7280; margin: 5px 0;">Comprehensive service including timing belt, brake pads, coolant flush</p>
+            </div>
+        </div>
+    </div>
+    -->
+</div>
+            </div>
+
+    <!-- Right Sidebar -->
         <div class="sidebar">
             <!-- Contact Dealer -->
             <div class="contact-card">
@@ -1248,18 +1236,18 @@
 
     <script>
         // Simple tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons and panels
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        //document.querySelectorAll('.tab-btn').forEach(btn => {
+        //    btn.addEventListener('click', () => {
+        //        // Remove active class from all buttons and panels
+        //        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        //        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
                 
                 // Add active class to clicked button and corresponding panel
-                btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
+        //        btn.classList.add('active');
+        //        const tabId = btn.getAttribute('data-tab');
+        //        document.getElementById(tabId).classList.add('active');
+        //    });
+        //});
 
         // Thumbnail click functionality
         document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
