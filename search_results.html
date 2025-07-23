@@ -752,6 +752,206 @@
         .search-input:focus + .animated-placeholder {
             opacity: 0;
         }
+
+        /* AI Buying Guide Styles */
+.ai-buying-guide {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #0ea5e9;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: gentleShimmer 4s ease-in-out infinite; /* Add this line */
+}
+
+.ai-buying-guide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6, #8b5cf6);
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.ai-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.guide-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 0;
+}
+
+.guide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}
+
+.guide-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-section li {
+    padding: 6px 0;
+    color: #374151;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 16px;
+}
+
+.guide-section li::before {
+    content: '•';
+    color: #3b82f6;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.guide-overview {
+    grid-column: 1 / -1;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+/* Update the .loading-guide class */
+.loading-guide {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.loading-guide span {
+    animation: breathingText 3s ease-in-out infinite;
+}
+
+@keyframes breathingText {
+    0%, 100% { 
+        opacity: 0.7;
+        transform: translateY(0px);
+    }
+    50% { 
+        opacity: 1;
+        transform: translateY(-1px);
+    }
+}
+
+/* Replace the existing .loading-spinner with this more soothing animation */
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+    background-size: 200% 200%;
+    animation: gentleGlow 2s ease-in-out infinite;
+}
+
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #f0f9ff;
+    animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentleGlow {
+    0%, 100% { 
+        background-position: 0% 50%;
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% { 
+        background-position: 100% 50%;
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes gentlePulse {
+    0%, 100% { 
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+    50% { 
+        opacity: 0.3;
+        transform: scale(1.1);
+    }
+}
+.guide-disclaimer {
+    grid-column: 1 / -1;
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-style: italic;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .guide-content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .ai-buying-guide {
+        padding: 16px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -816,6 +1016,44 @@
                         <option value="mileage">Mileage: Low to High</option>
                         <option value="distance">Distance: Nearest First</option>
                     </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Buying Guide (only show for specific model searches) -->
+        <div class="ai-buying-guide" id="ai-buying-guide" style="display: none;">
+            <div class="guide-header">
+                <div class="ai-icon">AI</div>
+                <h2 class="guide-title" id="guide-title">Loading buying guide...</h2>
+            </div>
+            
+            <div id="guide-loading" class="loading-guide">
+                <div class="loading-spinner"></div>
+                <span>Generating personalized buying guide...</span>
+            </div>
+            
+            <div id="guide-content-area" style="display: none;">
+                <div class="guide-overview" id="guide-overview"></div>
+                
+                <div class="guide-content">
+                    <div class="guide-section">
+                        <h4>🎯 Key Strengths</h4>
+                        <ul id="guide-strengths"></ul>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h4>🔍 What to Inspect</h4>
+                        <ul id="guide-inspect"></ul>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h4>⚠️ Common Issues</h4>
+                        <ul id="guide-issues"></ul>
+                    </div>
+                </div>
+                
+                <div class="guide-disclaimer">
+                    AI-generated buying guidance based on automotive data. Always inspect vehicles independently and consult professionals for specific advice.
                 </div>
             </div>
         </div>
@@ -1954,5 +2192,204 @@
             });
         })();
     </script>
+    <script>
+        // Include the AI Buying Guide Service (you'll need to include the ai-buying-guide.js file)
+        
+        // Initialize buying guide functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBuyingGuide();
+        });
+        
+        function initializeBuyingGuide() {
+            // Get current search context
+            const searchQuery = getSearchQuery();
+            const filters = getCurrentFilters();
+            
+            // Check if we should show the buying guide
+            if (buyingGuideService.shouldShowGuide(searchQuery, filters)) {
+                showBuyingGuide(searchQuery, filters);
+            }
+        }
+        
+        function getSearchQuery() {
+            // Get search query from URL params or search input
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || document.getElementById('keyword-search')?.value || '';
+            return query;
+        }
+        
+        function getCurrentFilters() {
+            // Extract current filter values from URL or form
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                make: urlParams.get('make'),
+                model: urlParams.get('model'),
+                year: urlParams.get('year'),
+                location: urlParams.get('location')
+            };
+        }
+        
+        async function showBuyingGuide(searchQuery, filters) {
+            const guideContainer = document.getElementById('ai-buying-guide');
+            const loadingElement = document.getElementById('guide-loading');
+            const contentArea = document.getElementById('guide-content-area');
+            const titleElement = document.getElementById('guide-title');
+            
+            // Show the guide container
+            guideContainer.style.display = 'block';
+
+            // Ensure loading state is shown (in case not already triggered)
+            if (loadingElement.style.display !== 'flex') {
+                titleElement.textContent = 'Loading buying guide...';
+                loadingElement.style.display = 'flex';
+                contentArea.style.display = 'none';
+            }
+            
+            try {
+                // Generate the buying guide
+                const result = await buyingGuideService.generateBuyingGuide(searchQuery, filters);
+                
+                if (result.success) {
+                    // Update title
+                    titleElement.textContent = `${result.vehicleName} Buying Guide`;
+                    
+                    // Hide loading
+                    loadingElement.style.display = 'none';
+                    
+                    // Populate content
+                    populateGuideContent(result.data);
+                    
+                    // Show content
+                    contentArea.style.display = 'block';
+                    
+                    // Add cache indicator if needed
+                    if (result.cached) {
+                        console.log('Loaded from cache');
+                    } else if (result.fallback) {
+                        console.log('Using fallback content');
+                    }
+                } else {
+                    throw new Error('Failed to generate guide');
+                }
+                
+            } catch (error) {
+                console.error('Error showing buying guide:', error);
+                hideGuideWithError();
+            }
+        }
+        
+        function populateGuideContent(data) {
+            // Populate overview
+            document.getElementById('guide-overview').textContent = data.overview;
+            
+            // Populate strengths
+            const strengthsList = document.getElementById('guide-strengths');
+            strengthsList.innerHTML = '';
+            data.strengths.forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength;
+                strengthsList.appendChild(li);
+            });
+            
+            // Populate inspection points
+            const inspectList = document.getElementById('guide-inspect');
+            inspectList.innerHTML = '';
+            data.inspection_points.forEach(point => {
+                const li = document.createElement('li');
+                li.textContent = point;
+                inspectList.appendChild(li);
+            });
+            
+            // Populate common issues
+            const issuesList = document.getElementById('guide-issues');
+            issuesList.innerHTML = '';
+            data.common_issues.forEach(issue => {
+                const li = document.createElement('li');
+                li.textContent = issue;
+                issuesList.appendChild(li);
+            });
+        }
+        
+        function hideGuideWithError() {
+            const guideContainer = document.getElementById('ai-buying-guide');
+            guideContainer.style.display = 'none';
+        }
+        
+        // Re-initialize when filters change or new search is performed
+        function onSearchFiltersChange() {
+    // Check if we should show a guide for the new search
+    const searchQuery = getSearchQuery();
+    const filters = getCurrentFilters();
+    
+    if (buyingGuideService.shouldShowGuide(searchQuery, filters)) {
+        // Show loading immediately
+        showLoadingImmediately();
+        // Then generate new guide
+        setTimeout(() => {
+            initializeBuyingGuide();
+        }, 100);
+    } else {
+        // Hide guide if not relevant
+        document.getElementById('ai-buying-guide').style.display = 'none';
+    }
+}
+        
+        // Listen for filter changes
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('.filter-input, .sort-select, input[type="checkbox"]')) {
+                onSearchFiltersChange();
+            }
+        });
+        
+        // Listen for search button clicks
+        // Replace the existing search button listener with this:
+document.getElementById('search-button')?.addEventListener('click', function() {
+    // Show loading immediately when search starts
+    showLoadingImmediately();
+    
+    // Small delay to ensure UI updates, then initialize guide
+    setTimeout(() => {
+        initializeBuyingGuide();
+    }, 100); // Reduced from 1000ms to 100ms
+});
+
+// Add this new function
+function showLoadingImmediately() {
+    const guideContainer = document.getElementById('ai-buying-guide');
+    const loadingElement = document.getElementById('guide-loading');
+    const contentArea = document.getElementById('guide-content-area');
+    const titleElement = document.getElementById('guide-title');
+    
+    // Show guide container immediately
+    guideContainer.style.display = 'block';
+    
+    // Reset to loading state
+    titleElement.textContent = 'Loading buying guide...';
+    loadingElement.style.display = 'flex';
+    contentArea.style.display = 'none';
+    
+    // Clear any previous content
+    document.getElementById('guide-overview').textContent = '';
+    document.getElementById('guide-strengths').innerHTML = '';
+    document.getElementById('guide-inspect').innerHTML = '';
+    document.getElementById('guide-issues').innerHTML = '';
+}
+
+// Add this event listener for Enter key
+document.getElementById('keyword-search')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        showLoadingImmediately();
+        setTimeout(() => {
+            initializeBuyingGuide();
+        }, 100);
+    }
+});
+</script>
+        
+        <!-- Include the AI service file -->
+        <script src="ai-buying-guide.js"></script>
+
+        <!-- Include the pre-generation manager -->
+        <script src="pregenerate-guides.js"></script>
 </body>
 </html>
