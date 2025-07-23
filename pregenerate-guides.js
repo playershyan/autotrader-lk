@@ -79,18 +79,17 @@ class PreGenerationManager {
             failed: 0,
             cached: 0
         };
+    }
 
-           // Add this to the PreGenerationManager class
-           generateCommonAliases(); {
-            const commonAliases = [
-                // High-priority aliases to pre-generate
-                'toyota chr', 'honda hrv', 'honda hr-v', 'nissan xtrail', 'suzuki wagonr',
-                'mercedes c class', 'bmw 3 series', 'mazda cx5', 'mazda cx3',
-                'honda crv', 'honda cr-v', 'toyota rav 4', 'nissan x trail'
-            ];
-            
-            return commonAliases;
-        }
+    // Add this to the PreGenerationManager class
+    generateCommonAliases() {
+        const commonAliases = [
+            // High-priority aliases to pre-generate
+            'toyota chr', 'honda hrv', 'honda hr-v', 'nissan xtrail', 'suzuki wagonr',
+            'mercedes c class', 'bmw 3 series', 'mazda cx5', 'mazda cx3',
+            'honda crv', 'honda cr-v', 'toyota rav 4', 'nissan x trail'
+        ];
+        return commonAliases;
     }
 
     // Calculate total guides to generate
