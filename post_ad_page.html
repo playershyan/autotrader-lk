@@ -723,6 +723,150 @@
     background: #9ca3af;
     box-shadow: none;
 }
+
+/* Enhanced Toggle Switches - Add after existing finance-toggle styles */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    top: 2px;
+    background-color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .toggle-slider {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.toggle-slider:hover {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+input:checked + .toggle-slider:hover {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.toggle-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Negotiable price toggle styles */
+.negotiable-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    min-width: 140px;
+}
+
+.negotiable-toggle .toggle-switch {
+    width: 38px;
+    height: 20px;
+    margin-right: 6px;
+}
+
+.negotiable-toggle .toggle-slider:before {
+    height: 16px;
+    width: 16px;
+}
+
+.negotiable-toggle input:checked + .toggle-slider:before {
+    transform: translateX(18px);
+}
+
+/* Contact Info Toggle */
+.contact-info-toggle-container {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact-toggle-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-toggle-icon {
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
+}
+
+.contact-toggle-text {
+    color: #374151;
+    font-weight: 500;
+}
+
+.contact-toggle-desc {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.contact-info-override {
+    background: #fef3c7;
+    border-color: #fbbf24;
+}
+
+.contact-info-override .contact-toggle-icon {
+    color: #f59e0b;
+}
+
+.contact-info-override .contact-toggle-text {
+    color: #92400e;
+}
     
     /* Selected Display */
     .selected-display {
@@ -1843,6 +1987,31 @@
     font-size: 0.85rem;
 }
 
+.auto-fill-notification {
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 </head>
 <body>
@@ -2237,14 +2406,17 @@
         </div>
 
         <div class="form-group">
-            <div class="checkbox-item" style="margin-top: 8px;">
-                <input type="checkbox" id="negotiable" name="negotiable" value="yes">
-                <label for="negotiable" class="form-label" style="margin-bottom: 0; cursor: pointer;">
+            <div class="negotiable-toggle">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="negotiable" name="negotiable" value="yes">
+                    <span class="toggle-slider"></span>
+                </label>
+                <label for="negotiable" class="toggle-label">
                     Price Negotiable?
                 </label>
             </div>
             <div class="input-hint" style="margin-left: 28px;">
-                Check if you're willing to negotiate on the price
+                Toggle if you're willing to negotiate on the price.
             </div>
         </div>
     </div>
@@ -2342,12 +2514,15 @@
             <div style="display: flex; gap: 15px; align-items: flex-start;">
                 <input type="number" class="form-input" id="asking-price-finance" 
                        placeholder="e.g., 4500000" required style="flex: 1;">
-                <div class="checkbox-item" style="margin-top: 12px; min-width: 140px;">
-                    <input type="checkbox" id="finance-negotiable" name="finance-negotiable" value="yes">
-                    <label for="finance-negotiable" style="margin: 0; cursor: pointer; font-size: 0.9rem;">
-                        Negotiable?
-                    </label>
-                </div>
+                       <div class="negotiable-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="finance-negotiable" name="finance-negotiable" value="yes">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <label for="finance-negotiable" class="toggle-label">
+                            Negotiable?
+                        </label>
+                    </div>
             </div>
             <div class="input-hint">
                 This is what you're asking from the buyer. They will pay this amount to you, 
@@ -2797,6 +2972,24 @@
                         </div>
                        Contact Information
                     </h2>
+
+                    <!-- ADD THIS TOGGLE SECTION -->
+                    <div class="contact-info-toggle-container" id="contact-info-toggle-container">
+                        <div class="contact-toggle-content">
+                            <svg class="contact-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <div>
+                                <div class="contact-toggle-text">Use different contact information</div>
+                                <p class="contact-toggle-desc">Toggle to enter different details than your account info</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="use-different-contact">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label" for="contact-name">
@@ -2822,9 +3015,12 @@
                         <div class="form-group">
                             <label class="form-label" for="whatsapp">
                                 WhatsApp Number
-                                <div class="checkbox-item" style="display: inline-flex; align-items: center; margin-left: 10px; margin-bottom: 0;">
-                                    <input type="checkbox" id="same-as-phone" style="margin: 0 5px 0 0;">
-                                    <label for="same-as-phone" style="margin: 0; font-weight: normal; font-size: 0.85rem; color: #6b7280; cursor: pointer;">
+                                <div class="toggle-container">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="same-as-phone">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <label for="same-as-phone" class="toggle-label">
                                         Same as phone number
                                     </label>
                                 </div>
@@ -3683,6 +3879,8 @@ document.getElementById('post-ad-form').addEventListener('submit', function(e) {
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             window.progressTracker = new ProgressTracker();
+
+            autoFillContactInfo();
             
             document.querySelectorAll('.style-option').forEach(option => {
                 option.addEventListener('click', function() {
@@ -4539,6 +4737,190 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Enhanced auto-fill with override toggle support
+function autoFillContactInfo() {
+    const userData = localStorage.getItem('autotrader_user');
+    const useDifferentContact = document.getElementById('use-different-contact');
+    
+    // Set up toggle listener
+    if (useDifferentContact) {
+        useDifferentContact.addEventListener('change', handleContactToggle);
+        
+        // Check if user previously chose to use different contact info
+        const savedPreference = localStorage.getItem('autotrader_use_different_contact');
+        if (savedPreference === 'true') {
+            useDifferentContact.checked = true;
+            handleContactToggle();
+            return; // Don't auto-fill if user prefers different info
+        }
+    }
+    
+    // Only auto-fill if toggle is OFF and user data exists
+    if (userData && (!useDifferentContact || !useDifferentContact.checked)) {
+        try {
+            const user = JSON.parse(userData);
+            const nameField = document.getElementById('contact-name');
+            const phoneField = document.getElementById('contact-phone');
+            
+            if (user.fullName && nameField && !nameField.value) {
+                nameField.value = user.fullName;
+                nameField.style.backgroundColor = '#f0fdf4';
+                nameField.style.border = '2px solid #10b981';
+                nameField.dataset.autofilled = 'true';
+            }
+            
+            if (user.phone && phoneField && !phoneField.value) {
+                let formattedPhone = user.phone;
+                if (!formattedPhone.startsWith('+94')) {
+                    formattedPhone = '+94 ' + formattedPhone.replace(/^0/, '');
+                }
+                phoneField.value = formattedPhone;
+                phoneField.style.backgroundColor = '#f0fdf4';
+                phoneField.style.border = '2px solid #10b981';
+                phoneField.dataset.autofilled = 'true';
+            }
+            
+            if ((nameField?.dataset.autofilled || phoneField?.dataset.autofilled)) {
+                showAutoFillNotification();
+            }
+            
+        } catch (error) {
+            console.error('Error auto-filling contact info:', error);
+        }
+    }
+}
+
+// Handle contact info toggle changes
+function handleContactToggle() {
+    const toggle = document.getElementById('use-different-contact');
+    const container = document.getElementById('contact-info-toggle-container');
+    const nameField = document.getElementById('contact-name');
+    const phoneField = document.getElementById('contact-phone');
+    
+    // Save user preference
+    localStorage.setItem('autotrader_use_different_contact', toggle.checked);
+    
+    if (toggle.checked) {
+        // User wants to use different contact info
+        container.classList.add('contact-info-override');
+        container.querySelector('.contact-toggle-text').textContent = 'Using different contact information';
+        container.querySelector('.contact-toggle-desc').textContent = 'Enter your preferred contact details below';
+        
+        // Clear auto-filled data and styling
+        [nameField, phoneField].forEach(field => {
+            if (field && field.dataset.autofilled) {
+                field.value = '';
+                field.style.backgroundColor = '';
+                field.style.border = '';
+                field.dataset.autofilled = '';
+            }
+        });
+        
+        // Remove auto-fill notification if present
+        const notification = document.querySelector('.auto-fill-notification');
+        if (notification) {
+            notification.remove();
+        }
+        
+        // Focus on first field for better UX
+        if (nameField) nameField.focus();
+        
+    } else {
+        // User wants to use account info
+        container.classList.remove('contact-info-override');
+        container.querySelector('.contact-toggle-text').textContent = 'Use different contact information';
+        container.querySelector('.contact-toggle-desc').textContent = 'Toggle to enter different details than your account info';
+        
+        // Re-trigger auto-fill
+        autoFillContactInfo();
+    }
+}
+
+// Update the clear auto-fill function
+function clearAutoFill() {
+    const nameField = document.getElementById('contact-name');
+    const phoneField = document.getElementById('contact-phone');
+    const toggle = document.getElementById('use-different-contact');
+    
+    // Clear fields and styling
+    [nameField, phoneField].forEach(field => {
+        if (field) {
+            field.value = '';
+            field.style.backgroundColor = '';
+            field.style.border = '';
+            field.dataset.autofilled = '';
+        }
+    });
+    
+    // Enable the override toggle
+    if (toggle) {
+        toggle.checked = true;
+        handleContactToggle();
+    }
+    
+    // Remove notification
+    const notification = document.querySelector('.auto-fill-notification');
+    if (notification) {
+        notification.remove();
+    }
+}
+
+// Updated notification function
+function showAutoFillNotification() {
+    // Don't show notification if toggle is enabled
+    const toggle = document.getElementById('use-different-contact');
+    if (toggle && toggle.checked) return;
+    
+    const notification = document.createElement('div');
+    notification.className = 'auto-fill-notification';
+    notification.innerHTML = `
+        <span>✅ Contact info auto-filled from your account</span>
+        <button onclick="clearAutoFill()" style="background: none; border: none; color: #1e3a8a; text-decoration: underline; cursor: pointer; margin-left: 10px;">Use different info</button>
+    `;
+    
+    // Insert after the toggle container
+    const toggleContainer = document.getElementById('contact-info-toggle-container');
+    if (toggleContainer) {
+        toggleContainer.parentNode.insertBefore(notification, toggleContainer.nextSibling);
+    }
+    
+    // Auto-remove after 8 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 8000);
+}
+
+// Fixed clear auto-fill function
+function clearAutoFill() {
+    const nameField = document.getElementById('contact-name');
+    const phoneField = document.getElementById('contact-phone');
+    const toggle = document.getElementById('use-different-contact');
+    
+    // Clear fields and styling first
+    [nameField, phoneField].forEach(field => {
+        if (field) {
+            field.value = '';
+            field.style.backgroundColor = '';
+            field.style.border = '';
+            field.dataset.autofilled = '';
+        }
+    });
+    
+    // Enable the override toggle AND trigger the UI update
+    if (toggle) {
+        toggle.checked = true;
+        handleContactToggle(); // This was missing! It updates the UI
+    }
+    
+    // Remove notification
+    const notification = document.querySelector('.auto-fill-notification');
+    if (notification) {
+        notification.remove();
+    }
+}
 
     </script>
 </body>
