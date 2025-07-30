@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars for Sale in Sri Lanka | AutoTrader.lk</title>
+    <style>
+        /* Reset and base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+
+        /* Header */
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #fbbf24;
+        }
+
+        .icon-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .icon-btn:hover {
+            background: white;
+            color: #1e3a8a;
+            transform: scale(1.1);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #f59e0b;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #e5e7eb;
+            padding: 10px 0;
+        }
+
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Search Header */
+        .search-header {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .quick-search {
+            margin: 15px 0 20px 0;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #1e3a8a;
+        }
+
+        .search-btn {
+            background: #1e3a8a;
+            color: white;
+            border: 2px solid #1e3a8a;
+            border-left: none;
+            padding: 12px 20px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background: #1e40af;
+            border-color: #1e40af;
+        }
+
+        .search-icon {
+            font-size: 0.9rem;
+        }
+
+        /* Filters Sidebar */
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 10px;
+        }
+
+        .collapsible-header:hover {
+            background-color: #f9fafb;
+            margin: 0 -10px;
+            padding: 8px 10px;
+            border-radius: 4px;
+        }
+
+        .collapse-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: #6b7280;
+        }
+
+        .collapse-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.expanded {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .location-links, .make-links, .model-links {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 10px;
+            background: #f9fafb;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .location-link, .make-link, .model-link {
+            color: #1e3a8a;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .location-link:hover, .make-link:hover, .model-link:hover {
+            color: #1e40af;
+            background: #e0f2fe;
+        }
+
+        .location-link.selected, .make-link.selected, .model-link.selected {
+            color: #fbbf24;
+            font-weight: bold;
+            background: #fffbeb;
+        }
+
+        .filters-sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filters-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .clear-filters {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #374151;
+            display: block;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        .price-range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input {
+            margin: 0;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Results Grid */
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Vehicle Card */
+        .vehicle-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vehicle-image {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+            width: 100%;
+            height: 200px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .car-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .car-image.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .carousel-prev {
+            left: 12px;
+        }
+
+        .carousel-next {
+            right: 12px;
+        }
+
+        .vehicle-image:hover .carousel-arrow {
+            opacity: 1;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .view-all-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .view-all-overlay.show {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .overlay-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            transition: background 0.3s ease;
+        }
+
+        .view-all-pill {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid white;
+            border-radius: 25px;
+            padding: 8px 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-pill:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .view-all-text {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .image-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 25;
+        }
+
+        .favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .favorite-btn.liked {
+            color: #ef4444;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .vehicle-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .vehicle-title {
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .vehicle-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dealer-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+        }
+
+        .dealer-name {
+            color: #6b7280;
+        }
+
+        .dealer-location {
+            color: #9ca3af;
+        }
+
+        /* Featured Badge */
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #fbbf24;
+            color: #1f2937;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 25;
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .filters-sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sort-options {
+                justify-content: space-between;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vehicle-specs {
+                font-size: 0.8rem;
+                gap: 8px;
+            }
+
+            .main-container {
+                padding: 15px;
+            }
+
+            .carousel-arrow {
+                display: none;
+            }
+            
+            .image-counter {
+                font-size: 0.7rem;
+                padding: 3px 6px;
+            }
+            
+            .view-all-pill {
+                padding: 6px 12px;
+            }
+            
+            .view-all-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Animated Placeholder Styles */
+        .animated-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% - 0px);
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.3s;
+        }
+        .placeholder-content {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            font-size: 0.95rem;
+            color: #9ca3af;
+            overflow: hidden;
+            height: 24px;
+            width: calc(100% - 32px);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+        .placeholder-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+            white-space: nowrap;
+            transition: none;
+            transform: translateY(100%);
+        }
+        .search-input:not(:placeholder-shown) + .animated-placeholder,
+        .search-input:focus + .animated-placeholder {
+            opacity: 0;
+        }
+
+        /* AI Buying Guide Styles */
+.ai-buying-guide {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #0ea5e9;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-buying-guide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6, #8b5cf6);
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.ai-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.guide-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 0;
+}
+
+.guide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}
+
+.guide-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-section li {
+    padding: 6px 0;
+    color: #374151;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 16px;
+}
+
+.guide-section li::before {
+    content: '•';
+    color: #3b82f6;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.guide-overview {
+    grid-column: 1 / -1;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.loading-guide {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.guide-disclaimer {
+    grid-column: 1 / -1;
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-style: italic;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .guide-content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .ai-buying-guide {
+        padding: 16px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AutoTrader.lk</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#research">Research & Reviews</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#wanted">Wanted Requests</a></li>
+                    <li><a href="#import">Import Service</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#favorites" class="icon-btn">❤️</a>
+                <a href="#profile" class="icon-btn">👤</a>
+                <a href="#sell" class="btn-primary">Post Ad</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/">Home</a> > <a href="/cars">Cars</a> > <span>Search Results</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Search Header -->
+        <div class="search-header">
+            <h1 class="search-title">Cars for sale in all of Sri Lanka</h1>
+            <div class="quick-search">
+                <div class="search-container" style="position:relative;">
+                    <input type="text" id="keyword-search" class="search-input" placeholder="">
+                    <div class="animated-placeholder" id="animated-placeholder">
+                        <div class="placeholder-content">
+                            <span class="placeholder-text" data-index="0">Prius 2019</span>
+                            <span class="placeholder-text" data-index="1">Honda Civic in Kandy</span>
+                            <span class="placeholder-text" data-index="2">Alto 2015 Colombo</span>
+                        </div>
+                    </div>
+                    <button class="search-btn" id="search-button">
+                        <span class="search-icon">🔍</span>
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="search-info">
+                <div class="results-count">1,247 cars found</div>
+                <div class="sort-options">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort" class="sort-select">
+                        <option value="relevance">Relevance</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="year-new">Year: Newest First</option>
+                        <option value="year-old">Year: Oldest First</option>
+                        <option value="mileage">Mileage: Low to High</option>
+                        <option value="distance">Distance: Nearest First</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Buying Guide (only show for specific model searches) -->
+        <div class="ai-buying-guide" id="ai-buying-guide" style="display: none;">
+            <div class="guide-header">
+                <div class="ai-icon">AI</div>
+                <h2 class="guide-title" id="guide-title">Loading buying guide...</h2>
+            </div>
+            
+            <div id="guide-loading" class="loading-guide">
+                <div class="loading-spinner"></div>
+                <span>Generating personalized buying guide...</span>
+            </div>
+            
+            <div id="guide-content-area" style="display: none;">
+                <div class="guide-overview" id="guide-overview"></div>
+                
+                <div class="guide-content">
+                    <div class="guide-section">
+                        <h4>🎯 Key Strengths</h4>
+                        <ul id="guide-strengths"></ul>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h4>🔍 What to Inspect</h4>
+                        <ul id="guide-inspect"></ul>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h4>⚠️ Common Issues</h4>
+                        <ul id="guide-issues"></ul>
+                    </div>
+                </div>
+                
+                <div class="guide-disclaimer">
+                    AI-generated buying guidance based on automotive data. Always inspect vehicles independently and consult professionals for specific advice.
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters Sidebar -->
+        <div class="filters-sidebar">
+            <div class="filters-header">
+                <h3 class="filters-title">Filters</h3>
+                <a href="#" class="clear-filters">Clear all</a>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleLocationFilter()">
+                    <span class="filter-label">Location</span>
+                    <span class="collapse-icon" id="location-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="location-content">
+                    <input type="text" class="filter-input location-search" id="location-search" placeholder="Search districts and cities...">
+                    <div class="location-links" id="location-list">
+                        <a href="#" class="location-link" data-location="colombo">Colombo</a>
+                        <a href="#" class="location-link" data-location="gampaha">Gampaha</a>
+                        <a href="#" class="location-link" data-location="kalutara">Kalutara</a>
+                        <a href="#" class="location-link" data-location="kandy">Kandy</a>
+                        <a href="#" class="location-link" data-location="galle">Galle</a>
+                        <a href="#" class="location-link" data-location="matara">Matara</a>
+                        <a href="#" class="location-link" data-location="negombo">Negombo</a>
+                        <a href="#" class="location-link" data-location="kurunegala">Kurunegala</a>
+                        <a href="#" class="location-link" data-location="anuradhapura">Anuradhapura</a>
+                        <a href="#" class="location-link" data-location="jaffna">Jaffna</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleMakeFilter()">
+                    <span class="filter-label">Make</span>
+                    <span class="collapse-icon" id="make-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="make-content">
+                    <input type="text" class="filter-input make-search" id="make-search" placeholder="Search makes...">
+                    <div class="make-links" id="make-list">
+                        <a href="#" class="make-link" data-make="toyota">Toyota</a>
+                        <a href="#" class="make-link" data-make="honda">Honda</a>
+                        <a href="#" class="make-link" data-make="nissan">Nissan</a>
+                        <a href="#" class="make-link" data-make="mazda">Mazda</a>
+                        <a href="#" class="make-link" data-make="suzuki">Suzuki</a>
+                        <a href="#" class="make-link" data-make="mitsubishi">Mitsubishi</a>
+                        <a href="#" class="make-link" data-make="hyundai">Hyundai</a>
+                        <a href="#" class="make-link" data-make="kia">Kia</a>
+                        <a href="#" class="make-link" data-make="bmw">BMW</a>
+                        <a href="#" class="make-link" data-make="mercedes">Mercedes-Benz</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="collapsible-header" onclick="toggleModelFilter()">
+                    <span class="filter-label">Model</span>
+                    <span class="collapse-icon" id="model-icon">▼</span>
+                </div>
+                <div class="collapsible-content" id="model-content">
+                    <input type="text" class="filter-input model-search" id="model-search" placeholder="Search models...">
+                    <div class="model-links" id="model-list">
+                        <a href="#" class="model-link" data-make="toyota" data-model="prius">Prius</a>
+                        <a href="#" class="model-link" data-make="toyota" data-model="corolla">Corolla</a>
+                        <a href="#" class="model-link" data-make="toyota" data-model="camry">Camry</a>
+                        <a href="#" class="model-link" data-make="honda" data-model="civic">Civic</a>
+                        <a href="#" class="model-link" data-make="honda" data-model="vezel">Vezel</a>
+                        <a href="#" class="model-link" data-make="honda" data-model="fit">Fit</a>
+                        <a href="#" class="model-link" data-make="nissan" data-model="march">March</a>
+                        <a href="#" class="model-link" data-make="nissan" data-model="xtrail">X-Trail</a>
+                        <a href="#" class="model-link" data-make="bmw" data-model="3-series">3 Series</a>
+                        <a href="#" class="model-link" data-make="bmw" data-model="x3">X3</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Price Range (LKR)</label>
+                <div class="price-range">
+                    <input type="number" class="filter-input" placeholder="Min" value="">
+                    <input type="number" class="filter-input" placeholder="Max" value="">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Fuel Type</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="petrol">
+                        <label for="petrol">Petrol</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="diesel">
+                        <label for="diesel">Diesel</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hybrid">
+                        <label for="hybrid">Hybrid</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="electric">
+                        <label for="electric">Electric</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Transmission</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="automatic">
+                        <label for="automatic">Automatic</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="manual">
+                        <label for="manual">Manual</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container">
+            <div class="results-grid" id="results-grid">
+                <!-- Vehicle Card 1 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <div class="featured-badge">Featured</div>
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="6">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Toyota+Prius+1" alt="Toyota Prius" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=Toyota+Prius+2" alt="Toyota Prius" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Toyota+Prius+3" alt="Toyota Prius" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/60a5fa/white?text=Toyota+Prius+4" alt="Toyota Prius" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/93c5fd/white?text=Toyota+Prius+5" alt="Toyota Prius" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 8 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 4,500,000</div>
+                        <div class="vehicle-title">Toyota Prius 2020</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2020</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>45,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Hybrid</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Auto</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">Prime Auto Lanka</span>
+                            <span class="dealer-location">Colombo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Vehicle Card 2 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="4">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Honda+Vezel+1" alt="Honda Vezel" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=Honda+Vezel+2" alt="Honda Vezel" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Honda+Vezel+3" alt="Honda Vezel" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/60a5fa/white?text=Honda+Vezel+4" alt="Honda Vezel" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 8 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 2,800,000</div>
+                        <div class="vehicle-title">Honda Vezel 2019</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2019</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>32,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Auto</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">Auto World</span>
+                            <span class="dealer-location">Kandy</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Vehicle Card 3 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="6">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Nissan+X-Trail+1" alt="Nissan X-Trail" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=Nissan+X-Trail+2" alt="Nissan X-Trail" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Nissan+X-Trail+3" alt="Nissan X-Trail" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/60a5fa/white?text=Nissan+X-Trail+4" alt="Nissan X-Trail" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 8 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 6,200,000</div>
+                        <div class="vehicle-title">Nissan X-Trail 2021</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2021</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>28,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Auto</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">Galle Motors</span>
+                            <span class="dealer-location">Galle</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Vehicle Card 4 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="3">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Toyota+Corolla+1" alt="Toyota Corolla" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=Toyota+Corolla+2" alt="Toyota Corolla" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Toyota+Corolla+3" alt="Toyota Corolla" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 8 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 3,200,000</div>
+                        <div class="vehicle-title">Toyota Corolla 2018</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2018</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>55,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Manual</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">City Motors</span>
+                            <span class="dealer-location">Colombo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Vehicle Card 5 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="7">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Honda+Civic+1" alt="Honda Civic" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=Honda+Civic+2" alt="Honda Civic" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Honda+Civic+3" alt="Honda Civic" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/60a5fa/white?text=Honda+Civic+4" alt="Honda Civic" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 8 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 5,500,000</div>
+                        <div class="vehicle-title">Honda Civic 2022</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2022</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>15,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Auto</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">Honda Lanka</span>
+                            <span class="dealer-location">Negombo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Vehicle Card 6 -->
+                <a href="/vehicle-listing" class="vehicle-card">
+                    <div class="card-header">
+                        <button class="favorite-btn">♡</button>
+                        <div class="vehicle-image" data-total-images="13">
+                            <div class="image-container">
+                                <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=BMW+3+Series+1" alt="BMW 3 Series" class="car-image active">
+                                <img src="https://via.placeholder.com/320x200/2563eb/white?text=BMW+3+Series+2" alt="BMW 3 Series" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/3b82f6/white?text=BMW+3+Series+3" alt="BMW 3 Series" class="car-image">
+                                <img src="https://via.placeholder.com/320x200/60a5fa/white?text=BMW+3+Series+4" alt="BMW 3 Series" class="car-image">
+                            </div>
+                            
+                            <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                            
+                            <div class="view-all-overlay">
+                                <div class="overlay-background"></div>
+                                <div class="view-all-pill">
+                                    <span class="view-all-text">View all 13 photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="vehicle-price">LKR 8,500,000</div>
+                        <div class="vehicle-title">BMW 3 Series 2020</div>
+                        <div class="vehicle-specs">
+                            <div class="spec-item">
+                                <span>📅</span>
+                                <span>2020</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🛣️</span>
+                                <span>35,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>⛽</span>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>🚗</span>
+                                <span>Auto</span>
+                            </div>
+                        </div>
+                        <div class="dealer-info">
+                            <span class="dealer-name">Prestige Auto</span>
+                            <span class="dealer-location">Colombo</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Load More Section -->
+            <div class="load-more">
+                <div class="loading" id="loading" style="display: none;">Loading more vehicles...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1f2937; color: white; padding: 50px 0 20px; margin-top: 50px;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <div>
+                <h3 style="margin-bottom: 20px; color: #fbbf24;">AutoTrader.lk</h3>
+                <p>Sri Lanka's most trusted vehicle marketplace. Find your perfect car, van, motorcycle or three-wheeler with confidence.</p>
+            </div>
+            
+            <div>
+                <h3 style="margin-bottom: 20px; color: #fbbf24;">Quick Links</h3>
+                <a href="#browse" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Browse Cars</a>
+                <a href="#sell" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Sell Your Car</a>
+                <a href="#finance" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Car Finance</a>
+                <a href="#insurance" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Car Insurance</a>
+            </div>
+            
+            <div>
+                <h3 style="margin-bottom: 20px; color: #fbbf24;">Support</h3>
+                <a href="#help" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Help Center</a>
+                <a href="#contact" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Contact Us</a>
+                <a href="#terms" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Terms & Conditions</a>
+                <a href="#privacy" style="color: #d1d5db; text-decoration: none; display: block; margin-bottom: 10px;">Privacy Policy</a>
+            </div>
+            
+            <div>
+                <h3 style="margin-bottom: 20px; color: #fbbf24;">Contact Info</h3>
+                <p>📞 +94 11 234 5678</p>
+                <p>📧 info@autotrader.lk</p>
+                <p>📍 Colombo, Sri Lanka</p>
+            </div>
+        </div>
+        
+        <div style="border-top: 1px solid #374151; margin-top: 30px; padding-top: 20px; text-align: center; color: #9ca3af;">
+            <p>&copy; 2025 AutoTrader.lk. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedMake = null;
+
+        // Filter toggle functions
+        function toggleLocationFilter() {
+            const content = document.getElementById('location-content');
+            const icon = document.getElementById('location-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+            }
+        }
+
+        function toggleMakeFilter() {
+            const content = document.getElementById('make-content');
+            const icon = document.getElementById('make-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+            }
+        }
+
+        function toggleModelFilter() {
+            const content = document.getElementById('model-content');
+            const icon = document.getElementById('model-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+            }
+        }
+
+        // Search functionality
+        document.getElementById('location-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const locationLinks = document.querySelectorAll('.location-link');
+            
+            locationLinks.forEach(link => {
+                const linkText = link.textContent.toLowerCase();
+                if (linkText.includes(searchTerm) || !searchTerm) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        });
+
+        document.getElementById('make-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const makeLinks = document.querySelectorAll('.make-link');
+            
+            makeLinks.forEach(link => {
+                const makeName = link.textContent.toLowerCase();
+                if (makeName.includes(searchTerm) || !searchTerm) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        });
+
+        document.getElementById('model-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const modelLinks = document.querySelectorAll('.model-link');
+            
+            modelLinks.forEach(link => {
+                const modelName = link.textContent.toLowerCase();
+                const modelMake = link.dataset.make;
+                
+                const matchesSearch = modelName.includes(searchTerm) || !searchTerm;
+                const matchesMake = !selectedMake || modelMake === selectedMake;
+                
+                if (matchesSearch && matchesMake) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        });
+
+        // Filter model by make
+        function filterModelsByMake(make) {
+            const modelLinks = document.querySelectorAll('.model-link');
+            const modelSearch = document.getElementById('model-search');
+            
+            selectedMake = make;
+            
+            modelLinks.forEach(link => {
+                const modelMake = link.dataset.make;
+                
+                if (!make || modelMake === make) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+            
+            modelSearch.value = '';
+            
+            if (make) {
+                modelSearch.placeholder = `Search ${make.charAt(0).toUpperCase() + make.slice(1)} models...`;
+            } else {
+                modelSearch.placeholder = 'Search models...';
+            }
+        }
+
+        // Filter link selection
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('location-link')) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.location-link').forEach(link => {
+                    link.classList.remove('selected');
+                });
+                
+                e.target.classList.add('selected');
+                const selectedLocation = e.target.dataset.location;
+                const locationDisplayName = e.target.textContent.trim();
+                
+                updateSearchHeader(locationDisplayName);
+                console.log('Location selected:', selectedLocation);
+            }
+            
+            if (e.target.classList.contains('make-link')) {
+                e.preventDefault();
+                
+                const clickedMake = e.target.dataset.make;
+                
+                if (selectedMake === clickedMake) {
+                    e.target.classList.remove('selected');
+                    selectedMake = null;
+                    filterModelsByMake(null);
+                } else {
+                    document.querySelectorAll('.make-link').forEach(link => {
+                        link.classList.remove('selected');
+                    });
+                    
+                    e.target.classList.add('selected');
+                    filterModelsByMake(clickedMake);
+                }
+                
+                document.querySelectorAll('.model-link').forEach(link => {
+                    link.classList.remove('selected');
+                });
+                
+                console.log('Make selected:', selectedMake);
+            }
+            
+            if (e.target.classList.contains('model-link')) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.model-link').forEach(link => {
+                    link.classList.remove('selected');
+                });
+                
+                e.target.classList.add('selected');
+                
+                const selectedModel = e.target.dataset.model;
+                const modelMake = e.target.dataset.make;
+                
+                console.log('Model selected:', selectedModel, 'from', modelMake);
+            }
+        });
+
+        // Update search header
+        function updateSearchHeader(locationName) {
+            const searchTitle = document.querySelector('.search-title');
+            if (!locationName) {
+                searchTitle.textContent = 'Cars for sale in all of Sri Lanka';
+            } else {
+                searchTitle.textContent = `Cars for Sale in ${locationName}`;
+            }
+        }
+
+        // Keyword search functionality
+        function performKeywordSearch() {
+            const searchTerm = document.getElementById('keyword-search').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                document.querySelectorAll('.vehicle-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+                updateResultsCount();
+                return;
+            }
+            
+            let visibleCount = 0;
+            
+            document.querySelectorAll('.vehicle-card').forEach(card => {
+                const title = card.querySelector('.vehicle-title')?.textContent.toLowerCase() || '';
+                const specs = card.querySelector('.vehicle-specs')?.textContent.toLowerCase() || '';
+                const dealer = card.querySelector('.dealer-name')?.textContent.toLowerCase() || '';
+                const location = card.querySelector('.dealer-location')?.textContent.toLowerCase() || '';
+                
+                const searchableText = `${title} ${specs} ${dealer} ${location}`;
+                
+                if (searchableText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            updateResultsCount(visibleCount, searchTerm);
+        }
+
+        function updateResultsCount(count = null, searchTerm = '') {
+            const resultsCount = document.querySelector('.results-count');
+            
+            if (count === null) {
+                count = document.querySelectorAll('.vehicle-card[style*="block"], .vehicle-card:not([style*="none"])').length;
+            }
+            
+            if (searchTerm) {
+                resultsCount.textContent = `${count} cars found for "${searchTerm}"`;
+            } else {
+                resultsCount.textContent = `${count} cars found`;
+            }
+        }
+
+        // Search event handlers
+        document.getElementById('search-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            performKeywordSearch();
+        });
+
+        document.getElementById('keyword-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performKeywordSearch();
+            }
+        });
+
+        // Clear filters
+        document.querySelector('.clear-filters').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            document.querySelectorAll('.filter-input').forEach(input => {
+                input.value = '';
+            });
+            
+            document.querySelectorAll('.checkbox-item input').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            document.querySelectorAll('.location-link, .make-link, .model-link').forEach(link => {
+                link.classList.remove('selected');
+            });
+            
+            selectedMake = null;
+            filterModelsByMake(null);
+            
+            document.getElementById('keyword-search').value = '';
+            
+            document.querySelectorAll('.vehicle-card').forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            updateSearchHeader();
+            updateResultsCount();
+            
+            console.log('All filters cleared');
+        });
+
+        // Vehicle Image Carousel Class
+        class VehicleImageCarousel {
+            constructor(element) {
+                this.container = element;
+                this.images = this.container.querySelectorAll('.car-image');
+                this.overlay = this.container.querySelector('.view-all-overlay');
+                this.overlayText = this.container.querySelector('.view-all-text');
+                this.prevBtn = this.container.querySelector('.carousel-prev');
+                this.nextBtn = this.container.querySelector('.carousel-next');
+                
+                this.currentIndex = 0;
+                this.totalImages = this.images.length;
+                this.totalPhotos = parseInt(this.container.dataset.totalImages) || this.totalImages;
+                
+                this.startX = 0;
+                this.endX = 0;
+                this.minSwipeDistance = 50;
+                
+                this.init();
+            }
+            
+            init() {
+                if (this.totalImages <= 1) return;
+                
+                if (this.overlayText) {
+                    this.overlayText.textContent = `View all ${this.totalPhotos} photos`;
+                }
+                
+                this.prevBtn?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.prevImage();
+                });
+                
+                this.nextBtn?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextImage();
+                });
+                
+                if (this.overlay) {
+                    this.overlay.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const vehicleCard = this.container.closest('.vehicle-card');
+                        if (vehicleCard && vehicleCard.href) {
+                            window.location.href = vehicleCard.href;
+                        }
+                    });
+                }
+                
+                const imageContainer = this.container.querySelector('.image-container');
+                
+                imageContainer.addEventListener('touchstart', (e) => {
+                    this.startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                imageContainer.addEventListener('touchend', (e) => {
+                    this.endX = e.changedTouches[0].clientX;
+                    this.handleSwipe();
+                }, { passive: true });
+                
+                this.container.addEventListener('click', (e) => {
+                    if (e.target.closest('.carousel-arrow') || e.target.closest('.view-all-overlay')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+                
+                this.updateOverlay();
+            }
+            
+            handleSwipe() {
+                const swipeDistance = this.startX - this.endX;
+                
+                if (Math.abs(swipeDistance) > this.minSwipeDistance) {
+                    if (swipeDistance > 0) {
+                        this.nextImage();
+                    } else {
+                        this.prevImage();
+                    }
+                }
+            }
+            
+            prevImage() {
+                this.currentIndex = this.currentIndex === 0 ? this.totalImages - 1 : this.currentIndex - 1;
+                this.updateCarousel();
+            }
+            
+            nextImage() {
+                this.currentIndex = this.currentIndex === this.totalImages - 1 ? 0 : this.currentIndex + 1;
+                this.updateCarousel();
+            }
+            
+            updateCarousel() {
+                this.images.forEach((img, index) => {
+                    img.classList.toggle('active', index === this.currentIndex);
+                });
+                
+                this.updateOverlay();
+            }
+            
+            updateOverlay() {
+                if (!this.overlay) return;
+                
+                const isLastImage = this.currentIndex === this.totalImages - 1;
+                const hasMorePhotos = this.totalPhotos > this.totalImages;
+                
+                if (isLastImage && hasMorePhotos) {
+                    this.overlay.classList.add('show');
+                } else {
+                    this.overlay.classList.remove('show');
+                }
+            }
+        }
+
+        // Favorite button functionality
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (this.classList.contains('liked')) {
+                    this.classList.remove('liked');
+                    this.innerHTML = '♡';
+                } else {
+                    this.classList.add('liked');
+                    this.innerHTML = '❤️';
+                }
+            });
+        });
+
+        // Initialize carousels
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselElements = document.querySelectorAll('.vehicle-image');
+            carouselElements.forEach(element => {
+                new VehicleImageCarousel(element);
+            });
+            
+            // Initialize model filter
+            filterModelsByMake(null);
+        });
+
+        // Sort functionality
+        document.getElementById('sort').addEventListener('change', function() {
+            console.log('Sort changed to:', this.value);
+            // In a real implementation, this would re-sort the results
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-input, .checkbox-item input').forEach(input => {
+            input.addEventListener('change', function() {
+                console.log('Filter applied:', this.name || this.id, this.value || this.checked);
+                // In a real implementation, this would trigger an API call to fetch filtered results
+            });
+        });
+
+        // Infinite scroll implementation
+        let isLoading = false;
+        let hasMoreResults = true;
+
+        function loadMoreVehicles() {
+            if (isLoading || !hasMoreResults) return;
+            
+            isLoading = true;
+            const loading = document.getElementById('loading');
+            const grid = document.getElementById('results-grid');
+            
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                const newCard = `
+                    <a href="/vehicle-listing" class="vehicle-card">
+                        <div class="card-header">
+                            <button class="favorite-btn">♡</button>
+                            <div class="vehicle-image" data-total-images="7">
+                                <div class="image-container">
+                                    <img src="https://via.placeholder.com/320x200/1e3a8a/white?text=Toyota+Camry+1" alt="Toyota Camry" class="car-image active">
+                                    <img src="https://via.placeholder.com/320x200/2563eb/white?text=Toyota+Camry+2" alt="Toyota Camry" class="car-image">
+                                    <img src="https://via.placeholder.com/320x200/3b82f6/white?text=Toyota+Camry+3" alt="Toyota Camry" class="car-image">
+                                    <img src="https://via.placeholder.com/320x200/60a5fa/white?text=Toyota+Camry+4" alt="Toyota Camry" class="car-image">
+                                </div>
+                                
+                                <button class="carousel-arrow carousel-prev" aria-label="Previous image">‹</button>
+                                <button class="carousel-arrow carousel-next" aria-label="Next image">›</button>
+                                
+                                <div class="view-all-overlay">
+                                    <div class="overlay-background"></div>
+                                    <div class="view-all-pill">
+                                        <span class="view-all-text">View all 7 photos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="vehicle-price">LKR ${Math.floor(Math.random() * 5000000) + 2000000}</div>
+                            <div class="vehicle-title">Toyota Camry 2019</div>
+                            <div class="vehicle-specs">
+                                <div class="spec-item">
+                                    <span>📅</span>
+                                    <span>2019</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>🛣️</span>
+                                    <span>${Math.floor(Math.random() * 60000) + 20000} km</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>⛽</span>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>🚗</span>
+                                    <span>Auto</span>
+                                </div>
+                            </div>
+                            <div class="dealer-info">
+                                <span class="dealer-name">Lanka Auto</span>
+                                <span class="dealer-location">Matara</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                for (let i = 0; i < 6; i++) {
+                    grid.insertAdjacentHTML('beforeend', newCard);
+                }
+                
+                loading.style.display = 'none';
+                isLoading = false;
+
+                initializeNewCarousels();
+                
+                const totalCards = document.querySelectorAll('.vehicle-card').length;
+                if (totalCards > 30) {
+                    hasMoreResults = false;
+                    loading.innerHTML = 'No more vehicles to load';
+                    loading.style.display = 'block';
+                }
+                
+            }, 1000);
+        }
+
+        function initializeNewCarousels() {
+            const newCarouselElements = document.querySelectorAll('.vehicle-image:not([data-carousel-initialized])');
+            newCarouselElements.forEach(element => {
+                element.setAttribute('data-carousel-initialized', 'true');
+                new VehicleImageCarousel(element);
+            });
+            
+            // Re-initialize favorite buttons for new cards
+            const newFavoriteButtons = document.querySelectorAll('.favorite-btn:not([data-favorite-initialized])');
+            newFavoriteButtons.forEach(btn => {
+                btn.setAttribute('data-favorite-initialized', 'true');
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (this.classList.contains('liked')) {
+                        this.classList.remove('liked');
+                        this.innerHTML = '♡';
+                    } else {
+                        this.classList.add('liked');
+                        this.innerHTML = '❤️';
+                    }
+                });
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadMoreVehicles();
+                }
+            });
+        }, {
+            rootMargin: '100px'
+        });
+
+        function createSentinel() {
+            const sentinel = document.createElement('div');
+            sentinel.id = 'scroll-sentinel';
+            sentinel.style.height = '1px';
+            sentinel.style.visibility = 'hidden';
+            
+            const resultsContainer = document.querySelector('.results-container');
+            resultsContainer.appendChild(sentinel);
+            
+            observer.observe(sentinel);
+        }
+
+        // Initialize infinite scroll when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createSentinel();
+        });
+
+        // Escalator Placeholder Animation Logic
+        (function() {
+            let currentIndex = 0;
+            let isAnimating = false;
+            let autoRotateInterval;
+            let autoRotateEnabled = true;
+            const placeholderTexts = ['Prius 2019', 'Honda Civic in Kandy', 'Alto 2015 Colombo'];
+
+            function initializeAnimation() {
+                const texts = document.querySelectorAll('.placeholder-text');
+                const speed = 2; // seconds, default
+                texts.forEach((text, index) => {
+                    text.style.transition = `transform ${speed}s cubic-bezier(0.4, 0, 0.2, 1)`;
+                    if (index === 0) {
+                        text.style.transform = 'translateY(0)';
+                    } else {
+                        text.style.transform = 'translateY(100%)';
+                    }
+                });
+            }
+
+            function rotatePlaceholder() {
+                if (isAnimating) return;
+                const texts = document.querySelectorAll('.placeholder-text');
+                const speed = 2;
+                isAnimating = true;
+                // Current text moves up and out
+                const currentText = texts[currentIndex];
+                currentText.style.transition = `transform ${speed}s cubic-bezier(0.4, 0, 0.2, 1)`;
+                currentText.style.transform = 'translateY(-100%)';
+                // Next text moves up into view
+                const nextIndex = (currentIndex + 1) % texts.length;
+                const nextText = texts[nextIndex];
+                nextText.style.transition = `transform ${speed}s cubic-bezier(0.4, 0, 0.2, 1)`;
+                nextText.style.transform = 'translateY(0)';
+                setTimeout(() => {
+                    // Reset the text that just left (move it back down without transition)
+                    currentText.style.transition = 'none';
+                    currentText.style.transform = 'translateY(100%)';
+                    // Force reflow
+                    currentText.offsetHeight;
+                    // Re-enable transition for next time
+                    setTimeout(() => {
+                        currentText.style.transition = `transform ${speed}s cubic-bezier(0.4, 0, 0.2, 1)`;
+                    }, 50);
+                    currentIndex = nextIndex;
+                    isAnimating = false;
+                }, speed * 1000);
+            }
+
+            function startAutoRotate() {
+                clearInterval(autoRotateInterval);
+                autoRotateInterval = setInterval(() => {
+                    const input = document.getElementById('keyword-search');
+                    if (!input.value && !input.matches(':focus') && autoRotateEnabled) {
+                        rotatePlaceholder();
+                    }
+                }, 3000);
+            }
+
+            // Hide placeholder when input has content or is focused
+            document.getElementById('keyword-search').addEventListener('input', function() {
+                const placeholder = document.getElementById('animated-placeholder');
+                if (!this.value) {
+                    placeholder.style.opacity = 1;
+                } else {
+                    placeholder.style.opacity = 0;
+                }
+            });
+            document.getElementById('keyword-search').addEventListener('focus', function() {
+                document.getElementById('animated-placeholder').style.opacity = 0;
+            });
+            document.getElementById('keyword-search').addEventListener('blur', function() {
+                if (!this.value) {
+                    document.getElementById('animated-placeholder').style.opacity = 1;
+                }
+            });
+
+            // Initialize on load
+            document.addEventListener('DOMContentLoaded', () => {
+                initializeAnimation();
+                startAutoRotate();
+            });
+
+            // Clean up on unload
+            window.addEventListener('beforeunload', () => {
+                clearInterval(autoRotateInterval);
+            });
+        })();
+    </script>
+    <script>
+        // Include the AI Buying Guide Service (you'll need to include the ai-buying-guide.js file)
+        
+        // Initialize buying guide functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBuyingGuide();
+        });
+        
+        function initializeBuyingGuide() {
+            // Get current search context
+            const searchQuery = getSearchQuery();
+            const filters = getCurrentFilters();
+            
+            // Check if we should show the buying guide
+            if (buyingGuideService.shouldShowGuide(searchQuery, filters)) {
+                showBuyingGuide(searchQuery, filters);
+            }
+        }
+        
+        function getSearchQuery() {
+            // Get search query from URL params or search input
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || document.getElementById('keyword-search')?.value || '';
+            return query;
+        }
+        
+        function getCurrentFilters() {
+            // Extract current filter values from URL or form
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                make: urlParams.get('make'),
+                model: urlParams.get('model'),
+                year: urlParams.get('year'),
+                location: urlParams.get('location')
+            };
+        }
+        
+        async function showBuyingGuide(searchQuery, filters) {
+            const guideContainer = document.getElementById('ai-buying-guide');
+            const loadingElement = document.getElementById('guide-loading');
+            const contentArea = document.getElementById('guide-content-area');
+            const titleElement = document.getElementById('guide-title');
+            
+            // Show the guide container
+            guideContainer.style.display = 'block';
+
+            // Ensure loading state is shown (in case not already triggered)
+            if (loadingElement.style.display !== 'flex') {
+                titleElement.textContent = 'Loading buying guide...';
+                loadingElement.style.display = 'flex';
+                contentArea.style.display = 'none';
+            }
+            
+            try {
+                // Generate the buying guide
+                const result = await buyingGuideService.generateBuyingGuide(searchQuery, filters);
+                
+                if (result.success) {
+                    // Update title
+                    titleElement.textContent = `${result.vehicleName} Buying Guide`;
+                    
+                    // Hide loading
+                    loadingElement.style.display = 'none';
+                    
+                    // Populate content
+                    populateGuideContent(result.data);
+                    
+                    // Show content
+                    contentArea.style.display = 'block';
+                    
+                    // Add cache indicator if needed
+                    if (result.cached) {
+                        console.log('Loaded from cache');
+                    } else if (result.fallback) {
+                        console.log('Using fallback content');
+                    }
+                } else {
+                    throw new Error('Failed to generate guide');
+                }
+                
+            } catch (error) {
+                console.error('Error showing buying guide:', error);
+                hideGuideWithError();
+            }
+        }
+        
+        function populateGuideContent(data) {
+            // Populate overview
+            document.getElementById('guide-overview').textContent = data.overview;
+            
+            // Populate strengths
+            const strengthsList = document.getElementById('guide-strengths');
+            strengthsList.innerHTML = '';
+            data.strengths.forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength;
+                strengthsList.appendChild(li);
+            });
+            
+            // Populate inspection points
+            const inspectList = document.getElementById('guide-inspect');
+            inspectList.innerHTML = '';
+            data.inspection_points.forEach(point => {
+                const li = document.createElement('li');
+                li.textContent = point;
+                inspectList.appendChild(li);
+            });
+            
+            // Populate common issues
+            const issuesList = document.getElementById('guide-issues');
+            issuesList.innerHTML = '';
+            data.common_issues.forEach(issue => {
+                const li = document.createElement('li');
+                li.textContent = issue;
+                issuesList.appendChild(li);
+            });
+        }
+        
+        function hideGuideWithError() {
+            const guideContainer = document.getElementById('ai-buying-guide');
+            guideContainer.style.display = 'none';
+        }
+        
+        // Re-initialize when filters change or new search is performed
+        function onSearchFiltersChange() {
+    // Check if we should show a guide for the new search
+    const searchQuery = getSearchQuery();
+    const filters = getCurrentFilters();
+    
+    if (buyingGuideService.shouldShowGuide(searchQuery, filters)) {
+        // Show loading immediately
+        showLoadingImmediately();
+        // Then generate new guide
+        setTimeout(() => {
+            initializeBuyingGuide();
+        }, 100);
+    } else {
+        // Hide guide if not relevant
+        document.getElementById('ai-buying-guide').style.display = 'none';
+    }
+}
+        
+        // Listen for filter changes
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('.filter-input, .sort-select, input[type="checkbox"]')) {
+                onSearchFiltersChange();
+            }
+        });
+        
+        // Listen for search button clicks
+        // Replace the existing search button listener with this:
+document.getElementById('search-button')?.addEventListener('click', function() {
+    // Show loading immediately when search starts
+    showLoadingImmediately();
+    
+    // Small delay to ensure UI updates, then initialize guide
+    setTimeout(() => {
+        initializeBuyingGuide();
+    }, 100); // Reduced from 1000ms to 100ms
+});
+
+// Add this new function
+function showLoadingImmediately() {
+    const guideContainer = document.getElementById('ai-buying-guide');
+    const loadingElement = document.getElementById('guide-loading');
+    const contentArea = document.getElementById('guide-content-area');
+    const titleElement = document.getElementById('guide-title');
+    
+    // Show guide container immediately
+    guideContainer.style.display = 'block';
+    
+    // Reset to loading state
+    titleElement.textContent = 'Loading buying guide...';
+    loadingElement.style.display = 'flex';
+    contentArea.style.display = 'none';
+    
+    // Clear any previous content
+    document.getElementById('guide-overview').textContent = '';
+    document.getElementById('guide-strengths').innerHTML = '';
+    document.getElementById('guide-inspect').innerHTML = '';
+    document.getElementById('guide-issues').innerHTML = '';
+}
+
+// Add this event listener for Enter key
+document.getElementById('keyword-search')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        showLoadingImmediately();
+        setTimeout(() => {
+            initializeBuyingGuide();
+        }, 100);
+    }
+});
+</script>
+        
+        <!-- Include the AI service file -->
+        <script src="ai-buying-guide.js"></script>
+
+        <!-- Include the pre-generation manager -->
+        <script src="pregenerate-guides.js"></script>
+</body>
+</html>

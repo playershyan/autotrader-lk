@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Prius 2020 - LKR 4,500,000 | AutoTrader.lk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #fbbf24;
+        }
+
+        .icon-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .icon-btn:hover {
+            background: white;
+            color: #1e3a8a;
+            transform: scale(1.1);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #f59e0b;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #e5e7eb;
+            padding: 10px 0;
+        }
+
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1300px;
+            margin: 20px auto;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        /* New layout for image and header */
+        .vehicle-top-section {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #6b7280;
+            position: relative;
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .thumbnail-row {
+            display: flex;
+            padding: 15px;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .thumbnail.active {
+            border-color: #1e3a8a;
+        }
+
+        /* Vehicle Header */
+        /* Vehicle Header - Improved Clean & Elegant Styling */
+.vehicle-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.vehicle-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0;
+}
+
+.vehicle-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+    flex: 1;
+}
+
+.vehicle-actions {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.action-btn-icon {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn-icon:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.action-btn-icon.active {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+.action-btn-icon.active .favorite-icon {
+    fill: #ef4444;
+}
+
+.vehicle-subtitle {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.posting-info {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: -18px 0 0px 0;
+    font-style: italic;
+}
+
+.vehicle-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.vehicle-details .detail-item {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0;
+    padding-top: 5px;
+}
+
+.price-main {
+    flex: 1;
+}
+
+.vehicle-price {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #1e40af;
+    margin: 0 0 8px 0;
+    line-height: 1;
+    letter-spacing: -0.025em;
+}
+
+.price-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.market-price {
+    background: none;
+    border: none;
+    color: #059669;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.market-price:hover {
+    color: #047857;
+}
+
+.info-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.info-icon:hover {
+    background-color: #f1f5f9;
+}
+
+.price-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.gauge-visual {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.price-notes {
+    margin: 0;
+}
+
+.price-notes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.price-notes li {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+.finance-section {
+    margin: 0;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.finance-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.finance-link:hover {
+    color: #1d4ed8;
+}
+
+.finance-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.finance-note {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 8px 0 0 0;
+    font-style: italic;
+}
+
+.contact-actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+    border: none;
+    cursor: pointer;
+    font-size: 0.975rem;
+}
+
+.contact-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(30, 64, 175, 0.3);
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vehicle-header {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .vehicle-title {
+        font-size: 1.75rem;
+    }
+
+    .vehicle-price {
+        font-size: 2.25rem;
+    }
+    
+    .vehicle-title-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .vehicle-actions {
+        align-self: flex-end;
+    }
+    
+    .price-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .price-gauge {
+        align-items: flex-start;
+    }
+}
+
+        /* Vehicle Details Tabs */
+        .details-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0 20px;
+        }
+
+        .tab-navigation {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #1e3a8a;
+            border-bottom-color: #1e3a8a;
+        }
+
+        .tab-content {
+            padding: 20px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+
+        .spec-label {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .spec-value {
+            color: #6b7280;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Contact Dealer Card */
+        .contact-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .dealer-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        .dealer-avatar {
+            width: 50px;
+            height: 50px;
+            background: #1e3a8a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dealer-details h4 {
+            margin-bottom: 5px;
+            color: #1f2937;
+        }
+
+        .dealer-rating {
+            color: #fbbf24;
+            font-size: 0.9rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-call {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-call:hover {
+            background: #059669;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #22c55e;
+        }
+
+        .btn-message {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .btn-message:hover {
+            background: #1e40af;
+        }
+
+        /* Finance Calculator */
+        .finance-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .finance-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        .calculate-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .calculate-btn:hover {
+            background: #1e40af;
+        }
+
+        .finance-result {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .monthly-payment {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #374151;
+        }
+
+        .action-btn:hover {
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+        }
+
+        .action-btn.liked {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Similar Vehicles */
+        .similar-vehicles {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .similar-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .similar-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .similar-image {
+            width: 100%;
+            height: 150px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+        }
+
+        .similar-content {
+            padding: 15px;
+        }
+
+        .similar-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .similar-title {
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        .similar-details {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .vehicle-top-section {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .key-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .vehicle-title {
+                font-size: 1.5rem;
+            }
+
+            .vehicle-price {
+                font-size: 2rem;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+            }
+
+            .main-image {
+                height: 250px;
+            }
+            
+            .vehicle-title-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .vehicle-actions {
+                margin-top: 15px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AutoTrader.lk</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#research">Research & Reviews</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#wanted">Wanted Requests</a></li>
+                    <li><a href="#import">Import Service</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#favorites" class="icon-btn">❤️</a>
+                <a href="#profile" class="icon-btn">👤</a>
+                <a href="#sell" class="btn-primary">Post Ad</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/">Home</a> > <a href="/cars">Cars</a> > <a href="/cars/toyota">Toyota</a> > <span>Prius 2020</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Section with Image on Left and Header on Right -->
+        <div class="vehicle-top-section">
+            <!-- Image Gallery (Left) -->
+            <div class="image-gallery">
+                <div class="main-image">
+                    📷 Toyota Prius Main Photo
+                    <div class="image-counter">1 / 12</div>
+                </div>
+                <div class="thumbnail-row">
+                    <div class="thumbnail active"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                </div>
+            </div>
+
+            <!-- Vehicle Header (Right) -->
+            <div class="vehicle-header">
+                <div class="vehicle-title-container">
+                    <h1 class="vehicle-title">Toyota Prius 2020</h1>
+                    <div class="vehicle-actions">
+                        <button class="action-btn-icon" aria-label="Save to favorites">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="#6b7280" class="favorite-icon">
+                                <title>Save</title>
+                                <path d="M12 22.3401L11.33 21.7501C10.37 20.9001 2 13.2801 2 8.01012C2 5.40012 3.28 3.31012 5.42 2.42012C7.52 1.55012 9.98 2.03012 12 3.66012C14.02 2.03012 16.47 1.55012 18.58 2.42012C20.72 3.31012 22 5.40012 22 8.01012C22 13.2801 13.62 20.9001 12.67 21.7501L12 22.3401ZM7.59 4.00012C7.11 4.00012 6.63 4.09012 6.19 4.27012C4.8 4.85012 4 6.21012 4 8.01012C4 11.4101 9.27 17.0701 12 19.6401C14.73 17.0701 20 11.4101 20 8.01012C20 6.21012 19.2 4.85012 17.81 4.27012C16.21 3.61012 14.26 4.16012 12.71 5.72012L12 6.43012L11.29 5.72012C10.17 4.60012 8.84 4.00012 7.59 4.00012Z"></path>
+                            </svg>
+                        </button>
+                        <button class="action-btn-icon" aria-label="Share this listing">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 22 22" fill="#6b7280" class="share-icon">
+                                <title>Share</title>
+                                <path d="M14 7H11V9H14V19H2V9H5V7H2C0.9 7 0 7.9 0 9V19C0 20.1 0.9 21 2 21H14C15.1 21 16 20.1 16 19V9C16 7.9 15.1 7 14 7Z"></path>
+                                <path d="M6.99999 4.4001V11.0001H8.99999V4.4001L10.3 5.7001L11.7 4.3001L7.99999 0.600098L4.29999 4.3001L5.69999 5.7001L6.99999 4.4001Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <p class="posting-info">Posted on 01 Jul 12:36 pm, Talawatugoda, Colombo</p>
+                <p class="vehicle-subtitle">1.8 Hybrid 5dr CVT Auto</p>
+
+                <ul class="vehicle-details">
+                    <li class="detail-item">45,000 km</li>
+                    <li class="detail-item">2020</li>
+                    <li class="detail-item">Automatic</li>
+                    <li class="detail-item">Hybrid</li>
+                </ul>
+                
+                <div class="price-section">
+                    <div class="price-main">
+                        <div class="vehicle-price">LKR 4,500,000</div>
+                        <div class="price-indicator">
+                            <button class="market-price">LKR 50,000 below market average</button>
+                            <button class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill="#242D3D">
+                                    <path d="M12 22C6.49 22 2 17.51 2 12C2 6.49 6.49 2 12 2C17.51 2 22 6.49 22 12C22 17.51 17.51 22 12 22ZM12 4C7.59 4 4 7.59 4 12C4 16.41 7.59 20 12 20C16.41 20 20 16.41 20 12C20 7.59 16.41 4 12 4Z"></path>
+                                    <path d="M12 9C12.5523 9 13 8.55228 13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55228 11.4477 9 12 9Z"></path>
+                                    <path d="M13 10H11V17H13V10Z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="price-gauge">
+                        <div class="gauge-visual">
+                            <span>Great price</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="finance-section">
+                    <a href="#finance" class="finance-link">
+                        <span>Get financing for</span>
+                        <span class="finance-price">LKR 98,750</span>
+                        <span>per month*</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="#242D3D">
+                            <path d="M14.71 6.29004L13.29 7.71004L16.59 11H3V13H16.59L13.29 16.29L14.71 17.71L20.41 12L14.71 6.29004Z"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <ul class="contact-actions">
+                    <li><a href="#contact" class="contact-btn">Message seller</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Left Column -->
+        <div class="left-column">
+            <!-- Vehicle Details Tabs -->
+            <div class="details-section">
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="specs">Specifications</button>
+                    <button class="tab-btn" data-tab="features">Features</button>
+                    <button class="tab-btn" data-tab="history">History</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-panel active" id="overview">
+                        <h3>Vehicle Description</h3>
+                        <p style="margin-bottom: 20px;">
+                            Excellent condition Toyota Prius 2020 in beautiful silver color. This hybrid vehicle offers exceptional fuel economy and reliability. 
+                            Well-maintained with full service history. Perfect for city driving and long-distance travel. 
+                            All original parts, no accidents, single owner.
+                        </p>
+                        
+                        <h4 style="margin-bottom: 15px;">Key Features:</h4>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin-bottom: 8px;">✅ Hybrid Engine Technology</li>
+                            <li style="margin-bottom: 8px;">✅ Automatic Transmission</li>
+                            <li style="margin-bottom: 8px;">✅ Excellent Fuel Economy</li>
+                            <li style="margin-bottom: 8px;">✅ Well Maintained</li>
+                            <li style="margin-bottom: 8px;">✅ No Accidents</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-panel" id="specs">
+                        <h3>Technical Specifications</h3>
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Make</span>
+                                <span class="spec-value">Toyota</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Model</span>
+                                <span class="spec-value">Prius</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Year</span>
+                                <span class="spec-value">2020</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Engine</span>
+                                <span class="spec-value">1.8L Hybrid</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Transmission</span>
+                                <span class="spec-value">CVT Automatic</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Fuel Type</span>
+                                <span class="spec-value">Hybrid (Petrol + Electric)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Mileage</span>
+                                <span class="spec-value">45,000 km</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Color</span>
+                                <span class="spec-value">Silver Metallic</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Body Type</span>
+                                <span class="spec-value">Hatchback</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Doors</span>
+                                <span class="spec-value">5</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Seats</span>
+                                <span class="spec-value">5</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Drive Type</span>
+                                <span class="spec-value">Front Wheel Drive</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="features">
+                        <h3>Standard & Optional Features</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div>
+                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Safety Features</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin-bottom: 5px;">✅ Toyota Safety Sense 2.0</li>
+                                    <li style="margin-bottom: 5px;">✅ Pre-Collision System</li>
+                                    <li style="margin-bottom: 5px;">✅ Lane Departure Alert</li>
+                                    <li style="margin-bottom: 5px;">✅ Automatic High Beams</li>
+                                    <li style="margin-bottom: 5px;">✅ Multiple Airbags</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Technology</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin-bottom: 5px;">✅ 7" Touch Display</li>
+                                    <li style="margin-bottom: 5px;">✅ Bluetooth Connectivity</li>
+                                    <li style="margin-bottom: 5px;">✅ USB Ports</li>
+                                    <li style="margin-bottom: 5px;">✅ Wireless Phone Charging</li>
+                                    <li style="margin-bottom: 5px;">✅ Backup Camera</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Comfort</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin-bottom: 5px;">✅ Climate Control</li>
+                                    <li style="margin-bottom: 5px;">✅ Power Windows</li>
+                                    <li style="margin-bottom: 5px;">✅ Power Mirrors</li>
+                                    <li style="margin-bottom: 5px;">✅ Keyless Entry</li>
+                                    <li style="margin-bottom: 5px;">✅ Push Button Start</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="history">
+                        <h3>Vehicle History</h3>
+                        <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 10px;">Clean History Report</h4>
+                            <p>This vehicle has a clean history with no reported accidents, flood damage, or major repairs.</p>
+                        </div>
+                        
+                        <h4 style="margin-bottom: 15px;">Service Records</h4>
+                        <div style="border-left: 3px solid #1e3a8a; padding-left: 20px;">
+                            <div style="margin-bottom: 15px;">
+                                <strong>Latest Service - December 2024</strong>
+                                <p style="color: #6b7280; margin: 5px 0;">Full service including oil change, filter replacement, brake inspection</p>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <strong>Major Service - June 2024</strong>
+                                <p style="color: #6b7280; margin: 5px 0;">40,000 km service, battery health check, transmission service</p>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <strong>Regular Service - January 2024</strong>
+                                <p style="color: #6b7280; margin: 5px 0;">Oil change, tire rotation, general inspection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <!-- Contact Dealer -->
+            <div class="contact-card">
+                <h3>Contact Dealer</h3>
+                <div class="dealer-profile">
+                    <div class="dealer-avatar">PA</div>
+                    <div class="dealer-details">
+                        <h4>Prime Auto Lanka</h4>
+                        <div class="dealer-rating">⭐⭐⭐⭐⭐ 4.8 (127 reviews)</div>
+                        <p style="font-size: 0.9rem; color: #6b7280;">Colombo 03</p>
+                    </div>
+                </div>
+                
+                <div class="contact-buttons">
+                    <a href="tel:+94112345678" class="contact-btn btn-call">
+                        📞 Call: +94 11 234 5678
+                    </a>
+                    <a href="https://wa.me/94112345678" class="contact-btn btn-whatsapp">
+                        💬 WhatsApp
+                    </a>
+                    <button class="contact-btn btn-message">
+                        ✉️ Send Message
+                    </button>
+                </div>
+            </div>
+
+            <!-- Finance Calculator -->
+            <div class="finance-card">
+                <h3>Finance Calculator</h3>
+                <div class="finance-form">
+                    <div class="form-group">
+                        <label for="loan-amount">Loan Amount (LKR)</label>
+                        <input type="number" id="loan-amount" value="4500000" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="down-payment">Down Payment (LKR)</label>
+                        <input type="number" id="down-payment" value="900000" placeholder="900,000">
+                    </div>
+                    <div class="form-group">
+                        <label for="loan-term">Loan Term</label>
+                        <select id="loan-term">
+                            <option value="12">1 year</option>
+                            <option value="24">2 years</option>
+                            <option value="36">3 years</option>
+                            <option value="48" selected>4 years</option>
+                            <option value="60">5 years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest-rate">Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" value="12.5" step="0.1">
+                    </div>
+                    <button class="calculate-btn">Calculate Monthly Payment</button>
+                </div>
+                <div class="finance-result">
+                    <p>Estimated Monthly Payment</p>
+                    <div class="monthly-payment">LKR 98,750</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn">
+                    ❤️ Save to Favorites
+                </button>
+                <button class="action-btn">
+                    🔄 Compare
+                </button>
+                <button class="action-btn">
+                    📊 Get Valuation
+                </button>
+                <button class="action-btn">
+                    📝 Request Test Drive
+                </button>
+            </div>
+        </div>
+
+        <!-- Similar Vehicles -->
+        <div class="similar-vehicles">
+            <h3>Similar Vehicles</h3>
+            <div class="similar-grid">
+                <a href="#" class="similar-card">
+                    <div class="similar-image">Toyota Prius 2019</div>
+                    <div class="similar-content">
+                        <div class="similar-price">LKR 4,200,000</div>
+                        <h4 class="similar-title">Toyota Prius 2019</h4>
+                        <div class="similar-details">
+                            <span>40,000 km</span> • <span>Hybrid</span> • <span>Automatic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="similar-card">
+                    <div class="similar-image">Toyota Aqua 2020</div>
+                    <div class="similar-content">
+                        <div class="similar-price">LKR 4,800,000</div>
+                        <h4 class="similar-title">Toyota Aqua 2020</h4>
+                        <div class="similar-details">
+                            <span>35,000 km</span> • <span>Hybrid</span> • <span>Automatic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="similar-card">
+                    <div class="similar-image">Honda Vezel 2019</div>
+                    <div class="similar-content">
+                        <div class="similar-price">LKR 5,100,000</div>
+                        <h4 class="similar-title">Honda Vezel 2019</h4>
+                        <div class="similar-details">
+                            <span>50,000 km</span> • <span>Hybrid</span> • <span>Automatic</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and panels
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding panel
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Thumbnail click functionality
+        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                document.querySelector('.main-image').textContent = `📷 Toyota Prius Photo ${index + 1}`;
+                document.querySelector('.image-counter').textContent = `${index + 1} / 12`;
+            });
+        });
+
+        // Favorite button toggle
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            if(btn.textContent.includes('Favorites')) {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('liked');
+                    this.innerHTML = this.classList.contains('liked') ? '❤️ Saved to Favorites' : '❤️ Save to Favorites';
+                });
+            }
+        });
+
+        // Header favorite button toggle
+        document.querySelector('.action-btn-icon').addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+
+        // Favorite button functionality
+document.querySelector('.favorite-btn').addEventListener('click', function() {
+  this.classList.toggle('active');
+  
+  // Change the icon to filled when active
+  const icon = this.querySelector('.favorite-icon');
+  if (this.classList.contains('active')) {
+    icon.setAttribute('fill', '#e53238');
+    icon.querySelector('path').setAttribute('d', 'M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z');
+  } else {
+    icon.setAttribute('fill', '#242D3D');
+    icon.querySelector('path').setAttribute('d', 'M12 22.3401L11.33 21.7501C10.37 20.9001 2 13.2801 2 8.01012C2 5.40012 3.28 3.31012 5.42 2.42012C7.52 1.55012 9.98 2.03012 12 3.66012C14.02 2.03012 16.47 1.55012 18.58 2.42012C20.72 3.31012 22 5.40012 22 8.01012C22 13.2801 13.62 20.9001 12.67 21.7501L12 22.3401ZM7.59 4.00012C7.11 4.00012 6.63 4.09012 6.19 4.27012C4.8 4.85012 4 6.21012 4 8.01012C4 11.4101 9.27 17.0701 12 19.6401C14.73 17.0701 20 11.4101 20 8.01012C20 6.21012 19.2 4.85012 17.81 4.27012C16.21 3.61012 14.26 4.16012 12.71 5.72012L12 6.43012L11.29 5.72012C10.17 4.60012 8.84 4.00012 7.59 4.00012Z');
+  }
+});
+    </script>
+</body>
+</html>
+

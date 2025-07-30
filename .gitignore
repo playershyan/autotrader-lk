@@ -1,0 +1,18 @@
+# Sensitive configuration files
+config.js
+.env
+.env.local
+.env.production
+
+# API keys and secrets
+**/api-keys.js
+secrets.json
+
+# Development files
+.DS_Store
+node_modules/
+*.log
+
+# Backup files
+*.bak
+*.tmp
